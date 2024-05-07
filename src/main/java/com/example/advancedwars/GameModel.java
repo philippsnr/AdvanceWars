@@ -73,12 +73,23 @@ public class GameModel {
     private void initTroops() {
         troops = new Troop[map.length][map[0].length];
         Troop t1 = new Infantry(1);
-        t1.xpos = 8;
-        t1.ypos = 2;
+        t1.xpos = 2;
+        t1.ypos = 8;
         troops[8][2] = t1;
     }
 
     private void switchTurn() {
         turn = (turn == 0) ? 1 : 0;
+    }
+
+    // Methode zum Bewegen der Truppe
+    protected void moveTroop(Troop troop, int x, int y) {
+
+        troops[troop.ypos][troop.xpos] = null;
+        troops[y][x] = troop;
+        troop.xpos = x;
+        troop.ypos = y;
+
+        System.out.println("Truppe bewegt nach: (" + x + ", " + y + ")");
     }
 }
