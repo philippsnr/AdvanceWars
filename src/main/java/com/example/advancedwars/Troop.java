@@ -3,6 +3,8 @@ package com.example.advancedwars;
 public abstract class Troop {
     protected int health;
     protected int team;
+    protected int xpos;
+    protected int ypos;
 
     public Troop(int _team) {
         this.health = 10;

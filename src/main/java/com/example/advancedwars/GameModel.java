@@ -73,6 +73,8 @@ public class GameModel {
     private void initTroops() {
         troops = new Troop[map.length][map[0].length];
         Troop t1 = new Infantry(1);
+        t1.xpos = 8;
+        t1.ypos = 2;
         troops[8][2] = t1;
     }
 

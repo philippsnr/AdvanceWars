@@ -51,6 +51,7 @@ public class HelloController implements Initializable {
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
 
+
                 mapGridPane.add(imageView, x, y);
 
                 // Überprüfe, ob eine Truppe auf diesem Feld steht
@@ -60,9 +61,18 @@ public class HelloController implements Initializable {
                     ImageView troopImageView = new ImageView(troopImg);
                     troopImageView.setFitWidth(35);
                     troopImageView.setFitHeight(35);
+                    int finalY = y;
+                    int finalX = x;
+                    troopImageView.setOnMouseClicked(event -> selectTroop(this.model.troops[finalY][finalX])); // EventHandler für Truppenbild hinzufügen
                     mapGridPane.add(troopImageView, x, y);
                 }
             }
         }
+    }
+
+    // Methode, die aufgerufen wird, wenn eine Truppe ausgewählt wird
+    private void selectTroop(Troop troop) {
+        // Hier kannst du deine Logik für die Auswahl der Truppe implementieren
+        System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
     }
 }
