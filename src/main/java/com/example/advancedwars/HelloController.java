@@ -85,7 +85,7 @@ public class HelloController implements Initializable {
                 int x = troop.xpos + i;
                 int y = troop.ypos + j;
                 // Überprüfe, ob das Feld innerhalb der Spielfeldgrenzen liegt
-                if (isValidField(x, y)) {
+                if (isValidField(x, y, troop)) {
                     Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
                     ImageView blueImageView = new ImageView(blue);
                     blueImageView.getStyleClass().add("blueImageView");
@@ -100,8 +100,8 @@ public class HelloController implements Initializable {
     }
 
     // Methode, um zu überprüfen, ob ein Feld innerhalb der Spielfeldgrenzen liegt
-    private boolean isValidField(int x, int y) {
-        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&this.model.troops[y][x]==null;
+    private boolean isValidField(int x, int y,Troop selectetTroop) {
+        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&(this.model.troops[y][x]==null||this.model.troops[y][x]==selectetTroop);
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
