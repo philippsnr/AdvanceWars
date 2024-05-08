@@ -4,8 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -136,7 +138,7 @@ public class HelloController implements Initializable {
         troopImageView.setFitHeight(35);
         troopImageView.setOnMouseClicked(event -> selectTroop(troop)); // EventHandler für Truppenbild hinzufügen
         mapGridPane.add(troopImageView, x, y);
-        
+        ListActions(troop);
         clearHighlights();
     }
 
@@ -153,4 +155,22 @@ public class HelloController implements Initializable {
         children.removeAll(nodesToRemove);
     }
 
+    private void ListActions(Troop troop){
+        Button button = new Button("Warten");
+        button.setPrefWidth(50);
+        button.setOnMouseClicked(mouseEvent -> troopWait());
+    if (troop.xpos>mapGridPane.getColumnCount()/2){
+
+
+        // Füge den Button zum GridPane hinzu (in Spalte 1, Zeile 1)
+        mapGridPane.add(button, 0, 0);
+
+        }
+    else {
+        mapGridPane.add(button,mapGridPane.getColumnCount()-1 , 0);
+    }
+    }
+    private void troopWait(){
+        
+    }
 }
