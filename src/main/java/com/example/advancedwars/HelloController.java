@@ -86,14 +86,27 @@ public class HelloController implements Initializable {
                 int y = troop.ypos + j;
                 // Überprüfe, ob das Feld innerhalb der Spielfeldgrenzen liegt
                 if (isValidField(x, y, troop)) {
-                    Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
-                    ImageView blueImageView = new ImageView(blue);
-                    blueImageView.getStyleClass().add("blueImageView");
-                    blueImageView.setFitWidth(50);
-                    blueImageView.setFitHeight(50);
-                    // Füge einen EventHandler zum Bewegen der Truppe hinzu, wenn das Feld geklickt wird
-                    blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
-                    mapGridPane.add(blueImageView, x, y);
+                    if(this.model.troops[y][x] == null) {
+                        Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
+                        ImageView blueImageView = new ImageView(blue);
+                        blueImageView.getStyleClass().add("blueImageView");
+                        blueImageView.setFitWidth(50);
+                        blueImageView.setFitHeight(50);
+                        // Füge einen EventHandler zum Bewegen der Truppe hinzu, wenn das Feld geklickt wird
+                        blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
+                        mapGridPane.add(blueImageView, x, y);
+                    }
+                    else if(this.model.troops[troop.ypos][troop.xpos].team != this.model.troops[y][x].team) {
+                        Image red = new Image(getClass().getResourceAsStream("/images/rot.png"));
+                        ImageView redImageView = new ImageView(red);
+                        redImageView.getStyleClass().add("redImageView");
+                        redImageView.setFitWidth(50);
+                        redImageView.setFitHeight(50);
+                        // Füge einen EventHandler zum Bewegen der Truppe hinzu, wenn das Feld geklickt wird
+
+                        mapGridPane.add(redImageView, x, y);
+                    }
+
                 }
             }
         }
@@ -101,7 +114,7 @@ public class HelloController implements Initializable {
 
     // Methode, um zu überprüfen, ob ein Feld innerhalb der Spielfeldgrenzen liegt
     private boolean isValidField(int x, int y,Troop selectetTroop) {
-        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&(this.model.troops[y][x]==null||this.model.troops[y][x]==selectetTroop);
+        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&(this.model.troops[y][x]==null||this.model.troops[y][x]==selectetTroop||this.model.troops[selectetTroop.ypos][selectetTroop.xpos].team != this.model.troops[y][x].team);
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
@@ -123,16 +136,16 @@ public class HelloController implements Initializable {
         troopImageView.setFitHeight(35);
         troopImageView.setOnMouseClicked(event -> selectTroop(troop)); // EventHandler für Truppenbild hinzufügen
         mapGridPane.add(troopImageView, x, y);
-
-        clearBlueHighlights();
+        
+        clearHighlights();
     }
 
-    private void clearBlueHighlights() {
+    private void clearHighlights() {
         ObservableList<Node> children = mapGridPane.getChildren();
         List<Node> nodesToRemove = new ArrayList<>();
 
         for (Node node : children) {
-            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView")) {
+            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView")||node instanceof ImageView && node.getStyleClass().contains("redImageView")) {
                 nodesToRemove.add(node);
             }
         }
