@@ -6,9 +6,11 @@ public abstract class Troop {
     protected int xpos;
     protected int ypos;
 
-    public Troop(int _team) {
+    public Troop(int _team, int _xpos, int _ypos) {
         this.health = 10;
         this.team = _team;
+        this.xpos = _xpos;
+        this.ypos = _ypos;
     }
 
     public int getTeam() {

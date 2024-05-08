@@ -22,7 +22,7 @@ public class HelloController implements Initializable {
     private GridPane mapGridPane;
 
     public HelloController() {
-        this.model = new GameModel("Eon Springs");
+        this.model = new GameModel("Little Island");
         System.out.println("Controller created");
     }
 
@@ -33,10 +33,10 @@ public class HelloController implements Initializable {
 
     private void loadMap() {
         // Iteriere über das 2D-Array und erstelle Bildansichten basierend auf den Werten
-        for (int y = 0; y < this.model.map.length; y++) {
-            for (int x = 0; x < this.model.map[y].length; x++) {
+        for (int y = 0; y < this.model.map.mapArray.length; y++) {
+            for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
                 ImageView imageView = new ImageView();
-                switch (this.model.map[y][x]) {
+                switch (this.model.map.mapArray[y][x]) {
                     case 0:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/gras.png")));
                         break;
@@ -64,6 +64,7 @@ public class HelloController implements Initializable {
                     Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
                     ImageView troopImageView = new ImageView(troopImg);
                     troopImageView.getStyleClass().add("troopImageView");
+                    troopImageView.setScaleX(-1);
                     troopImageView.setFitWidth(35);
                     troopImageView.setFitHeight(35);
                     int finalY = y;
@@ -100,7 +101,7 @@ public class HelloController implements Initializable {
 
     // Methode, um zu überprüfen, ob ein Feld innerhalb der Spielfeldgrenzen liegt
     private boolean isValidField(int x, int y) {
-        return x >= 0 && x < this.model.map[0].length && y >= 0 && y < this.model.map.length;
+        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length;
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
