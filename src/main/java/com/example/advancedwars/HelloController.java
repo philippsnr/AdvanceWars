@@ -80,6 +80,7 @@ public class HelloController implements Initializable {
 
     // Methode, die aufgerufen wird, wenn eine Truppe ausgewählt wird
     private void selectTroop(Troop troop) {
+        if (troop.moved==true){return;}
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
 
         for (int i = -2; i <= 2; i++) {
@@ -158,7 +159,7 @@ public class HelloController implements Initializable {
     private void ListActions(Troop troop){
         Button button = new Button("Warten");
         button.setPrefWidth(50);
-        button.setOnMouseClicked(mouseEvent -> troopWait());
+        button.setOnMouseClicked(mouseEvent -> troopWait(troop,button));
     if (troop.xpos>mapGridPane.getColumnCount()/2){
 
 
@@ -170,7 +171,9 @@ public class HelloController implements Initializable {
         mapGridPane.add(button,mapGridPane.getColumnCount()-1 , 0);
     }
     }
-    private void troopWait(){
-        
+    private void troopWait(Troop troop,Button button){
+        troop.moved=true;
+       mapGridPane.getChildren().remove(button);
+
     }
 }
