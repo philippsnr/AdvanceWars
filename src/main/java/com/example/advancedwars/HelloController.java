@@ -157,23 +157,23 @@ public class HelloController implements Initializable {
     }
 
     private void ListActions(Troop troop){
-        Button button = new Button("Warten");
-        button.setPrefWidth(50);
-        button.setOnMouseClicked(mouseEvent -> troopWait(troop,button));
+        Button waitButton = new Button("Warten");
+        waitButton.setPrefWidth(100);
+        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop,waitButton));
     if (troop.xpos>mapGridPane.getColumnCount()/2){
-
+        
 
         // Füge den Button zum GridPane hinzu (in Spalte 1, Zeile 1)
-        mapGridPane.add(button, 0, 0);
+        mapGridPane.add(waitButton, 0, 0, 1, 0);
 
         }
     else {
-        mapGridPane.add(button,mapGridPane.getColumnCount()-1 , 0);
+        mapGridPane.add(waitButton,mapGridPane.getColumnCount()-2 , 0,mapGridPane.getColumnCount()-1,0);
     }
     }
-    private void troopWait(Troop troop,Button button){
+    private void troopWait(Troop troop,Button waitButton){
         troop.moved=true;
-       mapGridPane.getChildren().remove(button);
+       mapGridPane.getChildren().remove(waitButton);
 
     }
 }
