@@ -5,6 +5,7 @@ public abstract class Troop {
     protected int team;
     protected int xpos;
     protected int ypos;
+    protected boolean moved = false;
 
     public Troop(int _team, int _xpos, int _ypos) {
         this.health = 10;
