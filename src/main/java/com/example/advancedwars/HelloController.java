@@ -22,7 +22,7 @@ public class HelloController implements Initializable {
     private GridPane mapGridPane;
 
     public HelloController() {
-        this.model = new GameModel("Little Island");
+        this.model = new GameModel("Piston Dam");
         System.out.println("Controller created");
     }
 
