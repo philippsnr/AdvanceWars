@@ -101,7 +101,7 @@ public class HelloController implements Initializable {
 
     // Methode, um zu überprüfen, ob ein Feld innerhalb der Spielfeldgrenzen liegt
     private boolean isValidField(int x, int y) {
-        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&this.model.troops[y][x]!=null;
+        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&this.model.troops[y][x]==null;
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
