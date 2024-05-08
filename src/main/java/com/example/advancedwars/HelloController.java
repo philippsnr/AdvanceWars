@@ -117,6 +117,7 @@ public class HelloController implements Initializable {
         String troopImgPath = troop.getTroopImg();
         Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
         ImageView troopImageView = new ImageView(troopImg);
+        troopImageView.getStyleClass().add("troopImageView");
         troopImageView.setFitWidth(35);
         troopImageView.setFitHeight(35);
         troopImageView.setOnMouseClicked(event -> selectTroop(troop)); // EventHandler für Truppenbild hinzufügen
