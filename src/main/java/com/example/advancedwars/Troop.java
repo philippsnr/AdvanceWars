@@ -24,4 +24,6 @@ public abstract class Troop {
 
     public abstract String getTroopImg();
 
+    public abstract int[][] getRange();
+
 }
