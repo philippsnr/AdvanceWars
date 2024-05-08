@@ -32,7 +32,8 @@ public class PistonDam extends Map{
         Troop tank12 = new Tank(1, 2, 2);
         Troop tank13 = new Tank(1, 2, 10);
         Troop tank14 = new Tank(1, 3, 12);
-        Troop artillery1 = new Artillery(1, 5, 3);
+        Troop artillery11 = new Artillery(1, 5, 3);
+        Troop artillery12 = new Artillery(1, 2, 6);
         Troop antiair1 = new AntiAir(1, 1, 3);
         Troop fighter1 = new Fighter(1, 1, 6);
         Troop bomber1 = new Bomber(1, 5, 10);
@@ -49,12 +50,13 @@ public class PistonDam extends Map{
         Troop tank22 = new Tank(2, 23, 3);
         Troop tank23 = new Tank(2, 23, 11);
         Troop tank24 = new Tank(2, 22, 12);
-        Troop artillery2 = new Artillery(2, 21, 10);
+        Troop artillery21 = new Artillery(2, 21, 10);
+        Troop artillery22 = new Artillery(2, 23, 7);
         Troop antiair2 = new AntiAir(2, 24, 10);
         Troop fighter2 = new Fighter(2, 25, 6);
         Troop bomber2 = new Bomber(2, 20, 3);
         Troop copter2 = new Copter(2, 19, 0);
 
-        return new Troop[] {inf11, inf12, inf13, inf14, mech11, mech12, mech13, tank11, tank12, tank13, tank14, artillery1, antiair1, fighter1, bomber1, copter1, inf21, inf22, inf23, inf24, mech21, mech22, mech23, tank21, tank22, tank23, tank24, artillery2, antiair2, fighter2, bomber2, copter2};
+        return new Troop[] {inf11, inf12, inf13, inf14, mech11, mech12, mech13, tank11, tank12, tank13, tank14, artillery11, artillery12, antiair1, fighter1, bomber1, copter1, inf21, inf22, inf23, inf24, mech21, mech22, mech23, tank21, tank22, tank23, tank24, artillery21, artillery22, antiair2, fighter2, bomber2, copter2};
     }
 }
