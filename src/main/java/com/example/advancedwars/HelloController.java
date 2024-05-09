@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     private final GameModel model;
+    private boolean mooving = false;
     @FXML
     private GridPane mapGridPane;
 
@@ -34,7 +35,7 @@ public class HelloController implements Initializable {
     }
 
     private void loadMap() {
-        // Iteriere über das 2D-Array und erstelle Bildansichten basierend auf den Werten
+
         for (int y = 0; y < this.model.map.mapArray.length; y++) {
             for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
                 ImageView imageView = new ImageView();
@@ -51,16 +52,13 @@ public class HelloController implements Initializable {
                     case 3:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/sea.png")));
                         break;
-                    // Füge weitere Fälle hinzu, wenn du mehr Bilder für andere Werte benötigst
                 }
 
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
 
-
                 mapGridPane.add(imageView, x, y);
 
-                // Überprüfe, ob eine Truppe auf diesem Feld steht
                 if (this.model.troops[y][x] != null) {
                     String troopImgPath = this.model.troops[y][x].getTroopImg();
                     Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
@@ -71,41 +69,43 @@ public class HelloController implements Initializable {
                     troopImageView.setFitHeight(35);
                     int finalY = y;
                     int finalX = x;
-                    troopImageView.setOnMouseClicked(event -> selectTroop(this.model.troops[finalY][finalX])); // EventHandler für Truppenbild hinzufügen
+                    troopImageView.setOnMouseClicked(event -> selectTroop(this.model.troops[finalY][finalX]));
                     mapGridPane.add(troopImageView, x, y);
                 }
             }
         }
     }
 
-    // Methode, die aufgerufen wird, wenn eine Truppe ausgewählt wird
     private void selectTroop(Troop troop) {
-        if (troop.moved==true){return;}
+        if (this.mooving == true) {
+            return;
+        }
+        this.mooving = true;
+        if (troop.moved == true) {
+            return;
+        }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
 
         for (int i = -2; i <= 2; i++) {
             for (int j = -2; j <= 2; j++) {
                 int x = troop.xpos + i;
                 int y = troop.ypos + j;
-                // Überprüfe, ob das Feld innerhalb der Spielfeldgrenzen liegt
+
                 if (isValidField(x, y, troop)) {
-                    if(this.model.troops[y][x] == null) {
+                    if (this.model.troops[y][x] == null) {
                         Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
                         ImageView blueImageView = new ImageView(blue);
                         blueImageView.getStyleClass().add("blueImageView");
                         blueImageView.setFitWidth(50);
                         blueImageView.setFitHeight(50);
-                        // Füge einen EventHandler zum Bewegen der Truppe hinzu, wenn das Feld geklickt wird
                         blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
                         mapGridPane.add(blueImageView, x, y);
-                    }
-                    else if(this.model.troops[troop.ypos][troop.xpos].team != this.model.troops[y][x].team) {
+                    } else if (this.model.troops[troop.ypos][troop.xpos].team != this.model.troops[y][x].team) {
                         Image red = new Image(getClass().getResourceAsStream("/images/rot.png"));
                         ImageView redImageView = new ImageView(red);
                         redImageView.getStyleClass().add("redImageView");
                         redImageView.setFitWidth(50);
                         redImageView.setFitHeight(50);
-                        // Füge einen EventHandler zum Bewegen der Truppe hinzu, wenn das Feld geklickt wird
 
                         mapGridPane.add(redImageView, x, y);
                     }
@@ -115,17 +115,14 @@ public class HelloController implements Initializable {
         }
     }
 
-    // Methode, um zu überprüfen, ob ein Feld innerhalb der Spielfeldgrenzen liegt
-    private boolean isValidField(int x, int y,Troop selectetTroop) {
-        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length&&(this.model.troops[y][x]==null||this.model.troops[y][x]==selectetTroop||this.model.troops[selectetTroop.ypos][selectetTroop.xpos].team != this.model.troops[y][x].team);
+    private boolean isValidField(int x, int y, Troop selectetTroop) {
+        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length && (this.model.troops[y][x] == null || this.model.troops[y][x] == selectetTroop || this.model.troops[selectetTroop.ypos][selectetTroop.xpos].team != this.model.troops[y][x].team);
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
 
         for (Node node : mapGridPane.getChildren()) {
-            // Überprüfe, ob das aktuelle Kind ein ImageView ist und sich an der gewünschten Position befindet
             if (node instanceof ImageView && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos && node.getStyleClass().contains("troopImageView")) {
-                // Entferne das ImageView der Truppe aus dem GridPane
                 mapGridPane.getChildren().remove(node);
                 break;
             }
@@ -137,7 +134,7 @@ public class HelloController implements Initializable {
         troopImageView.getStyleClass().add("troopImageView");
         troopImageView.setFitWidth(35);
         troopImageView.setFitHeight(35);
-        troopImageView.setOnMouseClicked(event -> selectTroop(troop)); // EventHandler für Truppenbild hinzufügen
+        troopImageView.setOnMouseClicked(event -> selectTroop(troop));
         mapGridPane.add(troopImageView, x, y);
         ListActions(troop);
         clearHighlights();
@@ -148,7 +145,7 @@ public class HelloController implements Initializable {
         List<Node> nodesToRemove = new ArrayList<>();
 
         for (Node node : children) {
-            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView")||node instanceof ImageView && node.getStyleClass().contains("redImageView")) {
+            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView") || node instanceof ImageView && node.getStyleClass().contains("redImageView")) {
                 nodesToRemove.add(node);
             }
         }
@@ -156,24 +153,51 @@ public class HelloController implements Initializable {
         children.removeAll(nodesToRemove);
     }
 
-    private void ListActions(Troop troop){
+    private void ListActions(Troop troop) {
+
+        ArrayList<Button> allButtons = new ArrayList<Button>();
+
         Button waitButton = new Button("Warten");
+        waitButton.setPrefHeight(50);
         waitButton.setPrefWidth(100);
-        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop,waitButton));
-    if (troop.xpos>mapGridPane.getColumnCount()/2){
-        
+        allButtons.add(waitButton);
 
-        // Füge den Button zum GridPane hinzu (in Spalte 1, Zeile 1)
-        mapGridPane.add(waitButton, 0, 0, 1, 0);
-
+        boolean attackPossible = false;
+        ArrayList<int[]> attackRange = troop.getRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
+        for (int[] field : attackRange) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team) {
+                attackPossible = true;
+                break;
+            }
         }
-    else {
-        mapGridPane.add(waitButton,mapGridPane.getColumnCount()-2 , 0,mapGridPane.getColumnCount()-1,0);
-    }
-    }
-    private void troopWait(Troop troop,Button waitButton){
-        troop.moved=true;
-       mapGridPane.getChildren().remove(waitButton);
 
+        if (attackPossible) {
+            Button attakButton = new Button("Attack");
+            attakButton.setPrefHeight(50);
+            attakButton.setPrefWidth(100);
+            allButtons.add(attakButton);
+        }
+
+        if (troop.xpos > mapGridPane.getColumnCount() / 2) {
+            for (int i = 0; i < allButtons.size(); i++) {
+                mapGridPane.add(allButtons.get(i), 0, i);
+                GridPane.setColumnSpan(allButtons.get(i), 2);
+            }
+        } else {
+            for (int i = 0; i < allButtons.size(); i++) {
+                mapGridPane.add(allButtons.get(i), mapGridPane.getColumnCount() - 2, i);
+                GridPane.setColumnSpan(allButtons.get(i), 2);
+            }
+        }
+
+        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop, allButtons));
+    }
+
+    private void troopWait(Troop troop, ArrayList<Button> allButtons) {
+        troop.moved = true;
+        for (Button button : allButtons) {
+            mapGridPane.getChildren().remove(button);
+        }
+        this.mooving = false;
     }
 }

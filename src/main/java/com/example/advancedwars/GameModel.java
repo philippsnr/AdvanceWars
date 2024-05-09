@@ -32,13 +32,12 @@ public class GameModel {
         this.troops = new Troop[map.mapArray.length][map.mapArray[0].length];
         Troop[] startTroops = this.map.getInitTroops();
 
-        for(Troop t : startTroops) {
+        for (Troop t : startTroops) {
             System.out.println(t.ypos);
             this.troops[t.ypos][t.xpos] = t;
         }
     }
 
-    // Methode zum Bewegen der Truppe
     protected void moveTroop(Troop troop, int x, int y) {
 
         troops[troop.ypos][troop.xpos] = null;

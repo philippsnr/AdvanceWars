@@ -1,5 +1,7 @@
 package com.example.advancedwars;
 
+import java.util.ArrayList;
+
 public abstract class Troop {
     protected int health;
     protected int team;
@@ -24,6 +26,22 @@ public abstract class Troop {
 
     public abstract String getTroopImg();
 
-    public abstract int[][] getRange();
+    public ArrayList<int[]> getRange(int xlength, int ylength) {
+        ArrayList<int[]> range = new ArrayList<int[]>();
 
+        if (this.ypos > 0) {
+            range.add(new int[]{this.xpos, this.ypos - 1});
+        }
+        if (this.xpos < xlength - 1) {
+            range.add(new int[]{this.xpos + 1, this.ypos});
+        }
+        if (this.ypos < ylength - 1) {
+            range.add(new int[]{this.xpos, this.ypos + 1});
+        }
+        if (this.xpos > 0) {
+            range.add(new int[]{this.xpos - 1, this.ypos});
+        }
+
+        return range;
+    }
 }
