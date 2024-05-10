@@ -77,10 +77,11 @@ public class HelloController implements Initializable {
     }
 
     private void selectTroop(Troop troop) {
-        if (this.mooving == true) {
-            return;
-        }
-        this.mooving = true;
+
+        if(this.mooving == true) { return; }
+
+        clearHighlights();
+
         if (troop.moved == true) {
             return;
         }
@@ -120,6 +121,8 @@ public class HelloController implements Initializable {
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
+
+        this.mooving = true;
 
         for (Node node : mapGridPane.getChildren()) {
             if (node instanceof ImageView && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos && node.getStyleClass().contains("troopImageView")) {
@@ -171,12 +174,11 @@ public class HelloController implements Initializable {
             }
         }
 
+        Button attakButton = new Button("Attack");
         if (attackPossible) {
-            Button attakButton = new Button("Attack");
             attakButton.setPrefHeight(50);
             attakButton.setPrefWidth(100);
             allButtons.add(attakButton);
-            attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons,attackRange));
         }
 
         if (troop.xpos > mapGridPane.getColumnCount() / 2) {
@@ -192,6 +194,7 @@ public class HelloController implements Initializable {
         }
 
         waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop, allButtons));
+        attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons,attackRange));
     }
 
     private void troopWait(Troop troop, ArrayList<Button> allButtons) {
@@ -211,7 +214,7 @@ public class HelloController implements Initializable {
                 TargetImageView.setFitWidth(50);
                 TargetImageView.setFitHeight(50);
 
-                mapGridPane.add(TargetImageView, field[1], field[0]);
+                mapGridPane.add(TargetImageView, field[0], field[1]);
 
             }
         }
