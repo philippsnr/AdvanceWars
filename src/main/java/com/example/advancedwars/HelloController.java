@@ -208,24 +208,24 @@ public class HelloController implements Initializable {
     private void troopAttack(Troop attakingTroop,ArrayList<Button> allButtons,ArrayList<int[]> attackRange){
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
-                Image Target = new Image(getClass().getResourceAsStream("/images/Target.png"));
-                ImageView TargetImageView = new ImageView(Target);
-                TargetImageView.getStyleClass().add("TargetImageView");
-                TargetImageView.setFitWidth(50);
-                TargetImageView.setFitHeight(50);
+                Image target = new Image(getClass().getResourceAsStream("/images/Target.png"));
+                ImageView targetImageView = new ImageView(target);
+                targetImageView.getStyleClass().add("TargetImageView");
+                targetImageView.setFitWidth(50);
+                targetImageView.setFitHeight(50);
+                targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
 
-                mapGridPane.add(TargetImageView, field[0], field[1]);
+                mapGridPane.add(targetImageView, field[0], field[1]);
 
             }
         }
 
-
-
-
-
-
         for (Button button : allButtons) {
             mapGridPane.getChildren().remove(button);
         }
+    }
+
+    private void troopFight(Troop attakingTroop, Troop defendingTroop) {
+
     }
 }
