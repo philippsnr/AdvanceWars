@@ -176,6 +176,7 @@ public class HelloController implements Initializable {
             attakButton.setPrefHeight(50);
             attakButton.setPrefWidth(100);
             allButtons.add(attakButton);
+            attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons,attackRange));
         }
 
         if (troop.xpos > mapGridPane.getColumnCount() / 2) {
@@ -199,5 +200,29 @@ public class HelloController implements Initializable {
             mapGridPane.getChildren().remove(button);
         }
         this.mooving = false;
+
+    }
+    private void troopAttack(Troop attakingTroop,ArrayList<Button> allButtons,ArrayList<int[]> attackRange){
+        for (int[] field : attackRange) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
+                Image Target = new Image(getClass().getResourceAsStream("/images/Target.png"));
+                ImageView TargetImageView = new ImageView(Target);
+                TargetImageView.getStyleClass().add("TargetImageView");
+                TargetImageView.setFitWidth(50);
+                TargetImageView.setFitHeight(50);
+
+                mapGridPane.add(TargetImageView, field[1], field[0]);
+
+            }
+        }
+
+
+
+
+
+
+        for (Button button : allButtons) {
+            mapGridPane.getChildren().remove(button);
+        }
     }
 }
