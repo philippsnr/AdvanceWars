@@ -3,12 +3,15 @@ package com.example.advancedwars;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -35,7 +38,6 @@ public class HelloController implements Initializable {
     }
 
     private void loadMap() {
-
         for (int y = 0; y < this.model.map.mapArray.length; y++) {
             for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
                 ImageView imageView = new ImageView();
@@ -60,20 +62,32 @@ public class HelloController implements Initializable {
                 mapGridPane.add(imageView, x, y);
 
                 if (this.model.troops[y][x] != null) {
-                    String troopImgPath = this.model.troops[y][x].getTroopImg();
-                    Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
-                    ImageView troopImageView = new ImageView(troopImg);
-                    troopImageView.getStyleClass().add("troopImageView");
-                    troopImageView.setScaleX(-1);
-                    troopImageView.setFitWidth(35);
-                    troopImageView.setFitHeight(35);
-                    int finalY = y;
-                    int finalX = x;
-                    troopImageView.setOnMouseClicked(event -> selectTroop(this.model.troops[finalY][finalX]));
-                    mapGridPane.add(troopImageView, x, y);
+                    placeTroopOnMap(this.model.troops[y][x]);
                 }
             }
         }
+    }
+
+    private void placeTroopOnMap(Troop troop) {
+        String troopImgPath = troop.getTroopImg();
+        Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
+        ImageView troopImageView = new ImageView(troopImg);
+        troopImageView.getStyleClass().add("troopImageView");
+        troopImageView.setScaleX(-1);
+        troopImageView.setFitWidth(35);
+        troopImageView.setFitHeight(35);
+
+        Label healthLabel = new Label(String.valueOf(troop.getHealth()));
+        healthLabel.setTextFill(Color.WHITE);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(troopImageView, healthLabel);
+
+        StackPane.setMargin(healthLabel, new Insets(-50, 0, 0, 0));
+
+        stackPane.setOnMouseClicked(event -> selectTroop(troop));
+
+        mapGridPane.add(stackPane, troop.xpos, troop.ypos);
     }
 
     private void selectTroop(Troop troop) {
@@ -130,18 +144,20 @@ public class HelloController implements Initializable {
                 break;
             }
         }
+
+        for (Node node : mapGridPane.getChildren()) {
+            if (node instanceof StackPane && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos) {
+                mapGridPane.getChildren().remove(node);
+                break;
+            }
+        }
+
         model.moveTroop(troop, x, y);
-        String troopImgPath = troop.getTroopImg();
-        Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
-        ImageView troopImageView = new ImageView(troopImg);
-        troopImageView.getStyleClass().add("troopImageView");
-        troopImageView.setFitWidth(35);
-        troopImageView.setFitHeight(35);
-        troopImageView.setOnMouseClicked(event -> selectTroop(troop));
-        mapGridPane.add(troopImageView, x, y);
+        placeTroopOnMap(troop);
         ListActions(troop);
         clearHighlights();
     }
+
 
     private void clearHighlights() {
         ObservableList<Node> children = mapGridPane.getChildren();
@@ -208,7 +224,7 @@ public class HelloController implements Initializable {
     private void troopAttack(Troop attakingTroop,ArrayList<Button> allButtons,ArrayList<int[]> attackRange){
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
-                Image target = new Image(getClass().getResourceAsStream("/images/Target.png"));
+                Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
                 ImageView targetImageView = new ImageView(target);
                 targetImageView.getStyleClass().add("TargetImageView");
                 targetImageView.setFitWidth(50);
@@ -223,6 +239,7 @@ public class HelloController implements Initializable {
         for (Button button : allButtons) {
             mapGridPane.getChildren().remove(button);
         }
+        this.mooving = false;
     }
 
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
