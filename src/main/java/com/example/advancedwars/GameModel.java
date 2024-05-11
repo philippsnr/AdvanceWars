@@ -6,6 +6,7 @@ public class GameModel {
 
     public Map map;
     public Troop[][] troops;
+    public Troop getInitTroops;
     private int turn = 0;
 
     public GameModel(String selectedMap) {

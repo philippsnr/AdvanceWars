@@ -36,6 +36,7 @@ public class HelloController implements Initializable {
     }
 
     private void loadMap() {
+
         for (int y = 0; y < this.model.map.mapArray.length; y++) {
             for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
                 ImageView imageView = new ImageView();
@@ -68,6 +69,20 @@ public class HelloController implements Initializable {
                 }
             }
         }
+        Troop activeTroops[]= new Troop[]{model.getInitTroops};
+        for (Troop troop : activeTroops) {
+            System.out.println("Troop: " + troop);
+        }
+        Button endButton = new Button("End Turn");
+        endButton.setPrefHeight(50);
+        endButton.setPrefWidth(100);
+        endButton.setOnMouseClicked(mouseEvent -> endTurn(activeTroops));
+        mapGridPane.setColumnSpan(endButton, 2);
+        mapGridPane.add(endButton, 0, mapGridPane.getRowCount());
+        System.out.println("heeeeee");
+
+
+
     }
 
     private void placeTroopOnMap(Troop troop, int direction) {
@@ -91,6 +106,8 @@ public class HelloController implements Initializable {
         stackPane.setOnMouseClicked(event -> selectTroop(troop));
 
         mapGridPane.add(stackPane, troop.xpos, troop.ypos);
+
+
     }
 
     private void selectTroop(Troop troop) {
@@ -252,5 +269,10 @@ public class HelloController implements Initializable {
 
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
 
+    }
+    private void endTurn(Troop Troops[]){
+        for (Troop troop : Troops) {
+            troop.moved=false;
+        }
     }
 }

@@ -20,7 +20,7 @@ public class PistonDam extends Map{
         };
     }
 
-    protected Troop[] getInitTroops() {
+    public  Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 10, 0);
         Troop inf12 = new Infantry(1, 10, 7);
         Troop inf13 = new Infantry(1, 8, 10);
