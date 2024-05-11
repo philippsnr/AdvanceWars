@@ -14,14 +14,12 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
 
-        // Ändern der Hintergrundfarbe der Szene auf Schwarz
         root.setStyle("-fx-background-color: black;");
 
         Scene scene = new Scene(root, 1000, 1000);
         stage.setTitle("Hello!");
         stage.setScene(scene);
 
-        // Vollbildmodus aktivieren
         stage.setFullScreen(true);
 
         stage.show();

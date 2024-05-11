@@ -26,7 +26,7 @@ public abstract class Troop {
 
     public abstract String getTroopImg();
 
-    public ArrayList<int[]> getRange(int xlength, int ylength) {
+    public ArrayList<int[]> getAttackRange(int xlength, int ylength) {
         ArrayList<int[]> range = new ArrayList<int[]>();
 
         if (this.ypos > 0) {
@@ -41,6 +41,12 @@ public abstract class Troop {
         if (this.xpos > 0) {
             range.add(new int[]{this.xpos - 1, this.ypos});
         }
+
+        return range;
+    }
+
+    public ArrayList<int[]> getMovingRange(int xlength, int ylength) {
+        ArrayList<int[]> range = new ArrayList<int[]>();
 
         return range;
     }

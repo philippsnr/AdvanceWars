@@ -9,11 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -62,13 +60,17 @@ public class HelloController implements Initializable {
                 mapGridPane.add(imageView, x, y);
 
                 if (this.model.troops[y][x] != null) {
-                    placeTroopOnMap(this.model.troops[y][x]);
+                    int troopDirection = 1;
+                    if(x < this.model.map.mapArray[0].length / 2) {
+                        troopDirection = -1;
+                    }
+                    placeTroopOnMap(this.model.troops[y][x], troopDirection);
                 }
             }
         }
     }
 
-    private void placeTroopOnMap(Troop troop) {
+    private void placeTroopOnMap(Troop troop, int direction) {
         String troopImgPath = troop.getTroopImg();
         Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
         ImageView troopImageView = new ImageView(troopImg);
@@ -76,6 +78,7 @@ public class HelloController implements Initializable {
         troopImageView.setScaleX(-1);
         troopImageView.setFitWidth(35);
         troopImageView.setFitHeight(35);
+        troopImageView.setScaleX(direction);
 
         Label healthLabel = new Label(String.valueOf(troop.getHealth()));
         healthLabel.setTextFill(Color.WHITE);
@@ -152,8 +155,13 @@ public class HelloController implements Initializable {
             }
         }
 
+        int troopDirection = 1;
+        if(troop.xpos < x) {
+            troopDirection = -1;
+        }
+
         model.moveTroop(troop, x, y);
-        placeTroopOnMap(troop);
+        placeTroopOnMap(troop, troopDirection);
         ListActions(troop);
         clearHighlights();
     }
@@ -182,7 +190,7 @@ public class HelloController implements Initializable {
         allButtons.add(waitButton);
 
         boolean attackPossible = false;
-        ArrayList<int[]> attackRange = troop.getRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
+        ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team) {
                 attackPossible = true;
