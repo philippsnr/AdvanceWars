@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.advancedwars.HelloController">
 
-   <padding>
-      <Insets bottom="20" left="20" right="20" top="20" />
-   </padding>
-
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
-      <!-- Fügen Sie weitere ColumnConstraints hinzu, wenn nötig -->
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints minHeight="10" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10" vgrow="SOMETIMES" />
-      <!-- Fügen Sie weitere RowConstraints hinzu, wenn nötig -->
-   </rowConstraints>
-
-   <!-- Hier wird die Karte angezeigt -->
-   <GridPane fx:id="mapGridPane" gridLinesVisible="true" />
-
-</GridPane>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.advancedwars.HelloController">
+   <children>
+      <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true" />
+   </children>
+</VBox>

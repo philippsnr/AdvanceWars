@@ -33,7 +33,6 @@ public class GameModel {
         Troop[] startTroops = this.map.getInitTroops();
 
         for (Troop t : startTroops) {
-            System.out.println(t.ypos);
             this.troops[t.ypos][t.xpos] = t;
         }
     }

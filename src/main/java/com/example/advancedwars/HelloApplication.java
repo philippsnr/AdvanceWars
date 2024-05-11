@@ -20,6 +20,10 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root, 1000, 1000);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+
+        // Vollbildmodus aktivieren
+        stage.setFullScreen(true);
+
         stage.show();
     }
 
