@@ -69,14 +69,10 @@ public class HelloController implements Initializable {
                 }
             }
         }
-        Troop activeTroops[]= new Troop[]{model.getInitTroops};
-        for (Troop troop : activeTroops) {
-            System.out.println("Troop: " + troop);
-        }
         Button endButton = new Button("End Turn");
         endButton.setPrefHeight(50);
         endButton.setPrefWidth(100);
-        endButton.setOnMouseClicked(mouseEvent -> endTurn(activeTroops));
+        endButton.setOnMouseClicked(mouseEvent -> endTurn());
         mapGridPane.setColumnSpan(endButton, 2);
         mapGridPane.add(endButton, 0, mapGridPane.getRowCount());
         System.out.println("heeeeee");
@@ -270,9 +266,7 @@ public class HelloController implements Initializable {
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
 
     }
-    private void endTurn(Troop Troops[]){
-        for (Troop troop : Troops) {
-            troop.moved=false;
-        }
+    private void endTurn(){
+        this.model.switchTurn();
     }
 }

@@ -6,12 +6,23 @@ public class GameModel {
 
     public Map map;
     public Troop[][] troops;
-    public Troop getInitTroops;
     private int turn = 0;
 
     public GameModel(String selectedMap) {
         initMap(selectedMap);
         initTroops();
+    }
+
+    protected void switchTurn() {
+        for(int y = 0; y < troops.length; y++) {
+            for(int x = 0; x < troops[y].length; x++) {
+                if(this.troops[y][x] != null) {
+                    this.troops[y][x].moved = false;
+                }
+            }
+        }
+        if (turn == 0) { turn = 1; }
+        else { turn = 0; }
     }
 
     private void initMap(String selectedMap) {
