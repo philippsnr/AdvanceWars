@@ -111,6 +111,9 @@ public class HelloController implements Initializable {
         if(this.mooving == true) { return; }
 
         clearHighlights();
+        if(this.model.turn!= troop.getTeam()){
+            return;
+        }
 
         if (troop.moved == true) {
             return;

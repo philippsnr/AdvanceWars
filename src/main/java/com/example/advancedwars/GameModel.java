@@ -6,7 +6,7 @@ public class GameModel {
 
     public Map map;
     public Troop[][] troops;
-    private int turn = 0;
+    protected int turn = 1;
 
     public GameModel(String selectedMap) {
         initMap(selectedMap);
@@ -21,8 +21,8 @@ public class GameModel {
                 }
             }
         }
-        if (turn == 0) { turn = 1; }
-        else { turn = 0; }
+        if (turn == 2) { turn = 1; }
+        else { turn = 2; }
     }
 
     private void initMap(String selectedMap) {
