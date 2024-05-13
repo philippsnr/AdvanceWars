@@ -1,8 +1,6 @@
 package com.example.advancedwars;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class GameModel {
 
@@ -13,28 +11,6 @@ public class GameModel {
     public GameModel(String selectedMap) {
         initMap(selectedMap);
         initTroops();
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public List<int[]> getTroopRange(Troop troop) {
-        List<int[]> movingRange = troop.getMovingRange();
-
-        List<int[]> range = new ArrayList<int[]>();
-        for (int[] field : movingRange) {
-            int x = field[0];
-            int y = field[1];
-            if(x < 0 || y < 0 || x >= troops[0].length || y >= troops.length) { continue; }
-            if(this.troops[y][x] != null) { continue; }
-
-            if (!(troop instanceof Copter || troop instanceof Fighter || troop instanceof Bomber) && this.map.mapArray[y][x] == 3) { continue; }
-
-
-            range.add(field);
-        }
-        return range;
     }
 
     protected void switchTurn() {
