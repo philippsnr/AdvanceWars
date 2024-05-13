@@ -62,7 +62,7 @@ public class HelloController implements Initializable {
 
                 if (this.model.troops[y][x] != null) {
                     int troopDirection = 1;
-                    if(x < this.model.map.mapArray[0].length / 2) {
+                    if (x < this.model.map.mapArray[0].length / 2) {
                         troopDirection = -1;
                     }
                     placeTroopOnMap(this.model.troops[y][x], troopDirection);
@@ -76,7 +76,6 @@ public class HelloController implements Initializable {
         mapGridPane.setColumnSpan(endButton, 2);
         mapGridPane.add(endButton, 0, mapGridPane.getRowCount());
         System.out.println("heeeeee");
-
 
 
     }
@@ -108,7 +107,13 @@ public class HelloController implements Initializable {
 
     private void selectTroop(Troop troop) {
 
-        if(this.mooving == true) { return; }
+        if (this.mooving == true) {
+            return;
+        }
+
+        if (this.model.getTurn() != troop.team) {
+            return;
+        }
 
         clearHighlights();
 
@@ -117,7 +122,22 @@ public class HelloController implements Initializable {
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
 
-        for (int i = -2; i <= 2; i++) {
+        List<int[]> movingRange = this.model.getTroopRange(troop);
+        for (int[] field : movingRange) {
+            int x = field[0];
+            int y = field[1];
+
+            Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
+            ImageView blueImageView = new ImageView(blue);
+            blueImageView.getStyleClass().add("blueImageView");
+            blueImageView.setFitWidth(50);
+            blueImageView.setFitHeight(50);
+            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
+            mapGridPane.add(blueImageView, x, y);
+
+        }
+
+        /*for (int i = -2; i <= 2; i++) {
             for (int j = -2; j <= 2; j++) {
                 int x = troop.xpos + i;
                 int y = troop.ypos + j;
@@ -143,11 +163,7 @@ public class HelloController implements Initializable {
 
                 }
             }
-        }
-    }
-
-    private boolean isValidField(int x, int y, Troop selectetTroop) {
-        return x >= 0 && x < this.model.map.mapArray[0].length && y >= 0 && y < this.model.map.mapArray.length && (this.model.troops[y][x] == null || this.model.troops[y][x] == selectetTroop || this.model.troops[selectetTroop.ypos][selectetTroop.xpos].team != this.model.troops[y][x].team);
+        }*/
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
@@ -169,7 +185,7 @@ public class HelloController implements Initializable {
         }
 
         int troopDirection = 1;
-        if(troop.xpos < x) {
+        if (troop.xpos < x) {
             troopDirection = -1;
         }
 
@@ -231,7 +247,7 @@ public class HelloController implements Initializable {
         }
 
         waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop, allButtons));
-        attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons,attackRange));
+        attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons, attackRange));
     }
 
     private void troopWait(Troop troop, ArrayList<Button> allButtons) {
@@ -242,7 +258,8 @@ public class HelloController implements Initializable {
         this.mooving = false;
 
     }
-    private void troopAttack(Troop attakingTroop,ArrayList<Button> allButtons,ArrayList<int[]> attackRange){
+
+    private void troopAttack(Troop attakingTroop, ArrayList<Button> allButtons, ArrayList<int[]> attackRange) {
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
                 Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
@@ -266,7 +283,11 @@ public class HelloController implements Initializable {
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
 
     }
-    private void endTurn(){
+
+    private void endTurn() {
+        if (this.mooving == true) {
+            return;
+        }
         this.model.switchTurn();
     }
 }
