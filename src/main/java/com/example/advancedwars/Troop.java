@@ -10,6 +10,8 @@ public abstract class Troop {
     protected int ypos;
     protected boolean moved = false;
     protected int stepRange;
+    public int identification;
+
 
     public Troop(int _team, int _xpos, int _ypos, int _stepRange) {
         this.health = 10;

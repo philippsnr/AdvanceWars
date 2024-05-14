@@ -44,7 +44,7 @@ public class PistonDam extends Map{
         Troop inf23 = new Infantry(2, 15, 13);
         Troop inf24 = new Infantry(2, 18, 11);
         Troop mech21 = new Mech(2, 18, 2);
-        Troop mech22 = new Mech(2, 15, 7);
+        Troop mech22 = new Mech(2, 7, 10);
         Troop mech23 = new Mech(2, 18, 9);
         Troop tank21 = new Tank(2, 21, 1);
         Troop tank22 = new Tank(2, 23, 3);

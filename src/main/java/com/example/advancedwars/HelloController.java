@@ -106,7 +106,7 @@ public class HelloController implements Initializable {
     }
 
     private void selectTroop(Troop troop) {
-
+        System.out.println("hyyyyyyyyyyy");
         if (this.mooving == true) {
             return;
         }
@@ -263,6 +263,7 @@ public class HelloController implements Initializable {
     }
 
     private void troopAttack(Troop attakingTroop, ArrayList<Button> allButtons, ArrayList<int[]> attackRange) {
+        this.mooving = false;
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
                 Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
@@ -270,6 +271,7 @@ public class HelloController implements Initializable {
                 targetImageView.getStyleClass().add("TargetImageView");
                 targetImageView.setFitWidth(50);
                 targetImageView.setFitHeight(50);
+
                 targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
 
                 mapGridPane.add(targetImageView, field[0], field[1]);
@@ -283,7 +285,11 @@ public class HelloController implements Initializable {
         this.mooving = false;
     }
 
+
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
+        System.out.println("hoooooooo");
+       double Faktor= model.getKIA(attakingTroop.identification, defendingTroop.identification);
+       System.out.println(Faktor);
 
     }
 
