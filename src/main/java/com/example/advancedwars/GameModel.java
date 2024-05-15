@@ -10,7 +10,7 @@ public class GameModel {
     public Map map;
     public Troop[][] troops;
     private int turn = 1;
-    public static char KIA[][]={{'d','d','e','d','e','x','x','e'},{'c','d','c','b','c','x','x','e'},{'b','b','d','b','c','x','x','e'},{'a','a','b','c','c','x','x','x'},{'a','a','d','c','d','c','c','a'},{'x','x','x','x','x','c','a','a'},{'a','a','a','a','a','x','x','x'},{'b','b','c','c','d','x','x','c'}};
+    public static char KIA[][]={{'d','d','e','d','e','x','x','e'},{'c','c','c','b','c','x','x','e'},{'b','b','d','b','c','x','x','e'},{'a','a','b','c','c','x','x','x'},{'a','a','d','c','d','c','c','a'},{'x','x','x','x','x','c','a','a'},{'a','a','a','a','a','x','x','x'},{'b','b','c','c','d','x','x','c'}};
     private final int Bellcurve[]={1,1,1,2,2,2,2,2,2,3,3,3,4,4,5};
 
     public static double getFaktor(int unit1, int unit2) {
@@ -18,7 +18,7 @@ public class GameModel {
             return 0.4;
         }
         else if (KIA[unit1][unit2]=='b'){
-            return 0.32;
+            return 0.3;
         }
         else if (KIA[unit1][unit2]=='c'){
             return 0.22;
