@@ -1,5 +1,6 @@
 package com.example.advancedwars;
 
+import Janne.faktor;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -288,9 +290,38 @@ public class HelloController implements Initializable {
 
 
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
-        System.out.println("hoooooooo");
-       double Faktor= model.getKIA(attakingTroop.identification, defendingTroop.identification);
-       System.out.println(Faktor);
+        double Faktor= model.getFaktor(attakingTroop.getIdentification(), defendingTroop.getIdentification());
+        System.out.println(Faktor);
+        Random rand = new Random();
+        int beforFaktor=0;
+        for(int i=1; i<= attakingTroop.getHealth(); i++){
+            int randomNumber = rand.nextInt(3) + 1;
+            beforFaktor+=randomNumber;
+
+        }
+        System.out.println(beforFaktor);
+        double afterFaktor=beforFaktor*Faktor;
+        System.out.println(afterFaktor);
+        int damage= Math.toIntExact(Math.round(afterFaktor));
+        System.out.println(attakingTroop+" hat "+damage+" schaden gemacht");
+        defendingTroop.recieveDamage(damage);
+
+
+        Faktor=model.getFaktor(defendingTroop.getIdentification(),attakingTroop.getIdentification());
+        System.out.println(Faktor);
+
+        beforFaktor=0;
+        for(int i=1; i<= defendingTroop.getHealth(); i++){
+            int randomNumber = rand.nextInt(3) + 1;
+            beforFaktor+=randomNumber;
+
+        }
+        System.out.println(beforFaktor);
+        afterFaktor=beforFaktor*Faktor;
+        System.out.println(afterFaktor);
+        damage= Math.toIntExact(Math.round(afterFaktor));
+        System.out.println(defendingTroop+" hat "+damage+" schaden gemacht");
+        attakingTroop.recieveDamage(damage);
     }
 
     private void endTurn() {
