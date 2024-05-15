@@ -271,9 +271,10 @@ public class HelloController implements Initializable {
                 targetImageView.getStyleClass().add("TargetImageView");
                 targetImageView.setFitWidth(50);
                 targetImageView.setFitHeight(50);
+                targetImageView.setPickOnBounds(true);
+
 
                 targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
-
                 mapGridPane.add(targetImageView, field[0], field[1]);
 
             }
@@ -290,7 +291,6 @@ public class HelloController implements Initializable {
         System.out.println("hoooooooo");
        double Faktor= model.getKIA(attakingTroop.identification, defendingTroop.identification);
        System.out.println(Faktor);
-
     }
 
     private void endTurn() {
