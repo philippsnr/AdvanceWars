@@ -9,7 +9,7 @@ public class GameModel {
     public Map map;
     public Troop[][] troops;
     private int turn = 1;
-    public double KIA[][]={{0.5,0.5},{0.6,0.5}};
+    
 
     public GameModel(String selectedMap) {
         initMap(selectedMap);

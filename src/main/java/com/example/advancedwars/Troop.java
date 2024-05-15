@@ -29,6 +29,13 @@ public abstract class Troop {
         return health;
     }
 
+    public int getIdentification() {
+        return identification;
+    }
+    public void recieveDamage(int damage){
+        this.health-=damage;
+    }
+
     public abstract String getTroopImg();
 
     public ArrayList<int[]> getAttackRange(int xlength, int ylength) {
