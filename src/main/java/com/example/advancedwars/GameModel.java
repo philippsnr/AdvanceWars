@@ -80,7 +80,7 @@ public class GameModel {
             int y = field[1];
 
             if(x < 0 || x >= map.mapArray[0].length || y < 0 || y >= map.mapArray.length) { continue; }
-            if(troops[y][x] != null) { continue; }
+            if(troops[y][x] != null && troops[y][x] != troop) { continue; }
             if (!(troop instanceof Copter || troop instanceof Fighter || troop instanceof Bomber) && this.map.mapArray[y][x] == 3) { continue; }
 
             range.add(field);
