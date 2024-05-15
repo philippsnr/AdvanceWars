@@ -11,22 +11,23 @@ public class GameModel {
     public Troop[][] troops;
     private int turn = 1;
     public static char KIA[][]={{'d','d','e','d','e','x','x','e'},{'c','d','c','b','c','x','x','e'},{'b','b','d','b','c','x','x','e'},{'a','a','b','c','c','x','x','x'},{'a','a','d','c','d','c','c','a'},{'x','x','x','x','x','c','a','a'},{'a','a','a','a','a','x','x','x'},{'b','b','c','c','d','x','x','c'}};
+    private final int Bellcurve[]={1,1,1,2,2,2,2,2,2,3,3,3,4,4,5};
 
     public static double getFaktor(int unit1, int unit2) {
         if (KIA[unit1][unit2]=='a'){
-            return 0.5;
+            return 0.4;
         }
         else if (KIA[unit1][unit2]=='b'){
-            return 0.4;
+            return 0.32;
         }
         else if (KIA[unit1][unit2]=='c'){
             return 0.22;
         }
         else if (KIA[unit1][unit2]=='d'){
-            return 0.17;
+            return 0.12;
         }
         else if (KIA[unit1][unit2]=='e'){
-            return 0.024;
+            return 0.035;
         }
         else return 0;
     }
@@ -43,7 +44,7 @@ public class GameModel {
         Random rand = new Random();
         int beforFaktor=0;
         for(int i=1; i<= attakingTroop.getHealth(); i++){
-            int randomNumber = rand.nextInt(3) + 1;
+            int randomNumber = Bellcurve[rand.nextInt(15)];
             beforFaktor+=randomNumber;
 
         }
@@ -60,7 +61,7 @@ public class GameModel {
 
         beforFaktor=0;
         for(int i=1; i<= defendingTroop.getHealth(); i++){
-            int randomNumber = rand.nextInt(3) + 1;
+            int randomNumber = Bellcurve[rand.nextInt(15)];
             beforFaktor+=randomNumber;
 
         }

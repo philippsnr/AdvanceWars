@@ -6,7 +6,7 @@ import java.util.Random;
 
 
 public class main {
-
+    private static final int[] Bellcurve ={1,1,1,2,2,2,2,2,2,3,3,3,4,4,5};
     public static void kampf(Troop attekingTroop,Troop defendingTroop){
 
 
@@ -49,9 +49,14 @@ public class main {
         Troop Tank1 = new Tank(1,1,1);
         Troop arty1 = new Artillery(1,1,1);
         Troop anti1 = new AntiAir(1,1,1);
-        while(mech1.getHealth()>0&&Tank1.getHealth()>0){
-            kampf(anti1,Tank1);
+
+        Random rand = new Random();
+        double beforFaktor=0;
+        for (int i=1;i<100;i++){
+            int randomNumber = Bellcurve[rand.nextInt(15)];
+            beforFaktor+=randomNumber;
         }
+        System.out.println(beforFaktor/100);
 
     }
 
