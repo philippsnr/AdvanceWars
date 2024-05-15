@@ -118,7 +118,7 @@ public class HelloController implements Initializable {
         }
 
         clearHighlights();
-        if(this.model.getTurn() != troop.getTeam()){
+        if (this.model.getTurn() != troop.getTeam()) {
             return;
         }
 
@@ -290,7 +290,44 @@ public class HelloController implements Initializable {
 
 
     private void troopFight(Troop attakingTroop, Troop defendingTroop) {
-        model.calculateDamage(attakingTroop,defendingTroop);
+
+        clearTargets();
+        model.calculateDamage(attakingTroop, defendingTroop);
+
+        updateHealthLabel(attakingTroop);
+        updateHealthLabel(defendingTroop);
+    }
+
+    private void clearTargets() {
+        List<Node> nodesToRemove = new ArrayList<>();
+
+        for (Node node : mapGridPane.getChildren()) {
+            if (node instanceof ImageView && ((ImageView) node).getStyleClass().contains("TargetImageView")) {
+                nodesToRemove.add(node);
+            }
+        }
+
+        mapGridPane.getChildren().removeAll(nodesToRemove);
+    }
+
+
+    private void updateHealthLabel(Troop troop) {
+
+        for (Node stackPane : mapGridPane.getChildren()) {
+            if (stackPane instanceof StackPane && GridPane.getColumnIndex(stackPane) == troop.xpos && GridPane.getRowIndex(stackPane) == troop.ypos) {
+                for (Node label : ((StackPane) stackPane).getChildren()) {
+                    if (label instanceof Label) {
+                        ((StackPane) stackPane).getChildren().remove(label);
+                        Label healthLabel = new Label(String.valueOf(troop.getHealth()));
+                        healthLabel.setTextFill(Color.WHITE);
+                        ((StackPane) stackPane).getChildren().add(healthLabel);
+                        StackPane.setMargin(healthLabel, new Insets(-50, 0, 0, 0));
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
 
     private void endTurn() {
