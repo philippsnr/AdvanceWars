@@ -5,4 +5,9 @@ public abstract class Map {
 
 
     protected abstract Troop[] getInitTroops();
+
+    // 0: Gras
+    // 1: Wald
+    // 2: Berg
+    // 3: Wasser
 }

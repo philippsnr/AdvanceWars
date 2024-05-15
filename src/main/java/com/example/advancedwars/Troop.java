@@ -38,6 +38,10 @@ public abstract class Troop {
 
     public abstract String getTroopImg();
 
+    public boolean canStandOnField(int field) {
+        return true;
+    };
+
     public ArrayList<int[]> getAttackRange(int xlength, int ylength) {
         ArrayList<int[]> range = new ArrayList<int[]>();
 
@@ -57,13 +61,13 @@ public abstract class Troop {
         return range;
     }
 
-    public List<int[]> getMovingRange() {
+    /*public List<int[]> getMovingRange(int[][] map, Troop[][] troops) {
         List<int[]> movingRange = new ArrayList<>();
-        move(xpos, ypos, stepRange, movingRange);
+        move(xpos, ypos, stepRange, movingRange, map, troops);
         return movingRange;
     }
 
-    private void move(int x, int y, int steps, List<int[]> movingRange) {
+    private void move(int x, int y, int steps, List<int[]> movingRange, int[][] map, Troop[][] troops) {
         if (steps <= 0) return;
 
         int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -71,6 +75,8 @@ public abstract class Troop {
         for (int[] dir : directions) {
             int nextX = x + dir[0];
             int nextY = y + dir[1];
+
+            if(!this.canStandOnField(map, troops, nextX, nextY)) { continue; }
 
             boolean alreadyExists = false;
             for (int[] position : movingRange) {
@@ -82,10 +88,10 @@ public abstract class Troop {
 
             if (!alreadyExists) {
                 movingRange.add(new int[]{nextX, nextY});
-                move(nextX, nextY, steps - 1, movingRange);
+                move(nextX, nextY, steps - 1, movingRange, map, troops);
             }
 
-            move(nextX, nextY, steps - 1, movingRange);
+            move(nextX, nextY, steps - 1, movingRange, map, troops);
         }
-    }
+    }*/
 }

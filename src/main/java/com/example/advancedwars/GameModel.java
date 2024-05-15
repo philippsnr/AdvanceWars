@@ -125,22 +125,40 @@ public class GameModel {
         System.out.println("Truppe bewegt nach: (" + x + ", " + y + ")");
     }
 
+
     public List<int[]> getTroopRange(Troop troop) {
-        List<int[]> range = new ArrayList<int[]>();
+        List<int[]> movingRange = new ArrayList<>();
+        movingField(troop, troop.xpos, troop.ypos, troop.stepRange, movingRange);
+        return movingRange;
+    }
 
-        List<int[]> movingRange = troop.getMovingRange();
+    private void movingField(Troop troop, int x, int y, int steps, List<int[]> movingRange) {
+        if (steps <= 0) return;
 
-        for (int[] field : movingRange) {
-            int x = field[0];
-            int y = field[1];
+        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-            if(x < 0 || x >= map.mapArray[0].length || y < 0 || y >= map.mapArray.length) { continue; }
-            if(troops[y][x] != null && troops[y][x] != troop) { continue; }
-            if (!(troop instanceof Copter || troop instanceof Fighter || troop instanceof Bomber) && this.map.mapArray[y][x] == 3) { continue; }
+        for (int[] dir : directions) {
+            int nextX = x + dir[0];
+            int nextY = y + dir[1];
 
-            range.add(field);
+            if(nextX < 0 || nextX >= this.map.mapArray[0].length || nextY < 0 || nextY >= this.map.mapArray.length) {}
+            if(this.troops[nextY][nextX] != null) { continue; }
+            if(!troop.canStandOnField(this.map.mapArray[nextY][nextX])) { continue; }
+
+            boolean alreadyExists = false;
+            for (int[] position : movingRange) {
+                if (position[0] == nextX && position[1] == nextY) {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+
+            if (!alreadyExists) {
+                movingRange.add(new int[]{nextX, nextY});
+                movingField(troop, nextX, nextY, steps - 1, movingRange);
+            }
+
+            movingField(troop, nextX, nextY, steps - 1, movingRange);
         }
-
-        return range;
     }
 }

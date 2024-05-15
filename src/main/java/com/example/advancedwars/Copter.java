@@ -9,4 +9,5 @@ public class Copter extends Troop{
     public String getTroopImg() {
         return "/images/troops/copter" + this.team + ".png";
     }
+
 }

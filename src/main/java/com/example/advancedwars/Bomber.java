@@ -9,4 +9,5 @@ public class Bomber extends Troop{
     public String getTroopImg() {
         return "/images/troops/bomber" + this.team + ".png";
     }
+
 }

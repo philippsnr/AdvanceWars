@@ -10,4 +10,10 @@ public class Mech extends Troop{
     public String getTroopImg() {
         return "/images/troops/mech" + this.team + ".png";
     }
+
+    public boolean canStandOnField(int field) {
+        if(field == 3) return false;
+
+        return true;
+    }
 }

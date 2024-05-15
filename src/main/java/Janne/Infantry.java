@@ -14,4 +14,11 @@ public class Infantry extends Troop {
     public String getTroopImg() {
         return "/images/troops/infantry" + this.team + ".png";
     }
+
+    public boolean canStandOnField(int[][] map, int x, int y) {
+        if(x < 0 || x >= map[0].length || y < 0 || y >= map.length) return false;
+        if(map[y][x] == 3) return false;
+
+        return true;
+    }
 }
