@@ -130,7 +130,7 @@ public class HelloController implements Initializable {
             return;
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
-
+        this.mooving = true;
         List<int[]> movingRange = this.model.getTroopRange(troop);
         for (int[] field : movingRange) {
             int x = field[0];
@@ -197,11 +197,16 @@ public class HelloController implements Initializable {
         if (troop.xpos < x) {
             troopDirection = -1;
         }
+        if (this.model.troops[x][y] == null) {
+            model.moveTroop(troop, x, y);
+            placeTroopOnMap(troop, troopDirection);
+            ListActions(troop);
+        }
+        else {
+            this.model.troops[x][y].health+= troop.getHealth();
+        }
+            clearHighlights();
 
-        model.moveTroop(troop, x, y);
-        placeTroopOnMap(troop, troopDirection);
-        ListActions(troop);
-        clearHighlights();
     }
 
 
