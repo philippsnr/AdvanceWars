@@ -71,14 +71,15 @@ public class HelloController implements Initializable {
                 }
             }
         }
+        /*
         Button endButton = new Button("End Turn");
+        endButton.setId("endTurnButton");
         endButton.setPrefHeight(50);
         endButton.setPrefWidth(100);
         endButton.setOnMouseClicked(mouseEvent -> endTurn());
         mapGridPane.setColumnSpan(endButton, 2);
         mapGridPane.add(endButton, 0, mapGridPane.getRowCount());
-        System.out.println("heeeeee");
-
+    */
 
     }
 
@@ -340,6 +341,7 @@ public class HelloController implements Initializable {
         }
     }
 
+    @FXML
     private void endTurn() {
         if (this.mooving == true) {
             return;
