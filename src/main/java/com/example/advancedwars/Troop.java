@@ -13,12 +13,13 @@ public abstract class Troop {
     public int identification;
 
 
-    public Troop(int _team, int _xpos, int _ypos, int _stepRange) {
+    public Troop(int _team, int _xpos, int _ypos, int _stepRange, int _identification) {
         this.health = 10;
         this.team = _team;
         this.xpos = _xpos;
         this.ypos = _ypos;
         this.stepRange = _stepRange;
+        this.identification = _identification;
     }
 
     public int getTeam() {
