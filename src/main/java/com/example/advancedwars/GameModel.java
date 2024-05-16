@@ -141,8 +141,8 @@ public class GameModel {
             int nextX = x + dir[0];
             int nextY = y + dir[1];
 
-            if(nextX < 0 || nextX >= this.map.mapArray[0].length || nextY < 0 || nextY >= this.map.mapArray.length) {}
-            if(this.troops[nextY][nextX] != null) { continue; }
+            if(nextX < 0 || nextX >= this.map.mapArray[0].length || nextY < 0 || nextY >= this.map.mapArray.length) { continue; }
+            if(this.troops[nextY][nextX] != null && this.troops[nextY][nextX] != troop) { continue; }
             if(!troop.canStandOnField(this.map.mapArray[nextY][nextX])) { continue; }
 
             boolean alreadyExists = false;
