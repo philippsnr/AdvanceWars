@@ -28,7 +28,7 @@ public class HelloController implements Initializable {
     private GridPane mapGridPane;
 
     public HelloController() {
-        this.model = new GameModel("Eon Springs");
+        this.model = new GameModel("Piston Dam");
         System.out.println("Controller created");
     }
 
@@ -312,6 +312,16 @@ public class HelloController implements Initializable {
 
 
     private void updateHealthLabel(Troop troop) {
+
+        if(troop.getHealth() <= 0) {
+            for (Node stackPane : mapGridPane.getChildren()) {
+                if (stackPane instanceof StackPane && GridPane.getColumnIndex(stackPane) == troop.xpos && GridPane.getRowIndex(stackPane) == troop.ypos) {
+                    mapGridPane.getChildren().remove(stackPane);
+                    this.model.troops[troop.ypos][troop.xpos] = null;
+                    return;
+                }
+            }
+        }
 
         for (Node stackPane : mapGridPane.getChildren()) {
             if (stackPane instanceof StackPane && GridPane.getColumnIndex(stackPane) == troop.xpos && GridPane.getRowIndex(stackPane) == troop.ypos) {
