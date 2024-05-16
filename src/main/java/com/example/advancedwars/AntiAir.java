@@ -9,9 +9,4 @@ public class AntiAir extends Troop{
         return "/images/troops/antiair" + this.team + ".png";
     }
 
-    public boolean canStandOnField(int field) {
-        if(field == 3 || field == 2) return false;
-
-        return true;
-    }
 }

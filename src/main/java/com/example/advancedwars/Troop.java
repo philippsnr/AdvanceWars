@@ -39,10 +39,6 @@ public abstract class Troop {
 
     public abstract String getTroopImg();
 
-    public boolean canStandOnField(int field) {
-        return true;
-    };
-
     public ArrayList<int[]> getAttackRange(int xlength, int ylength) {
         ArrayList<int[]> range = new ArrayList<int[]>();
 
