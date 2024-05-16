@@ -197,13 +197,18 @@ public class HelloController implements Initializable {
         if (troop.xpos < x) {
             troopDirection = -1;
         }
-        if (this.model.troops[x][y] == null) {
+        if (this.model.troops[y][x] == null) {
+
             model.moveTroop(troop, x, y);
             placeTroopOnMap(troop, troopDirection);
             ListActions(troop);
         }
         else {
-            this.model.troops[x][y].health+= troop.getHealth();
+            this.model.troops[y][x].health += troop.health;
+            if (this.model.troops[y][x].health >= 10) {
+                this.model.troops[y][x].health = 10;
+            }
+            updateHealthLabel(this.model.troops[y][x]);
         }
             clearHighlights();
 
