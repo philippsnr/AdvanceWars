@@ -226,7 +226,7 @@ public class HelloController implements Initializable {
         boolean attackPossible = false;
         ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
         for (int[] field : attackRange) {
-            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team&&(model.KIA[troop.getIdentification()][this.model.troops[field[1]][field[0]].identification]!='x')) {
                 attackPossible = true;
                 break;
             }
@@ -267,7 +267,7 @@ public class HelloController implements Initializable {
     private void troopAttack(Troop attakingTroop, ArrayList<Button> allButtons, ArrayList<int[]> attackRange) {
         this.mooving = false;
         for (int[] field : attackRange) {
-            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team&&(model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification]!='x')) {
                 Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
                 ImageView targetImageView = new ImageView(target);
                 targetImageView.getStyleClass().add("TargetImageView");

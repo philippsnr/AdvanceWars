@@ -82,6 +82,7 @@ public class GameModel {
 
         double kiaFaktor= getKIAFaktor(attakingTroop.getIdentification(), defendingTroop.getIdentification());
         double GroundFaktor = getGroundFaktor(attakingTroop,defendingTroop);
+        System.out.println("Ground Faktor: "+GroundFaktor);
         System.out.println(kiaFaktor);
         Random rand = new Random();
         int beforFaktor=0;
@@ -90,9 +91,9 @@ public class GameModel {
             beforFaktor+=randomNumber;
 
         }
-        System.out.println(beforFaktor);
+        System.out.println("befor Faktor"+beforFaktor);
         double afterFaktor=beforFaktor*kiaFaktor*GroundFaktor;
-        System.out.println(afterFaktor);
+        System.out.println("after faktor"+afterFaktor);
         int damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(attakingTroop+" hat "+damage+" schaden gemacht");
         defendingTroop.recieveDamage(damage);
@@ -107,9 +108,9 @@ public class GameModel {
             beforFaktor+=randomNumber;
 
         }
-        System.out.println(beforFaktor);
+        System.out.println("befor faktor"+beforFaktor);
         afterFaktor=beforFaktor*kiaFaktor*(1/GroundFaktor);
-        System.out.println(afterFaktor);
+        System.out.println("after faktor"+afterFaktor);
         damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(defendingTroop+" hat "+damage+" schaden gemacht");
         attakingTroop.recieveDamage(damage);

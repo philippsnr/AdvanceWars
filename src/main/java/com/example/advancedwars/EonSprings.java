@@ -58,6 +58,10 @@ public class EonSprings extends Map{
         Troop bomber22 = new Bomber(2, 16, 5);
         Troop copter2 = new Copter(2, 9, 2);
 
-        return new Troop[] {inf11, inf12, mech11, mech12, mech13, tank11, tank12, artillery11, artillery12, antiair11, antiair12, fighter11, fighter12, bomber11, bomber12, copter1, inf21, inf22, mech21, mech22, mech23, tank21, tank22, artillery21, artillery22, antiair21, antiair22, fighter21, fighter22, bomber21, bomber22, copter2};
+
+        //Test kämpfe
+        Troop inft11 = new Infantry(1, 12, 5);
+
+        return new Troop[] {inf11, inf12, mech11, mech12, mech13, tank11, tank12, artillery11, artillery12, antiair11, antiair12, fighter11, fighter12, bomber11, bomber12, copter1, inf21, inf22, mech21, mech22, mech23, tank21, tank22, artillery21, artillery22, antiair21, antiair22, fighter21, fighter22, bomber21, bomber22, copter2,inft11};
     }
 }
