@@ -185,7 +185,7 @@ public class GameModel {
             int nextY = y + dir[1];
 
             if(nextX < 0 || nextX >= this.map.mapArray[0].length || nextY < 0 || nextY >= this.map.mapArray.length) { continue; }
-            if(this.troops[nextY][nextX] != null && this.troops[nextY][nextX] != troop) { continue; }
+            if(this.troops[nextY][nextX] != null && (this.troops[nextY][nextX].team!= troop.team||this.troops[nextY][nextX].getIdentification()!= troop.getIdentification()||(troop.health==10||this.troops[nextY][nextX].health==10))) { continue; }
 
             int stepLoose = movementCost[troop.identification][map.mapArray[nextY][nextX]];
 

@@ -1,6 +1,8 @@
 package com.example.advancedwars;
 
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -108,7 +111,7 @@ public class HelloController implements Initializable {
     }
 
     private void selectTroop(Troop troop) {
-        System.out.println("hyyyyyyyyyyy");
+
         if (this.mooving == true) {
             return;
         }
@@ -334,6 +337,19 @@ public class HelloController implements Initializable {
         if (this.mooving == true) {
             return;
         }
+
         this.model.switchTurn();
+        Image target = new Image(getClass().getResourceAsStream("/images/Bums.png"));
+        ImageView turnSwitchImageView = new ImageView(target);
+        turnSwitchImageView.getStyleClass().add("TargetImageView");
+        turnSwitchImageView.setFitWidth(50);
+        turnSwitchImageView.setFitHeight(50);
+        mapGridPane.add(turnSwitchImageView, 10, 10);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            // Hier wird das Bild aus dem GridPane entfernt
+            mapGridPane.getChildren().remove(turnSwitchImageView);
+        }));
+        timeline.play();
+
     }
 }
