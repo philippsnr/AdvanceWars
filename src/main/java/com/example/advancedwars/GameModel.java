@@ -12,8 +12,9 @@ public class GameModel {
     private int turn = 1;
     public static char KIA[][]={{'d','d','e','d','e','x','x','e'},{'c','c','c','b','c','x','x','e'},{'b','b','d','b','c','x','x','e'},{'a','a','b','c','c','x','x','x'},{'a','a','d','c','d','c','c','a'},{'x','x','x','x','x','c','a','a'},{'a','a','a','a','a','x','x','x'},{'b','b','c','c','d','x','x','c'}};
     private final int Bellcurve[]={1,1,1,2,2,2,2,2,2,3,3,3,4,4,5};
+    private final int GroudnToStars[]={1,2,4,0};
 
-    public static double getFaktor(int unit1, int unit2) {
+    public static double getKIAFaktor(int unit1, int unit2) {
         if (KIA[unit1][unit2]=='a'){
             return 0.4;
         }
@@ -31,6 +32,44 @@ public class GameModel {
         }
         else return 0;
     }
+    private double getGroundFaktor(Troop attakingTroop, Troop defedingtroop) {
+        int attakGround=this.map.mapArray[attakingTroop.ypos][attakingTroop.xpos];
+        int defendGround=this.map.mapArray[defedingtroop.ypos][defedingtroop.xpos];
+        int attakStars=GroudnToStars[attakGround];
+        int defendStars=GroudnToStars[defendGround];
+        int StarsDiff=attakStars-defendStars;
+        if (StarsDiff==0){
+            return 1;
+        }
+        else if(StarsDiff==1){
+            return 1.2;
+        }
+        else if (StarsDiff==2){
+            return 1.3;
+        }
+        else if (StarsDiff==3){
+            return 1.4;
+        }
+        else if (StarsDiff==4){
+            return 1.5;
+        }
+        else if (StarsDiff==-1){
+            return 1/1.2;
+        }
+        else if (StarsDiff==-2){
+            return 1/1.3;
+        }
+        else if (StarsDiff==-3){
+            return 1/1.4;
+        }
+        else if (StarsDiff==-4){
+            return 1/1.5;
+        }
+
+        return 0;
+    }
+
+
 
 
     public GameModel(String selectedMap) {
@@ -39,8 +78,10 @@ public class GameModel {
     }
 
     public void calculateDamage(Troop attakingTroop,Troop defendingTroop){
-        double Faktor= getFaktor(attakingTroop.getIdentification(), defendingTroop.getIdentification());
-        System.out.println(Faktor);
+
+        double kiaFaktor= getKIAFaktor(attakingTroop.getIdentification(), defendingTroop.getIdentification());
+        double GroundFaktor = getGroundFaktor(attakingTroop,defendingTroop);
+        System.out.println(kiaFaktor);
         Random rand = new Random();
         int beforFaktor=0;
         for(int i=1; i<= attakingTroop.getHealth(); i++){
@@ -49,15 +90,15 @@ public class GameModel {
 
         }
         System.out.println(beforFaktor);
-        double afterFaktor=beforFaktor*Faktor;
+        double afterFaktor=beforFaktor*kiaFaktor*GroundFaktor;
         System.out.println(afterFaktor);
         int damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(attakingTroop+" hat "+damage+" schaden gemacht");
         defendingTroop.recieveDamage(damage);
 
 
-        Faktor=getFaktor(defendingTroop.getIdentification(),attakingTroop.getIdentification());
-        System.out.println(Faktor);
+        kiaFaktor=getKIAFaktor(defendingTroop.getIdentification(),attakingTroop.getIdentification());
+        System.out.println(kiaFaktor);
 
         beforFaktor=0;
         for(int i=1; i<= defendingTroop.getHealth(); i++){
@@ -66,7 +107,7 @@ public class GameModel {
 
         }
         System.out.println(beforFaktor);
-        afterFaktor=beforFaktor*Faktor;
+        afterFaktor=beforFaktor*kiaFaktor*(1/GroundFaktor);
         System.out.println(afterFaktor);
         damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(defendingTroop+" hat "+damage+" schaden gemacht");
