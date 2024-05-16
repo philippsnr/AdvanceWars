@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.advancedwars.HelloController">
+   <stylesheets>
+      <URL value="@/styles.css" />
+   </stylesheets>
    <children>
       <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true" />
+      <HBox styleClass="optionRow"> <!-- styleClass für die HBox -->
+         <children>
+            <Button mnemonicParsing="false" text="Warten" />
+            <Button mnemonicParsing="false" text="Attack" />
+            <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="EndTurn" />
+         </children>
+      </HBox>
    </children>
 </VBox>
