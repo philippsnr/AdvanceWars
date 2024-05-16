@@ -1,6 +1,6 @@
 package com.example.advancedwars;
 
-import Janne.faktor;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
