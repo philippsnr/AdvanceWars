@@ -42,13 +42,28 @@ public class GameModel {
             return 1;
         }
         else if(StarsDiff==1){
-            return 1.15;
-        }
-        else if (StarsDiff==2){
             return 1.2;
         }
+        else if (StarsDiff==2){
+            return 1.3;
+        }
         else if (StarsDiff==3){
-            return 1.25;
+            return 1.4;
+        }
+        else if (StarsDiff==4){
+            return 1.5;
+        }
+        else if (StarsDiff==-1){
+            return 1/1.2;
+        }
+        else if (StarsDiff==-2){
+            return 1/1.3;
+        }
+        else if (StarsDiff==-3){
+            return 1/1.4;
+        }
+        else if (StarsDiff==-4){
+            return 1/1.5;
         }
 
         return 0;
@@ -75,7 +90,7 @@ public class GameModel {
 
         }
         System.out.println(beforFaktor);
-        double afterFaktor=beforFaktor*kiaFaktor;
+        double afterFaktor=beforFaktor*kiaFaktor*GroundFaktor;
         System.out.println(afterFaktor);
         int damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(attakingTroop+" hat "+damage+" schaden gemacht");
@@ -92,7 +107,7 @@ public class GameModel {
 
         }
         System.out.println(beforFaktor);
-        afterFaktor=beforFaktor*kiaFaktor;
+        afterFaktor=beforFaktor*kiaFaktor*(1/GroundFaktor);
         System.out.println(afterFaktor);
         damage= Math.toIntExact(Math.round(afterFaktor));
         System.out.println(defendingTroop+" hat "+damage+" schaden gemacht");
