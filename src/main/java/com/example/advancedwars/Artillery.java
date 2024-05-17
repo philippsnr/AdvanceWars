@@ -8,10 +8,26 @@ public class Artillery extends Troop{
     }
     public ArrayList<int[]> getAttackRange(int xlength, int ylength){
         ArrayList<int[]> range = new ArrayList<int[]>();
+        int Y=4;
+        int x=-1;
+        for(int i = 3; i >0 ; i++){
+            Y-=1;
+
+            range.add(new int[]{this.xpos, this.ypos - Y});
+            for(int j = 0; j < 3; j++){
+                x+=1;
+                range.add(new int[]{this.xpos+x, this.ypos });
+            }
+        }
+
 
 
 
         return range;
+
+
+
+
 
     }
 
