@@ -197,23 +197,16 @@ public class HelloController implements Initializable {
         if (troop.xpos < x) {
             troopDirection = -1;
         }
-        if (this.model.troops[y][x] == null) {
-
+        if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
             model.moveTroop(troop, x, y);
             placeTroopOnMap(troop, troopDirection);
             ListActions(troop);
-        }
-        else {
-            this.model.troops[y][x].health += troop.health;
-            if (this.model.troops[y][x].health >= 10) {
-                this.model.troops[y][x].health = 10;
-            }
+        } else {
+            this.model.mergeTroops(troop, this.model.troops[y][x]);
             updateHealthLabel(this.model.troops[y][x]);
         }
-            clearHighlights();
-
+        clearHighlights();
     }
-
 
     private void clearHighlights() {
         ObservableList<Node> children = mapGridPane.getChildren();
@@ -240,7 +233,7 @@ public class HelloController implements Initializable {
         boolean attackPossible = false;
         ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
         for (int[] field : attackRange) {
-            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team&&(model.KIA[troop.getIdentification()][this.model.troops[field[1]][field[0]].identification]!='x')) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team && (model.KIA[troop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
                 attackPossible = true;
                 break;
             }
@@ -281,7 +274,7 @@ public class HelloController implements Initializable {
     private void troopAttack(Troop attakingTroop, ArrayList<Button> allButtons, ArrayList<int[]> attackRange) {
         this.mooving = false;
         for (int[] field : attackRange) {
-            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team&&(model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification]!='x')) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team && (model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
                 Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
                 ImageView targetImageView = new ImageView(target);
                 targetImageView.getStyleClass().add("TargetImageView");
@@ -327,7 +320,7 @@ public class HelloController implements Initializable {
 
     private void updateHealthLabel(Troop troop) {
 
-        if(troop.getHealth() <= 0) {
+        if (troop.getHealth() <= 0) {
             for (Node stackPane : mapGridPane.getChildren()) {
                 if (stackPane instanceof StackPane && GridPane.getColumnIndex(stackPane) == troop.xpos && GridPane.getRowIndex(stackPane) == troop.ypos) {
                     mapGridPane.getChildren().remove(stackPane);
