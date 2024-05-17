@@ -2,6 +2,7 @@
     -fx-alignment: center;
     -fx-pref-width: 100%;
     -fx-padding: 20px;
+    -fx-cursor: hand;
 }
 
 .button {
@@ -14,4 +15,23 @@
 .button.disabled {
     -fx-background-color: gray;
     -fx-text-fill: transparent;
+}
+
+#surrenderButton1 {
+    -fx-background-color: #F77F6A;
+    -fx-text-fill: white;
+}
+
+#surrenderButton2 {
+    -fx-background-color: #6E7DBA;
+    -fx-text-fill: white;
+}
+
+.troopImageView {
+    -fx-cursor: hand;
+}
+
+.troopImageView.moved {
+    -fx-cursor: DEFAULT;
+    -fx-opacity: 0.6;
 }

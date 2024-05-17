@@ -15,7 +15,7 @@
       <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true" />
       <HBox spacing="20.0" styleClass="optionRow">
          <children>
-            <Button mnemonicParsing="false" text="Aufgeben" />
+            <Button fx:id="surrenderButton1" mnemonicParsing="false" text="Aufgeben" />
             <Button fx:id="waitButton" mnemonicParsing="false" text="Warten">
                <styleClass>
                   <String fx:value="button" />
@@ -27,7 +27,7 @@
                   <String fx:value="disabled" />
                </styleClass></Button>
             <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="EndTurn" />
-            <Button mnemonicParsing="false" text="Aufgeben" />
+            <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben" />
          </children>
       </HBox>
    </children>
