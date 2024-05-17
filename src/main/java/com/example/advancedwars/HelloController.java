@@ -222,7 +222,7 @@ public class HelloController implements Initializable {
         List<Node> nodesToRemove = new ArrayList<>();
 
         for (Node node : children) {
-            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView") || node instanceof ImageView && node.getStyleClass().contains("redImageView")) {
+            if (node instanceof ImageView && node.getStyleClass().contains("blueImageView")) {
                 nodesToRemove.add(node);
             }
         }
@@ -254,7 +254,9 @@ public class HelloController implements Initializable {
         troop.moved = true;
         waitButton.getStyleClass().add("disabled");
         waitButton.setOnMouseClicked(null);
-        attackButton.getStyleClass().add("disabled");
+        if(!attackButton.getStyleClass().contains("disabled")) {
+            attackButton.getStyleClass().add("disabled");
+        }
         attackButton.setOnMouseClicked(null);
         this.mooving = false;
 
@@ -344,6 +346,10 @@ public class HelloController implements Initializable {
             return;
         }
 
+        for(Node node : mapGridPane.getChildren()) {
+            node.getStyleClass().remove("moved");
+        }
+
         this.model.switchTurn();
         Image target = new Image(getClass().getResourceAsStream("/images/Bums.png"));
         ImageView turnSwitchImageView = new ImageView(target);
@@ -351,11 +357,11 @@ public class HelloController implements Initializable {
         turnSwitchImageView.setFitWidth(50);
         turnSwitchImageView.setFitHeight(50);
         mapGridPane.add(turnSwitchImageView, 10, 10);
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
             // Hier wird das Bild aus dem GridPane entfernt
             mapGridPane.getChildren().remove(turnSwitchImageView);
         }));
         timeline.play();
-
     }
 }

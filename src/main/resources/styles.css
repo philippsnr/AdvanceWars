@@ -15,6 +15,7 @@
 .button.disabled {
     -fx-background-color: gray;
     -fx-text-fill: transparent;
+    -fx-cursor: DEFAULT;
 }
 
 #surrenderButton1 {
@@ -27,7 +28,9 @@
     -fx-text-fill: white;
 }
 
-.troopImageView {
+.troopImageView,
+.TargetImageView,
+.blueImageView {
     -fx-cursor: hand;
 }
 
