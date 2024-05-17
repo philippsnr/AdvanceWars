@@ -213,7 +213,9 @@ public class GameModel {
                 movingRange.add(new int[]{nextX, nextY});
             }
 
-            movingField(troop, nextX, nextY, steps - stepLoose, movingRange);
+            if(this.troops[nextY][nextX] == null) {
+                movingField(troop, nextX, nextY, steps - stepLoose, movingRange);
+            }
         }
     }
 }

@@ -1,10 +1,17 @@
 .optionRow {
     -fx-alignment: center;
-    -fx-pref-width: 100%; /* Breite auf 100% setzen */
+    -fx-pref-width: 100%;
+    -fx-padding: 20px;
 }
 
 .button {
     -fx-pref-width: 100px;
     -fx-pref-height: 40px;
-    -fx-background-color: red;
+    -fx-background-color: white;
+    -fx-padding: 20px;
+}
+
+.button.disabled {
+    -fx-background-color: gray;
+    -fx-text-fill: transparent;
 }

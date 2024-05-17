@@ -29,6 +29,10 @@ public class HelloController implements Initializable {
     private boolean mooving = false;
     @FXML
     private GridPane mapGridPane;
+    @FXML
+    private Button waitButton;
+    @FXML
+    private Button attackButton;
 
     public HelloController() {
         this.model = new GameModel("Piston Dam");
@@ -204,6 +208,7 @@ public class HelloController implements Initializable {
         } else {
             this.model.mergeTroops(troop, this.model.troops[y][x]);
             updateHealthLabel(this.model.troops[y][x]);
+            this.mooving = false;
         }
         clearHighlights();
     }
@@ -223,12 +228,8 @@ public class HelloController implements Initializable {
 
     private void ListActions(Troop troop) {
 
-        ArrayList<Button> allButtons = new ArrayList<Button>();
-
-        Button waitButton = new Button("Warten");
-        waitButton.setPrefHeight(50);
-        waitButton.setPrefWidth(100);
-        allButtons.add(waitButton);
+        waitButton.getStyleClass().remove("disabled");
+        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop));
 
         boolean attackPossible = false;
         ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
@@ -239,39 +240,23 @@ public class HelloController implements Initializable {
             }
         }
 
-        Button attakButton = new Button("Attack");
         if (attackPossible) {
-            attakButton.setPrefHeight(50);
-            attakButton.setPrefWidth(100);
-            allButtons.add(attakButton);
+            attackButton.getStyleClass().remove("disabled");
+            attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
-
-        if (troop.xpos > mapGridPane.getColumnCount() / 2) {
-            for (int i = 0; i < allButtons.size(); i++) {
-                mapGridPane.add(allButtons.get(i), 0, i);
-                GridPane.setColumnSpan(allButtons.get(i), 2);
-            }
-        } else {
-            for (int i = 0; i < allButtons.size(); i++) {
-                mapGridPane.add(allButtons.get(i), mapGridPane.getColumnCount() - 2, i);
-                GridPane.setColumnSpan(allButtons.get(i), 2);
-            }
-        }
-
-        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop, allButtons));
-        attakButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, allButtons, attackRange));
     }
 
-    private void troopWait(Troop troop, ArrayList<Button> allButtons) {
+    private void troopWait(Troop troop) {
         troop.moved = true;
-        for (Button button : allButtons) {
-            mapGridPane.getChildren().remove(button);
-        }
+        waitButton.getStyleClass().add("disabled");
+        waitButton.setOnMouseClicked(null);
+        attackButton.getStyleClass().add("disabled");
+        attackButton.setOnMouseClicked(null);
         this.mooving = false;
 
     }
 
-    private void troopAttack(Troop attakingTroop, ArrayList<Button> allButtons, ArrayList<int[]> attackRange) {
+    private void troopAttack(Troop attakingTroop, ArrayList<int[]> attackRange) {
         this.mooving = false;
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team && (model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
@@ -288,10 +273,10 @@ public class HelloController implements Initializable {
 
             }
         }
-
-        for (Button button : allButtons) {
-            mapGridPane.getChildren().remove(button);
-        }
+        waitButton.getStyleClass().add("disabled");
+        waitButton.setOnMouseClicked(null);
+        attackButton.getStyleClass().add("disabled");
+        attackButton.setOnMouseClicked(null);
         this.mooving = false;
     }
 
