@@ -95,6 +95,10 @@ public class HelloController implements Initializable {
         Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
         ImageView troopImageView = new ImageView(troopImg);
         troopImageView.getStyleClass().add("troopImageView");
+        if (troop.moved) {
+            troopImageView.getStyleClass().add("moved");
+        }
+
         troopImageView.setScaleX(-1);
         troopImageView.setFitWidth(35);
         troopImageView.setFitHeight(35);

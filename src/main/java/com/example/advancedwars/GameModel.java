@@ -160,6 +160,7 @@ public class GameModel {
         troops[y][x] = troop;
         troop.xpos = x;
         troop.ypos = y;
+        troop.moved = true;
 
         System.out.println("Truppe bewegt nach: (" + x + ", " + y + ")");
     }
