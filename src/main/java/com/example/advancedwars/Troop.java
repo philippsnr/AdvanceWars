@@ -55,6 +55,10 @@ public abstract class Troop {
             range.add(new int[]{this.xpos - 1, this.ypos});
         }
 
+
+
+
+
         return range;
     }
 

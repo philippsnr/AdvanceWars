@@ -89,17 +89,19 @@ public class GameModel {
         System.out.println(kiaFaktor);
 
         beforFaktor = 0;
-        for (int i = 1; i <= defendingTroop.getHealth(); i++) {
-            int randomNumber = Bellcurve[rand.nextInt(15)];
-            beforFaktor += randomNumber;
+        if ((defendingTroop.identification!=3&& attakingTroop.identification!=3)&&kiaFaktor!=0) {
+            for (int i = 1; i <= defendingTroop.getHealth(); i++) {
+                int randomNumber = Bellcurve[rand.nextInt(15)];
+                beforFaktor += randomNumber;
 
+            }
+            System.out.println("befor faktor" + beforFaktor);
+            afterFaktor = beforFaktor * kiaFaktor * (1 / GroundFaktor);
+            System.out.println("after faktor" + afterFaktor);
+            damage = Math.toIntExact(Math.round(afterFaktor));
+            System.out.println(defendingTroop + " hat " + damage + " schaden gemacht");
+            attakingTroop.recieveDamage(damage);
         }
-        System.out.println("befor faktor" + beforFaktor);
-        afterFaktor = beforFaktor * kiaFaktor * (1 / GroundFaktor);
-        System.out.println("after faktor" + afterFaktor);
-        damage = Math.toIntExact(Math.round(afterFaktor));
-        System.out.println(defendingTroop + " hat " + damage + " schaden gemacht");
-        attakingTroop.recieveDamage(damage);
     }
 
 

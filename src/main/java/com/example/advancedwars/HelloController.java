@@ -235,7 +235,7 @@ public class HelloController implements Initializable {
         waitButton.getStyleClass().remove("disabled");
         waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop));
 
-        boolean attackPossible = true;
+        boolean attackPossible = false;
         ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team && (model.KIA[troop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
@@ -276,12 +276,7 @@ public class HelloController implements Initializable {
                 mapGridPane.add(targetImageView, field[0], field[1]);
 
             }
-            Image Rot = new Image(getClass().getResourceAsStream("/images/rot.png"));
-            ImageView RotImageView = new ImageView(Rot);
-            RotImageView.getStyleClass().add("TargetImageView");
-            RotImageView.setFitWidth(50);
-            RotImageView.setFitHeight(50);
-            mapGridPane.add(RotImageView, field[0], field[1]);
+
 
         }
         waitButton.getStyleClass().add("disabled");

@@ -12,41 +12,45 @@ public class Artillery extends Troop{
         int x=0;
         //unten rechts
         for(int i = 3; i >0 ; i--){
-            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos - Y});}
+
             Y+=1;
-            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x+=1;
         }
         //oben rechts
          Y=3;
          x=0;
         for(int i = 0; i <3 ; i++){
-            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            if(this.xpos<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos - Y});
+                System.out.println((this.xpos+x)+" "+(this.ypos-Y));
+            }
+
             Y-=1;
-            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&(this.ypos-Y)>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x+=1;
         }
         //oben links
         Y=3;
         x=0;
         for(int i = 0; i <3 ; i++){
-            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos - Y});}
             Y-=1;
-            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x-=1;
         }
         //unten links
         Y=-3;
         x=0;
         for(int i = 3; i >0 ; i--){
-            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos - Y});}
             Y+=1;
-            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x-=1;
         }
         //zusatz
-        range.add(new int[]{this.xpos+3, this.ypos });
-        range.add(new int[]{this.xpos-3, this.ypos });
+        if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){range.add(new int[]{this.xpos+3, this.ypos });}
+        if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){ range.add(new int[]{this.xpos-3, this.ypos });}
 
 
 
