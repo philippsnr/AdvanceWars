@@ -8,17 +8,45 @@ public class Artillery extends Troop{
     }
     public ArrayList<int[]> getAttackRange(int xlength, int ylength){
         ArrayList<int[]> range = new ArrayList<int[]>();
-        int Y=4;
-        int x=-1;
-        for(int i = 3; i >0 ; i++){
-            Y-=1;
-
-            range.add(new int[]{this.xpos, this.ypos - Y});
-            for(int j = 0; j < 3; j++){
-                x+=1;
-                range.add(new int[]{this.xpos+x, this.ypos });
-            }
+        int Y=-3;
+        int x=0;
+        //unten rechts
+        for(int i = 3; i >0 ; i--){
+            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            Y+=1;
+            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            x+=1;
         }
+        //oben rechts
+         Y=3;
+         x=0;
+        for(int i = 0; i <3 ; i++){
+            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            Y-=1;
+            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            x+=1;
+        }
+        //oben links
+        Y=3;
+        x=0;
+        for(int i = 0; i <3 ; i++){
+            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            Y-=1;
+            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            x-=1;
+        }
+        //unten links
+        Y=-3;
+        x=0;
+        for(int i = 3; i >0 ; i--){
+            range.add(new int[]{this.xpos+x, this.ypos - Y});
+            Y+=1;
+            range.add(new int[]{this.xpos+x, this.ypos-Y });
+            x-=1;
+        }
+        //zusatz
+        range.add(new int[]{this.xpos+3, this.ypos });
+        range.add(new int[]{this.xpos-3, this.ypos });
 
 
 

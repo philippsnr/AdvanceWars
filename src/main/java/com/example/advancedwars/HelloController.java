@@ -277,6 +277,7 @@ public class HelloController implements Initializable {
             RotImageView.getStyleClass().add("TargetImageView");
             RotImageView.setFitWidth(50);
             RotImageView.setFitHeight(50);
+            mapGridPane.add(RotImageView, field[0], field[1]);
 
         }
         waitButton.getStyleClass().add("disabled");
