@@ -20,7 +20,6 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -78,16 +77,6 @@ public class HelloController implements Initializable {
                 }
             }
         }
-        /*
-        Button endButton = new Button("End Turn");
-        endButton.setId("endTurnButton");
-        endButton.setPrefHeight(50);
-        endButton.setPrefWidth(100);
-        endButton.setOnMouseClicked(mouseEvent -> endTurn());
-        mapGridPane.setColumnSpan(endButton, 2);
-        mapGridPane.add(endButton, 0, mapGridPane.getRowCount());
-    */
-
     }
 
     private void placeTroopOnMap(Troop troop, int direction) {
@@ -99,7 +88,6 @@ public class HelloController implements Initializable {
             troopImageView.getStyleClass().add("moved");
         }
 
-        troopImageView.setScaleX(-1);
         troopImageView.setFitWidth(35);
         troopImageView.setFitHeight(35);
         troopImageView.setScaleX(direction);
@@ -108,6 +96,7 @@ public class HelloController implements Initializable {
         healthLabel.setTextFill(Color.WHITE);
 
         StackPane stackPane = new StackPane();
+        stackPane.getStyleClass().add("troopStackPane");
         stackPane.getChildren().addAll(troopImageView, healthLabel);
 
         StackPane.setMargin(healthLabel, new Insets(-50, 0, 0, 0));
@@ -151,36 +140,7 @@ public class HelloController implements Initializable {
             blueImageView.setFitHeight(50);
             blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
             mapGridPane.add(blueImageView, x, y);
-
         }
-
-        /*for (int i = -2; i <= 2; i++) {
-            for (int j = -2; j <= 2; j++) {
-                int x = troop.xpos + i;
-                int y = troop.ypos + j;
-
-                if (isValidField(x, y, troop)) {
-                    if (this.model.troops[y][x] == null) {
-                        Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
-                        ImageView blueImageView = new ImageView(blue);
-                        blueImageView.getStyleClass().add("blueImageView");
-                        blueImageView.setFitWidth(50);
-                        blueImageView.setFitHeight(50);
-                        blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
-                        mapGridPane.add(blueImageView, x, y);
-                    } else if (this.model.troops[troop.ypos][troop.xpos].team != this.model.troops[y][x].team) {
-                        Image red = new Image(getClass().getResourceAsStream("/images/rot.png"));
-                        ImageView redImageView = new ImageView(red);
-                        redImageView.getStyleClass().add("redImageView");
-                        redImageView.setFitWidth(50);
-                        redImageView.setFitHeight(50);
-
-                        mapGridPane.add(redImageView, x, y);
-                    }
-
-                }
-            }
-        }*/
     }
 
     private void selectTargetField(Troop troop, int x, int y) {
@@ -188,31 +148,30 @@ public class HelloController implements Initializable {
         this.mooving = true;
 
         for (Node node : mapGridPane.getChildren()) {
-            if (node instanceof ImageView && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos && node.getStyleClass().contains("troopImageView")) {
-                mapGridPane.getChildren().remove(node);
-                break;
-            }
-        }
-
-        for (Node node : mapGridPane.getChildren()) {
             if (node instanceof StackPane && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos) {
                 mapGridPane.getChildren().remove(node);
+
+                for (Node n : ((StackPane) node).getChildren()) {
+                    if (n.getStyleClass().contains("troopImageView")) {
+                        n.getStyleClass().add("moved");
+                        if (x > troop.xpos) {
+                            n.setScaleX(-1);
+                        } else if (x < troop.xpos) {
+                            n.setScaleX(1);
+                        }
+                    }
+                }
+                if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
+                    model.moveTroop(troop, x, y);
+                    mapGridPane.add(node, x, y);
+                    ListActions(troop);
+                } else {
+                    this.model.mergeTroops(troop, this.model.troops[y][x]);
+                    updateHealthLabel(this.model.troops[y][x]);
+                    this.mooving = false;
+                }
                 break;
             }
-        }
-
-        int troopDirection = 1;
-        if (troop.xpos < x) {
-            troopDirection = -1;
-        }
-        if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
-            model.moveTroop(troop, x, y);
-            placeTroopOnMap(troop, troopDirection);
-            ListActions(troop);
-        } else {
-            this.model.mergeTroops(troop, this.model.troops[y][x]);
-            updateHealthLabel(this.model.troops[y][x]);
-            this.mooving = false;
         }
         clearHighlights();
     }
@@ -254,7 +213,7 @@ public class HelloController implements Initializable {
         troop.moved = true;
         waitButton.getStyleClass().add("disabled");
         waitButton.setOnMouseClicked(null);
-        if(!attackButton.getStyleClass().contains("disabled")) {
+        if (!attackButton.getStyleClass().contains("disabled")) {
             attackButton.getStyleClass().add("disabled");
         }
         attackButton.setOnMouseClicked(null);
@@ -346,11 +305,21 @@ public class HelloController implements Initializable {
             return;
         }
 
-        for(Node node : mapGridPane.getChildren()) {
+        for (Node node : mapGridPane.getChildren()) {
             node.getStyleClass().remove("moved");
         }
 
         this.model.switchTurn();
+
+        for (Node node : mapGridPane.getChildren()) {
+            if (node.getStyleClass().contains("troopStackPane")) {
+                StackPane stackPane = (StackPane) node;
+                for (Node troop : stackPane.getChildren()) {
+                    troop.getStyleClass().remove("moved");
+                }
+            }
+        }
+
         Image target = new Image(getClass().getResourceAsStream("/images/Bums.png"));
         ImageView turnSwitchImageView = new ImageView(target);
         turnSwitchImageView.getStyleClass().add("TargetImageView");
