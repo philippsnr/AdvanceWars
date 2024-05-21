@@ -35,7 +35,7 @@ public class HelloController implements Initializable {
     private Button attackButton;
 
     public HelloController() {
-        this.model = new GameModel("Piston Dam");
+        this.model = new GameModel("Little Island");
         System.out.println("Controller created");
     }
 
@@ -121,6 +121,10 @@ public class HelloController implements Initializable {
 
     private void selectTroop(Troop troop) {
 
+
+
+
+
         if (this.mooving == true) {
             return;
         }
@@ -129,13 +133,24 @@ public class HelloController implements Initializable {
             return;
         }
 
-        clearHighlights();
-        if (this.model.getTurn() != troop.getTeam()) {
-            return;
-        }
+
+
 
         if (troop.moved == true) {
             return;
+        }
+        boolean attackPossible = false;
+        ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
+        for (int[] field : attackRange) {
+            if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != troop.team && (model.KIA[troop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
+                attackPossible = true;
+                break;
+            }
+        }
+
+        if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
+            attackButton.getStyleClass().remove("disabled");
+            attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
         this.mooving = true;
@@ -186,6 +201,9 @@ public class HelloController implements Initializable {
     private void selectTargetField(Troop troop, int x, int y) {
 
         this.mooving = true;
+        attackButton.getStyleClass().add("disabled");
+        attackButton.setOnMouseClicked(null);
+
 
         for (Node node : mapGridPane.getChildren()) {
             if (node instanceof ImageView && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos && node.getStyleClass().contains("troopImageView")) {
@@ -244,10 +262,12 @@ public class HelloController implements Initializable {
             }
         }
 
-        if (attackPossible) {
+        if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
             attackButton.getStyleClass().remove("disabled");
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
+
+
     }
 
     private void troopWait(Troop troop) {
@@ -262,6 +282,7 @@ public class HelloController implements Initializable {
 
     private void troopAttack(Troop attakingTroop, ArrayList<int[]> attackRange) {
         this.mooving = false;
+        clearHighlights();
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team && (model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
                 Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
