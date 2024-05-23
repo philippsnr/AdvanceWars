@@ -1,3 +1,16 @@
+#turnElement {
+    -fx-alignment: center;
+    -fx-pref-height: 50px;
+}
+
+.turnRed {
+    -fx-background-color: #F77F6A;
+}
+
+.turnBlue {
+    -fx-background-color: #6E7DBA;
+}
+
 .optionRow {
     -fx-alignment: center;
     -fx-pref-width: 100%;

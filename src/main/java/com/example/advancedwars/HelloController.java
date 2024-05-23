@@ -13,8 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -32,6 +34,10 @@ public class HelloController implements Initializable {
     private Button waitButton;
     @FXML
     private Button attackButton;
+    @FXML
+    private HBox turnElement;
+    @FXML
+    private Text turnText;
 
     public HelloController() {
         this.model = new GameModel("Little Island");
@@ -222,7 +228,9 @@ public class HelloController implements Initializable {
         }
 
         if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
-            attackButton.getStyleClass().remove("disabled");
+            while(attackButton.getStyleClass().contains("disabled")) {
+                attackButton.getStyleClass().remove("disabled");
+            }
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
 
@@ -346,12 +354,17 @@ public class HelloController implements Initializable {
         turnSwitchImageView.getStyleClass().add("TargetImageView");
         turnSwitchImageView.setFitWidth(50);
         turnSwitchImageView.setFitHeight(50);
-        mapGridPane.add(turnSwitchImageView, 10, 10);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-            // Hier wird das Bild aus dem GridPane entfernt
-            mapGridPane.getChildren().remove(turnSwitchImageView);
-        }));
-        timeline.play();
+        String turnColor = (this.model.getTurn() == 1) ? "Red" : "Blue";
+        turnText.setText("Turn " + turnColor);
+
+        if(model.getTurn() == 1) {
+            turnElement.getStyleClass().remove("turnBlue");
+            turnElement.getStyleClass().add("turnRed");
+        }
+        else {
+            turnElement.getStyleClass().remove("turnRed");
+            turnElement.getStyleClass().add("turnBlue");
+        }
     }
 }
