@@ -2,10 +2,12 @@ package com.example.advancedwars;
 
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,13 +18,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
 import javafx.scene.text.Text;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class HelloController implements Initializable {
 
@@ -173,11 +179,8 @@ public class HelloController implements Initializable {
 
         for (Node node : mapGridPane.getChildren()) {
             if (node instanceof StackPane && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos) {
-                mapGridPane.getChildren().remove(node);
-
                 for (Node n : ((StackPane) node).getChildren()) {
                     if (n.getStyleClass().contains("troopImageView")) {
-                        n.getStyleClass().add("moved");
                         if (x > troop.xpos) {
                             n.setScaleX(-1);
                         } else if (x < troop.xpos) {
@@ -185,19 +188,68 @@ public class HelloController implements Initializable {
                         }
                     }
                 }
-                if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
-                    model.moveTroop(troop, x, y);
-                    mapGridPane.add(node, x, y);
-                    ListActions(troop);
-                } else {
-                    this.model.mergeTroops(troop, this.model.troops[y][x]);
-                    updateHealthLabel(this.model.troops[y][x]);
-                    this.mooving = false;
-                }
+                troopMoveTransition(node, troop, x, y).thenRun(() -> {
+                    mapGridPane.getChildren().remove(node);
+                    if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
+                        model.moveTroop(troop, x, y);
+                        mapGridPane.add(node, x, y);
+                        ListActions(troop);
+                    } else {
+                        this.model.mergeTroops(troop, this.model.troops[y][x]);
+                        updateHealthLabel(this.model.troops[y][x]);
+                        this.mooving = false;
+                    }
+                    disableTroop((StackPane) node);
+                });
+
                 break;
             }
         }
         clearHighlights();
+    }
+
+    private CompletableFuture<Void> troopMoveTransition(Node troopNode, Troop troop, int x, int y) {
+        CompletableFuture<Void> future = new CompletableFuture<>();
+
+        Bounds startCellBounds = mapGridPane.getCellBounds(troop.xpos, troop.ypos);
+        double startX = startCellBounds.getWidth() / 2;
+        double startY = startCellBounds.getHeight() / 2;
+
+        double endX = 50 * (x - troop.xpos) + startCellBounds.getWidth() / 2;
+        double endY = 50 * (y - troop.ypos) + startCellBounds.getHeight() / 2;
+
+        Path path = new Path();
+        path.getElements().add(new MoveTo(startX, startY));
+        path.getElements().add(new LineTo(endX, endY));
+
+        int pathLength = Math.abs(x - troop.xpos) + Math.abs(y - troop.ypos);
+
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.seconds((double) pathLength / 2));
+        pathTransition.setPath(path);
+        pathTransition.setNode(troopNode);
+        pathTransition.setCycleCount(1);
+
+        pathTransition.setOnFinished(event -> {
+            future.complete(null);
+            troopNode.setTranslateX(0);
+            troopNode.setTranslateY(0);
+            pathTransition.stop();
+        });
+
+        troopNode.toFront();
+        pathTransition.play();
+
+        return future;
+    }
+
+    private void disableTroop(StackPane troop) {
+        for (Node n : troop.getChildren()) {
+            if (n.getStyleClass().contains("troopImageView")) {
+                n.getStyleClass().add("moved");
+            }
+            break;
+        }
     }
 
     private void clearHighlights() {
