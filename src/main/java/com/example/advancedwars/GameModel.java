@@ -1,5 +1,6 @@
 package com.example.advancedwars;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -168,13 +169,15 @@ public class GameModel {
     }
 
 
-    public List<int[]> getTroopRange(Troop troop) {
-        List<int[]> movingRange = new ArrayList<>();
-        movingField(troop, troop.xpos, troop.ypos, troop.stepRange, movingRange);
+    public ArrayList<TargetField> getTroopRange(Troop troop) {
+        ArrayList<TargetField> movingRange = new ArrayList<>();
+        ArrayList<TargetField> path = new ArrayList<>();
+        path.add(new TargetField(troop.xpos, troop.ypos, null));
+        movingField(troop, troop.xpos, troop.ypos, troop.stepRange, path, movingRange);
         return movingRange;
     }
 
-    private void movingField(Troop troop, int x, int y, int steps, List<int[]> movingRange) {
+    private void movingField(Troop troop, int x, int y, int steps, ArrayList<TargetField> path, ArrayList<TargetField> movingRange) {
         if (steps <= 0) return;
 
         int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -205,20 +208,34 @@ public class GameModel {
             }
 
             boolean alreadyExists = false;
-            for (int[] position : movingRange) {
-                if (position[0] == nextX && position[1] == nextY) {
+            for (TargetField position : movingRange) {
+                if (position.x == nextX && position.y == nextY) {
                     alreadyExists = true;
                     break;
                 }
             }
 
-            if (!alreadyExists) {
-                movingRange.add(new int[]{nextX, nextY});
-            }
+            if(alreadyExists) { continue; }
+
+            ArrayList<TargetField> newPath = deepClone(path);
+
+            TargetField newField = new TargetField(nextX, nextY, null);
+            newPath.add(newField);
+
+            movingRange.add(new TargetField(nextX, nextY, newPath));
 
             if(this.troops[nextY][nextX] == null) {
-                movingField(troop, nextX, nextY, steps - stepLoose, movingRange);
+                ArrayList<TargetField> newPathCopy = deepClone(newPath);
+                movingField(troop, nextX, nextY, steps - stepLoose, newPathCopy, movingRange);
             }
         }
+    }
+
+    public static ArrayList<TargetField> deepClone(ArrayList<TargetField> list) {
+        ArrayList<TargetField> newList = new ArrayList<>();
+        for (TargetField element : list) {
+            newList.add(new TargetField(element)); // Verwende Kopierkonstruktor
+        }
+        return newList;
     }
 }

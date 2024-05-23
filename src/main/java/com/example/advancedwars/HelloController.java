@@ -155,26 +155,25 @@ public class HelloController implements Initializable {
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
         this.mooving = true;
-        List<int[]> movingRange = this.model.getTroopRange(troop);
-        for (int[] field : movingRange) {
-            int x = field[0];
-            int y = field[1];
-
+        ArrayList<TargetField> movingRange = this.model.getTroopRange(troop);
+        for (TargetField field : movingRange) {
             Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
             ImageView blueImageView = new ImageView(blue);
             blueImageView.getStyleClass().add("blueImageView");
             blueImageView.setFitWidth(50);
             blueImageView.setFitHeight(50);
-            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
-            mapGridPane.add(blueImageView, x, y);
+            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, field));
+            mapGridPane.add(blueImageView, field.x, field.y);
         }
     }
 
-    private void selectTargetField(Troop troop, int x, int y) {
+    private void selectTargetField(Troop troop, TargetField field) {
 
         this.mooving = true;
         attackButton.getStyleClass().add("disabled");
         attackButton.setOnMouseClicked(null);
+        int x = field.x;
+        int y = field.y;
 
 
         for (Node node : mapGridPane.getChildren()) {
@@ -188,7 +187,7 @@ public class HelloController implements Initializable {
                         }
                     }
                 }
-                troopMoveTransition(node, troop, x, y).thenRun(() -> {
+                troopMoveTransition(node, troop, field).thenRun(() -> {
                     mapGridPane.getChildren().remove(node);
                     if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
                         model.moveTroop(troop, x, y);
@@ -208,21 +207,27 @@ public class HelloController implements Initializable {
         clearHighlights();
     }
 
-    private CompletableFuture<Void> troopMoveTransition(Node troopNode, Troop troop, int x, int y) {
+    private CompletableFuture<Void> troopMoveTransition(Node troopNode, Troop troop, TargetField field) {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         Bounds startCellBounds = mapGridPane.getCellBounds(troop.xpos, troop.ypos);
         double startX = startCellBounds.getWidth() / 2;
         double startY = startCellBounds.getHeight() / 2;
 
-        double endX = 50 * (x - troop.xpos) + startCellBounds.getWidth() / 2;
-        double endY = 50 * (y - troop.ypos) + startCellBounds.getHeight() / 2;
-
         Path path = new Path();
         path.getElements().add(new MoveTo(startX, startY));
-        path.getElements().add(new LineTo(endX, endY));
 
-        int pathLength = Math.abs(x - troop.xpos) + Math.abs(y - troop.ypos);
+        int i = 0;
+        for(TargetField f : field.path) {
+            if(i == 0) { i++; continue; }
+            double fx = 50 * (f.x - field.path.get(i - 1).x) + startCellBounds.getWidth() / 2;
+            double fy = 50 * (f.y - field.path.get(i - 1).y) + startCellBounds.getHeight() / 2;
+
+            path.getElements().add(new LineTo(fx, fy));
+        }
+
+        int pathLength = field.path.toArray().length - 1;
+        System.out.println(field.path.toArray().length);
 
         PathTransition pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.seconds((double) pathLength / 2));
