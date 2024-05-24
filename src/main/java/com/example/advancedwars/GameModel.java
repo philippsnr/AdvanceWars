@@ -171,6 +171,7 @@ public class GameModel {
 
     public ArrayList<TargetField> getTroopRange(Troop troop) {
         ArrayList<TargetField> movingRange = new ArrayList<>();
+        movingRange.add(new TargetField(troop.xpos, troop.ypos, null));
         ArrayList<TargetField> path = new ArrayList<>();
         path.add(new TargetField(troop.xpos, troop.ypos, null));
         movingField(troop, troop.xpos, troop.ypos, troop.stepRange, path, movingRange);
@@ -189,17 +190,18 @@ public class GameModel {
             if (nextX < 0 || nextX >= this.map.mapArray[0].length || nextY < 0 || nextY >= this.map.mapArray.length) {
                 continue;
             }
-            //if(this.troops[nextY][nextX] != null && (this.troops[nextY][nextX].team!= troop.team||this.troops[nextY][nextX].getIdentification()!= troop.getIdentification()||(troop.health==10||this.troops[nextY][nextX].health==10))) { continue; }
-            //if((troops[nextY][nextX] != null && troops[nextY][nextX] != troop) || (troops[nextY][nextX] != null && troops[nextY][nextX].team != troop.team) || (troops[nextY][nextX] != null && troops[nextY][nextX].identification != troop.team) || (troops[nextY][nextX].getHealth() == 10 && troop.getHealth() == 10)) { continue; }
-            if (troops[nextY][nextX] != null &&
+
+            if(troop.identification < 5 && troops[nextY][nextX] != null && troops[nextY][nextX].identification < 5 && troops[nextY][nextX].team != troop.team) { continue; }
+            if(troop.identification >= 5 && troops[nextY][nextX] != null && troops[nextY][nextX].team != troop.team && troops[nextY][nextX].identification >= 5) { continue; }
+
+
+            /*if (troops[nextY][nextX] != null &&
                     troops[nextY][nextX] != troop &&
                     (troops[nextY][nextX].team != troop.team ||
                             troops[nextY][nextX].identification != troop.identification ||
                             (troops[nextY][nextX].getHealth() == 10 && troop.getHealth() == 10))) {
                 continue;
-            }
-
-
+            }*/
 
             int stepLoose = movementCost[troop.identification][map.mapArray[nextY][nextX]];
 
@@ -215,19 +217,17 @@ public class GameModel {
                 }
             }
 
-            if(alreadyExists) { continue; }
-
             ArrayList<TargetField> newPath = deepClone(path);
 
             TargetField newField = new TargetField(nextX, nextY, null);
             newPath.add(newField);
 
-            movingRange.add(new TargetField(nextX, nextY, newPath));
-
-            if(this.troops[nextY][nextX] == null) {
-                ArrayList<TargetField> newPathCopy = deepClone(newPath);
-                movingField(troop, nextX, nextY, steps - stepLoose, newPathCopy, movingRange);
+            if(!alreadyExists && (troops[nextY][nextX] == null || troops[nextY][nextX] == troop ||(troops[nextY][nextX].team == troop.team && troops[nextY][nextX].identification == troop.identification && troop.health < 10 && troops[nextY][nextX].health < 10))) {
+                movingRange.add(new TargetField(nextX, nextY, newPath));
             }
+
+            ArrayList<TargetField> newPathCopy = deepClone(newPath);
+            movingField(troop, nextX, nextY, steps - stepLoose, newPathCopy, movingRange);
         }
     }
 

@@ -217,6 +217,10 @@ public class HelloController implements Initializable {
         Path path = new Path();
         path.getElements().add(new MoveTo(startX, startY));
 
+        if(field.path == null) {
+            future.complete(null);
+            return future;
+        }
         int i = 0;
         for(TargetField f : field.path) {
             if(i == 0) { i++; continue; }
@@ -412,8 +416,8 @@ public class HelloController implements Initializable {
         turnSwitchImageView.setFitWidth(50);
         turnSwitchImageView.setFitHeight(50);
 
-        String turnColor = (this.model.getTurn() == 1) ? "Red" : "Blue";
-        turnText.setText("Turn " + turnColor);
+        String turnColor = (this.model.getTurn() == 1) ? "Rot" : "Blau";
+        turnText.setText(turnColor + " ist am Zug");
 
         if(model.getTurn() == 1) {
             turnElement.getStyleClass().remove("turnBlue");

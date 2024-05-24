@@ -16,7 +16,7 @@
       <URL value="@/styles.css" />
    </stylesheets>
    <children>
-      <HBox fx:id="turnElement" styleClass="turnRed"><Text fx:id="turnText">Turn red</Text></HBox>
+      <HBox fx:id="turnElement" styleClass="turnRed"><Text fx:id="turnText">Rot ist am Zug</Text></HBox>
       <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true" />
       <HBox spacing="20.0" styleClass="optionRow">
          <children>
@@ -31,7 +31,7 @@
                   <String fx:value="button" />
                   <String fx:value="disabled" />
                </styleClass></Button>
-            <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="EndTurn" />
+            <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden" />
             <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben" />
          </children>
       </HBox>
