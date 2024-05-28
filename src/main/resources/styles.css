@@ -27,6 +27,10 @@
     -fx-background-color: #6E7DBA;
     -fx-text-fill: white;
 }
+#testButton {
+    -fx-background-color: #e0b446;
+    -fx-text-fill: white;
+}
 
 .troopImageView,
 .TargetImageView,

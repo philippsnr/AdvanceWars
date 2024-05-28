@@ -39,4 +39,9 @@ public class LittleIsland extends Map {
 
         return new Troop[] {inf11, inf12, inf13, inf21, inf22, inf23, mech1, mech2, tank1, tank2, antiair1, antiair2, bomber1, bomber2, copter1, copter2};
     }
+    protected Factory[] getInitFactorys(){
+        Factory f11= new Factory(2,7,1);
+        Factory f12= new Factory(16,2,2);
+        return new Factory[] {f11, f12};
+    }
 }

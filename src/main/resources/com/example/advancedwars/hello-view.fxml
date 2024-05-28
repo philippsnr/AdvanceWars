@@ -28,6 +28,13 @@
                </styleClass></Button>
             <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="EndTurn" />
             <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben" />
+            <Button fx:id="testButton" mnemonicParsing="false" text="hooooo">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="disabled" />
+               </styleClass>
+            </Button>
+
          </children>
       </HBox>
    </children>

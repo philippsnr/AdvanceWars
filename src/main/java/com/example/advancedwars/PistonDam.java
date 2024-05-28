@@ -5,7 +5,7 @@ public class PistonDam extends Map{
         this.mapArray = new int[][] {
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1},
+                {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 5, 0, 0, 1},
                 {0, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 1, 0, 0, 0, 0, 0, 1},
                 {0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 1, 0, 0, 1, 3, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0},
                 {3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3},
@@ -14,7 +14,7 @@ public class PistonDam extends Map{
                 {3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3},
                 {0, 0, 0, 0, 1, 1, 1, 0, 3, 3, 3, 1, 0, 0, 1, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 1, 0, 0, 1, 3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+                {1, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 {0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
         };
@@ -71,5 +71,10 @@ public class PistonDam extends Map{
         Troop antit12 = new AntiAir(2,13,9);
 
         return new Troop[] {inf11, inf12, inf13, inf14, mech11, mech12, mech13, tank11, tank12, tank13, tank14, artillery11, artillery12, antiair1, fighter1, bomber1, copter1, inf21, inf22, inf23, inf24, mech21, mech22, mech23, tank21, tank22, tank23, tank24, artillery21, artillery22, antiair2, fighter2, bomber2, copter2, inft11, inft12, mecht11,mecht12,tankt11, tankt12,artyt11,artyt12,antit12,antit11};
+    }
+    protected Factory[] getInitFactorys(){
+        Factory f11= new Factory(3,10,1);
+        Factory f12= new Factory(10,5,2);
+        return new Factory[] {f11, f12};
     }
 }

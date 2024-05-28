@@ -1,6 +1,7 @@
 package com.example.advancedwars;
 
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -32,6 +33,8 @@ public class HelloController implements Initializable {
     private Button waitButton;
     @FXML
     private Button attackButton;
+    @FXML
+    private Button testButton;
 
     public HelloController() {
         this.model = new GameModel("Little Island");
@@ -61,6 +64,7 @@ public class HelloController implements Initializable {
                     case 3:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/sea.png")));
                         break;
+
                 }
 
                 imageView.setFitWidth(50);
@@ -75,10 +79,23 @@ public class HelloController implements Initializable {
                     }
                     placeTroopOnMap(this.model.troops[y][x], troopDirection);
                 }
+                if (this.model.factorys[y][x] !=null){
+                    placeFactoryOnMap(this.model.factorys[y][x]);
+                }
+
             }
         }
     }
+    private void placeFactoryOnMap(Factory factory) {
+        String factoryIMGPath = factory.getimage();
+        Image factoryImg = new Image(getClass().getResourceAsStream(factoryIMGPath));
+        ImageView factoryimageView = new ImageView(factoryImg);
+        factoryimageView.setFitWidth(50);
+        factoryimageView.setFitHeight(50);
+        mapGridPane.add(factoryimageView, factory.xpos, factory.ypos);
+        factoryimageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory));
 
+    }
     private void placeTroopOnMap(Troop troop, int direction) {
         String troopImgPath = troop.getTroopImg();
         Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
@@ -106,6 +123,23 @@ public class HelloController implements Initializable {
         mapGridPane.add(stackPane, troop.xpos, troop.ypos);
 
 
+    }
+    private void factoryClicked(Factory factroy) {
+        System.out.println("Factory clicked");
+        if (this.mooving == true) {
+            return;
+        }
+        if (this.model.getTurn() != factroy.team) {
+            return;
+        }
+
+        testButton.getStyleClass().remove("disabled");
+        testButton.setOnMouseClicked(mouseEvent -> gekauft());
+
+
+    }
+    private void gekauft(){
+        System.out.println("gekauft");
     }
 
     private void selectTroop(Troop troop) {
@@ -354,4 +388,6 @@ public class HelloController implements Initializable {
         }));
         timeline.play();
     }
+
+
 }
