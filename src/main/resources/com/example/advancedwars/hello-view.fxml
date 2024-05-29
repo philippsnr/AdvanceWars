@@ -48,7 +48,7 @@
                            </image>
                         </ImageView>
                         <VBox alignment="CENTER">
-                           <Text text="Infantry" />g
+                           <Text text="Infantry" />
                            <Text text="500" />
                         </VBox>
                      </children>
