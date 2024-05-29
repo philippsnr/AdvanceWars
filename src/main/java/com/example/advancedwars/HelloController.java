@@ -80,11 +80,13 @@ public class HelloController implements Initializable {
                         break;
                     case 5:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory1.png")));
-                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(1, finalX, finalY));
+                        Factory factory1 = new Factory(1, x, y);
+                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory1));
                         break;
                     case 6:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory2.png")));
-                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(2, finalX, finalY));
+                        Factory factory2 = new Factory(2, x, y);
+                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory2));
                         break;
                 }
 
@@ -133,12 +135,12 @@ public class HelloController implements Initializable {
 
 
     }
-    private void factoryClicked(int team, int x, int y) {
+    private void factoryClicked(Factory factory) {
         System.out.println("Factory clicked");
         if (this.mooving == true) {
             return;
         }
-        if (this.model.getTurn() != team) {
+        if (this.model.getTurn() != factory.team) {
             return;
         }
 
