@@ -66,9 +66,4 @@ public class EonSprings extends Map{
 
         return new Troop[] {inf11, inf12, mech11, mech12, mech13, tank11, tank12, artillery11, artillery12, antiair11, antiair12, fighter11, fighter12, bomber11, bomber12, copter1, inf21, inf22, mech21, mech22, mech23, tank21, tank22, artillery21, artillery22, antiair21, antiair22, fighter21, fighter22, bomber21, bomber22, copter2,inft11,inft22,inft21};
     }
-    protected Factory[] getInitFactorys(){
-        Factory f11= new Factory(3,10,1);
-        Factory f12= new Factory(10,5,2);
-        return new Factory[] {f11, f12};
-    }
 }

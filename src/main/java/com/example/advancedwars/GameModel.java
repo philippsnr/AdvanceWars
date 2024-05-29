@@ -10,7 +10,6 @@ public class GameModel {
 
     public Map map;
     public Troop[][] troops;
-    public Factory[][] factorys;
     private int turn = 1;
     public static char[][] KIA = {{'d', 'd', 'e', 'd', 'e', 'x', 'x', 'e'}, {'c', 'c', 'c', 'b', 'c', 'x', 'x', 'e'}, {'b', 'b', 'd', 'b', 'c', 'x', 'x', 'e'}, {'a', 'a', 'b', 'c', 'c', 'x', 'x', 'x'}, {'a', 'a', 'd', 'c', 'd', 'c', 'c', 'a'}, {'x', 'x', 'x', 'x', 'x', 'c', 'a', 'a'}, {'a', 'a', 'a', 'a', 'a', 'x', 'x', 'x'}, {'b', 'b', 'c', 'c', 'd', 'x', 'x', 'c'}};
     private final int[] Bellcurve = {1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
@@ -64,7 +63,6 @@ public class GameModel {
     public GameModel(String selectedMap) {
         initMap(selectedMap);
         initTroops();
-        initFactory();
     }
 
     public void calculateDamage(Troop attakingTroop, Troop defendingTroop) {
@@ -149,16 +147,6 @@ public class GameModel {
         for (Troop t : startTroops) {
             this.troops[t.ypos][t.xpos] = t;
         }
-    }
-    private void initFactory(){
-        this.factorys = new Factory[map.mapArray.length][map.mapArray[0].length];
-        Factory[] startFactory = this.map.getInitFactorys();
-
-        for (Factory f : startFactory) {
-            this.factorys[f.ypos][f.xpos] = f;
-            System.out.println("haaaaaaaaaaaa");
-        }
-
     }
 
     protected void mergeTroops(Troop troop1, Troop troop2) {

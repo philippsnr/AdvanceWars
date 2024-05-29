@@ -62,6 +62,8 @@ public class HelloController implements Initializable {
 
         for (int y = 0; y < this.model.map.mapArray.length; y++) {
             for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
+                final int finalX = x;
+                final int finalY = y;
                 ImageView imageView = new ImageView();
                 switch (this.model.map.mapArray[y][x]) {
                     case 0:
@@ -76,7 +78,14 @@ public class HelloController implements Initializable {
                     case 3:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/sea.png")));
                         break;
-
+                    case 5:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory1.png")));
+                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(1, finalX, finalY));
+                        break;
+                    case 6:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory2.png")));
+                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(2, finalX, finalY));
+                        break;
                 }
 
                 imageView.setFitWidth(50);
@@ -91,23 +100,11 @@ public class HelloController implements Initializable {
                     }
                     placeTroopOnMap(this.model.troops[y][x], troopDirection);
                 }
-                if (this.model.factorys[y][x] !=null){
-                    placeFactoryOnMap(this.model.factorys[y][x]);
-                }
 
             }
         }
     }
-    private void placeFactoryOnMap(Factory factory) {
-        String factoryIMGPath = factory.getimage();
-        Image factoryImg = new Image(getClass().getResourceAsStream(factoryIMGPath));
-        ImageView factoryimageView = new ImageView(factoryImg);
-        factoryimageView.setFitWidth(50);
-        factoryimageView.setFitHeight(50);
-        mapGridPane.add(factoryimageView, factory.xpos, factory.ypos);
-        factoryimageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory));
 
-    }
     private void placeTroopOnMap(Troop troop, int direction) {
         String troopImgPath = troop.getTroopImg();
         Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
@@ -136,12 +133,12 @@ public class HelloController implements Initializable {
 
 
     }
-    private void factoryClicked(Factory factroy) {
+    private void factoryClicked(int team, int x, int y) {
         System.out.println("Factory clicked");
         if (this.mooving == true) {
             return;
         }
-        if (this.model.getTurn() != factroy.team) {
+        if (this.model.getTurn() != team) {
             return;
         }
 

@@ -6,12 +6,12 @@ public class LittleIsland extends Map {
         this.mapArray = new int[][] {
                 {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
                 {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 1, 0, 0, 0, 1, 3},
-                {3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+                {3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 3},
                 {3, 3, 3, 3, 3, 3, 3, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3},
                 {3, 3, 3, 3, 3, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 3, 3},
                 {3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 3, 3, 3, 3, 3},
                 {3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 3, 3, 3, 3, 3, 3, 3},
-                {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3},
+                {3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3},
                 {3, 1, 0, 0, 0, 1, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
                 {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3}
         };
@@ -38,10 +38,5 @@ public class LittleIsland extends Map {
         Troop copter2 = new Copter(2, 16, 1);
 
         return new Troop[] {inf11, inf12, inf13, inf21, inf22, inf23, mech1, mech2, tank1, tank2, antiair1, antiair2, bomber1, bomber2, copter1, copter2};
-    }
-    protected Factory[] getInitFactorys(){
-        Factory f11= new Factory(2,7,1);
-        Factory f12= new Factory(16,2,2);
-        return new Factory[] {f11, f12};
     }
 }
