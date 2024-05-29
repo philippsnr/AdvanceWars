@@ -3,10 +3,12 @@ package com.example.advancedwars;
 
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,14 +16,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.text.Text;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class HelloController implements Initializable {
 
@@ -35,6 +43,10 @@ public class HelloController implements Initializable {
     private Button attackButton;
     @FXML
     private Button testButton;
+    @FXML
+    private HBox turnElement;
+    @FXML
+    private Text turnText;
 
     public HelloController() {
         this.model = new GameModel("Little Island");
@@ -177,35 +189,31 @@ public class HelloController implements Initializable {
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
         this.mooving = true;
-        List<int[]> movingRange = this.model.getTroopRange(troop);
-        for (int[] field : movingRange) {
-            int x = field[0];
-            int y = field[1];
-
+        ArrayList<TargetField> movingRange = this.model.getTroopRange(troop);
+        for (TargetField field : movingRange) {
             Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
             ImageView blueImageView = new ImageView(blue);
             blueImageView.getStyleClass().add("blueImageView");
             blueImageView.setFitWidth(50);
             blueImageView.setFitHeight(50);
-            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, x, y));
-            mapGridPane.add(blueImageView, x, y);
+            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, field));
+            mapGridPane.add(blueImageView, field.x, field.y);
         }
     }
 
-    private void selectTargetField(Troop troop, int x, int y) {
+    private void selectTargetField(Troop troop, TargetField field) {
 
         this.mooving = true;
         attackButton.getStyleClass().add("disabled");
         attackButton.setOnMouseClicked(null);
+        int x = field.x;
+        int y = field.y;
 
 
         for (Node node : mapGridPane.getChildren()) {
             if (node instanceof StackPane && GridPane.getColumnIndex(node) == troop.xpos && GridPane.getRowIndex(node) == troop.ypos) {
-                mapGridPane.getChildren().remove(node);
-
                 for (Node n : ((StackPane) node).getChildren()) {
                     if (n.getStyleClass().contains("troopImageView")) {
-                        n.getStyleClass().add("moved");
                         if (x > troop.xpos) {
                             n.setScaleX(-1);
                         } else if (x < troop.xpos) {
@@ -213,19 +221,78 @@ public class HelloController implements Initializable {
                         }
                     }
                 }
-                if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
-                    model.moveTroop(troop, x, y);
-                    mapGridPane.add(node, x, y);
-                    ListActions(troop);
-                } else {
-                    this.model.mergeTroops(troop, this.model.troops[y][x]);
-                    updateHealthLabel(this.model.troops[y][x]);
-                    this.mooving = false;
-                }
+                troopMoveTransition(node, troop, field).thenRun(() -> {
+                    mapGridPane.getChildren().remove(node);
+                    if (this.model.troops[y][x] == null || this.model.troops[y][x] == troop) {
+                        model.moveTroop(troop, x, y);
+                        mapGridPane.add(node, x, y);
+                        ListActions(troop);
+                    } else {
+                        this.model.mergeTroops(troop, this.model.troops[y][x]);
+                        updateHealthLabel(this.model.troops[y][x]);
+                        this.mooving = false;
+                    }
+                    disableTroop((StackPane) node);
+                });
+
                 break;
             }
         }
         clearHighlights();
+    }
+
+    private CompletableFuture<Void> troopMoveTransition(Node troopNode, Troop troop, TargetField field) {
+        CompletableFuture<Void> future = new CompletableFuture<>();
+
+        Bounds startCellBounds = mapGridPane.getCellBounds(troop.xpos, troop.ypos);
+        double startX = startCellBounds.getWidth() / 2;
+        double startY = startCellBounds.getHeight() / 2;
+
+        Path path = new Path();
+        path.getElements().add(new MoveTo(startX, startY));
+
+        if(field.path == null) {
+            future.complete(null);
+            return future;
+        }
+        int i = 0;
+        for(TargetField f : field.path) {
+            if(i == 0) { i++; continue; }
+            double fx = 50 * (f.x - field.path.get(i - 1).x) + startCellBounds.getWidth() / 2;
+            double fy = 50 * (f.y - field.path.get(i - 1).y) + startCellBounds.getHeight() / 2;
+
+            path.getElements().add(new LineTo(fx, fy));
+        }
+
+        int pathLength = field.path.toArray().length - 1;
+        System.out.println(field.path.toArray().length);
+
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.seconds((double) pathLength / 2));
+        pathTransition.setPath(path);
+        pathTransition.setNode(troopNode);
+        pathTransition.setCycleCount(1);
+
+        pathTransition.setOnFinished(event -> {
+            future.complete(null);
+            troopNode.setTranslateX(0);
+            troopNode.setTranslateY(0);
+            pathTransition.stop();
+        });
+
+        troopNode.toFront();
+        pathTransition.play();
+
+        return future;
+    }
+
+    private void disableTroop(StackPane troop) {
+        for (Node n : troop.getChildren()) {
+            if (n.getStyleClass().contains("troopImageView")) {
+                n.getStyleClass().add("moved");
+            }
+            break;
+        }
     }
 
     private void clearHighlights() {
@@ -256,7 +323,9 @@ public class HelloController implements Initializable {
         }
 
         if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
-            attackButton.getStyleClass().remove("disabled");
+            while(attackButton.getStyleClass().contains("disabled")) {
+                attackButton.getStyleClass().remove("disabled");
+            }
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
 
@@ -380,13 +449,18 @@ public class HelloController implements Initializable {
         turnSwitchImageView.getStyleClass().add("TargetImageView");
         turnSwitchImageView.setFitWidth(50);
         turnSwitchImageView.setFitHeight(50);
-        mapGridPane.add(turnSwitchImageView, 10, 10);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-            // Hier wird das Bild aus dem GridPane entfernt
-            mapGridPane.getChildren().remove(turnSwitchImageView);
-        }));
-        timeline.play();
+        String turnColor = (this.model.getTurn() == 1) ? "Rot" : "Blau";
+        turnText.setText(turnColor + " ist am Zug");
+
+        if(model.getTurn() == 1) {
+            turnElement.getStyleClass().remove("turnBlue");
+            turnElement.getStyleClass().add("turnRed");
+        }
+        else {
+            turnElement.getStyleClass().remove("turnRed");
+            turnElement.getStyleClass().add("turnBlue");
+        }
     }
 
 
