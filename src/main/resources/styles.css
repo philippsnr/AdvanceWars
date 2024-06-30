@@ -56,6 +56,10 @@
     -fx-opacity: 0.6;
 }
 
+.disabledSection {
+    visibility: hidden;
+}
+
 #troopSelection {
     -fx-alignment: center;
     -fx-pref-width: 100%;

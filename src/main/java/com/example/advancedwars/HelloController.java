@@ -1,7 +1,6 @@
 package com.example.advancedwars;
 
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -15,9 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -35,6 +36,7 @@ public class HelloController implements Initializable {
 
     private final GameModel model;
     private boolean mooving = false;
+    private Factory activeFactory;
     @FXML
     private GridPane mapGridPane;
     @FXML
@@ -42,11 +44,11 @@ public class HelloController implements Initializable {
     @FXML
     private Button attackButton;
     @FXML
-    private Button testButton;
-    @FXML
     private HBox turnElement;
     @FXML
     private Text turnText;
+    @FXML
+    private HBox troopSelection;
 
     public HelloController() {
         this.model = new GameModel("Little Island");
@@ -135,29 +137,35 @@ public class HelloController implements Initializable {
 
 
     }
+
     private void factoryClicked(Factory factory) {
         System.out.println("Factory clicked");
-        if (this.mooving == true) {
+        this.activeFactory = factory;
+        if (this.mooving == true || this.model.getTurn() != factory.team || this.model.troops[factory.y][factory.x] != null) {
             return;
         }
-        if (this.model.getTurn() != factory.team) {
-            return;
-        }
-
-        testButton.getStyleClass().remove("disabled");
-        testButton.setOnMouseClicked(mouseEvent -> gekauft());
-
-
+        troopSelection.getStyleClass().remove("disabledSection");
+        Infantry newTroop = new Infantry(model.getTurn(), factory.x, factory.y);
+        newTroop.moved = true;
+        placeTroopOnMap(newTroop, 1);
+        model.placeTroop(newTroop);
     }
-    private void gekauft(){
-        System.out.println("gekauft");
+
+    @FXML
+    private void buyTroop(MouseEvent event) {
+
+        Object source = event.getSource();
+
+        VBox clickedButton = (VBox) source;
+
+        System.out.println(clickedButton.getStyleClass().get(0));
+        for (String styleClass : clickedButton.getStyleClass()) {
+            System.out.println("Button CSS class: " + styleClass);
+        }
+
     }
 
     private void selectTroop(Troop troop) {
-
-
-
-
 
         if (this.mooving == true) {
             return;
@@ -166,8 +174,6 @@ public class HelloController implements Initializable {
         if (this.model.getTurn() != troop.team) {
             return;
         }
-
-
 
 
         if (troop.moved == true) {
@@ -182,7 +188,7 @@ public class HelloController implements Initializable {
             }
         }
 
-        if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
+        if (attackPossible && (troop.identification != 3 || troop.moved == false)) {
             attackButton.getStyleClass().remove("disabled");
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
@@ -250,13 +256,16 @@ public class HelloController implements Initializable {
         Path path = new Path();
         path.getElements().add(new MoveTo(startX, startY));
 
-        if(field.path == null) {
+        if (field.path == null) {
             future.complete(null);
             return future;
         }
         int i = 0;
-        for(TargetField f : field.path) {
-            if(i == 0) { i++; continue; }
+        for (TargetField f : field.path) {
+            if (i == 0) {
+                i++;
+                continue;
+            }
             double fx = 50 * (f.x - field.path.get(i - 1).x) + startCellBounds.getWidth() / 2;
             double fy = 50 * (f.y - field.path.get(i - 1).y) + startCellBounds.getHeight() / 2;
 
@@ -321,8 +330,8 @@ public class HelloController implements Initializable {
             }
         }
 
-        if (attackPossible&&(troop.identification!=3||troop.moved==false)) {
-            while(attackButton.getStyleClass().contains("disabled")) {
+        if (attackPossible && (troop.identification != 3 || troop.moved == false)) {
+            while (attackButton.getStyleClass().contains("disabled")) {
                 attackButton.getStyleClass().remove("disabled");
             }
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
@@ -452,11 +461,10 @@ public class HelloController implements Initializable {
         String turnColor = (this.model.getTurn() == 1) ? "Rot" : "Blau";
         turnText.setText(turnColor + " ist am Zug");
 
-        if(model.getTurn() == 1) {
+        if (model.getTurn() == 1) {
             turnElement.getStyleClass().remove("turnBlue");
             turnElement.getStyleClass().add("turnRed");
-        }
-        else {
+        } else {
             turnElement.getStyleClass().remove("turnRed");
             turnElement.getStyleClass().add("turnBlue");
         }

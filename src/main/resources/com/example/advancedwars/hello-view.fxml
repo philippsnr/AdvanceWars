@@ -36,9 +36,9 @@
 
          </children>
       </HBox>
-      <HBox fx:id="troopSelection">
+      <HBox fx:id="troopSelection" styleClass="disabledSection">
          <children>
-            <Button fx:id="troopSelectionButton" styleClass="troopSelectionButton">
+            <Button styleClass="troopSelectionButton">
                <graphic>
                   <HBox alignment="CENTER_LEFT">
                      <children>
@@ -47,7 +47,7 @@
                               <Image url="@../../../images/troops/infantry1.png" />
                            </image>
                         </ImageView>
-                        <VBox alignment="CENTER">
+                        <VBox alignment="CENTER" onMouseClicked="#buyTroop" styleClass="infantry">
                            <Text text="Infantry" />
                            <Text text="500" />
                         </VBox>

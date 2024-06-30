@@ -14,7 +14,7 @@ public class GameModel {
     public static char[][] KIA = {{'d', 'd', 'e', 'd', 'e', 'x', 'x', 'e'}, {'c', 'c', 'c', 'b', 'c', 'x', 'x', 'e'}, {'b', 'b', 'd', 'b', 'c', 'x', 'x', 'e'}, {'a', 'a', 'b', 'c', 'c', 'x', 'x', 'x'}, {'a', 'a', 'd', 'c', 'd', 'c', 'c', 'a'}, {'x', 'x', 'x', 'x', 'x', 'c', 'a', 'a'}, {'a', 'a', 'a', 'a', 'a', 'x', 'x', 'x'}, {'b', 'b', 'c', 'c', 'd', 'x', 'x', 'c'}};
     private final int[] Bellcurve = {1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
     private final int[] GroudnToStars = {1, 2, 4, 0, 0, 3};
-    private final int[][] movementCost = {{1, 1, 2, 0}, {1, 1, 1, 0}, {1, 2, 0, 0}, {1, 2, 0, 0}, {1, 2, 0, 0}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}};
+    private final int[][] movementCost = {{1, 1, 2, 0, 1, 1}, {1, 1, 1, 0, 1, 1}, {1, 2, 0, 0, 1, 1}, {1, 2, 0, 0, 1, 1}, {1, 2, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}};
 
     public static double getKIAFaktor(int unit1, int unit2) {
         if (KIA[unit1][unit2] == 'a') {
@@ -145,8 +145,12 @@ public class GameModel {
         Troop[] startTroops = this.map.getInitTroops();
 
         for (Troop t : startTroops) {
-            this.troops[t.ypos][t.xpos] = t;
+            placeTroop(t);
         }
+    }
+
+    protected void placeTroop(Troop t) {
+        this.troops[t.ypos][t.xpos] = t;
     }
 
     protected void mergeTroops(Troop troop1, Troop troop2) {
