@@ -145,10 +145,6 @@ public class HelloController implements Initializable {
             return;
         }
         troopSelection.getStyleClass().remove("disabledSection");
-        Infantry newTroop = new Infantry(model.getTurn(), factory.x, factory.y);
-        newTroop.moved = true;
-        placeTroopOnMap(newTroop, 1);
-        model.placeTroop(newTroop);
     }
 
     @FXML
@@ -156,12 +152,31 @@ public class HelloController implements Initializable {
 
         Object source = event.getSource();
 
-        VBox clickedButton = (VBox) source;
+        HBox clickedTroop = (HBox) source;
 
-        System.out.println(clickedButton.getStyleClass().get(0));
-        for (String styleClass : clickedButton.getStyleClass()) {
-            System.out.println("Button CSS class: " + styleClass);
+        String type = clickedTroop.getStyleClass().get(0);
+
+        Troop newTroop;
+
+        switch (type) {
+            case "infantry" -> newTroop = new Infantry(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "fighter" -> newTroop = new Fighter(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "antiair" -> newTroop = new AntiAir(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "artillery" -> newTroop = new Artillery(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "bomber" -> newTroop = new Bomber(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "copter" -> newTroop = new Copter(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "mech" -> newTroop = new Mech(activeFactory.team, activeFactory.x, activeFactory.y);
+            case "tank" -> newTroop = new Tank(activeFactory.team, activeFactory.x, activeFactory.y);
+            default -> {
+                return;
+            }
         }
+
+        newTroop.moved = true;
+        placeTroopOnMap(newTroop, 1);
+        model.placeTroop(newTroop);
+
+        troopSelection.getStyleClass().add("disabledSection");
 
     }
 
@@ -451,12 +466,6 @@ public class HelloController implements Initializable {
                 }
             }
         }
-
-        Image target = new Image(getClass().getResourceAsStream("/images/Bums.png"));
-        ImageView turnSwitchImageView = new ImageView(target);
-        turnSwitchImageView.getStyleClass().add("TargetImageView");
-        turnSwitchImageView.setFitWidth(50);
-        turnSwitchImageView.setFitHeight(50);
 
         String turnColor = (this.model.getTurn() == 1) ? "Rot" : "Blau";
         turnText.setText(turnColor + " ist am Zug");
