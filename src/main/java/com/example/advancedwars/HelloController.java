@@ -80,6 +80,9 @@ public class HelloController implements Initializable {
                     case 3:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/sea.png")));
                         break;
+                    case 4:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/matsch.jpg")));
+                        break;
                     case 5:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory1.png")));
                         Factory factory1 = new Factory(1, x, y);
