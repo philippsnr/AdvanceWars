@@ -22,6 +22,12 @@
         </HBox>
         <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true"/>
         <HBox spacing="20.0" styleClass="optionRow">
+            <HBox fx:id="moneyTeam1" styleClass="money">
+                <Text text="1.000" style="-fx-text-fill: white"/>
+                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../images/coin.png"/>
+                </ImageView>
+            </HBox>
             <Button fx:id="surrenderButton1" mnemonicParsing="false" text="Aufgeben"/>
             <Button fx:id="waitButton" mnemonicParsing="false" text="Warten">
                 <styleClass>
@@ -37,6 +43,12 @@
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden"/>
             <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben"/>
+            <HBox fx:id="moneyTeam2" styleClass="money">
+                <Text text="1.000" style="-fx-text-fill: white"/>
+                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../images/coin.png"/>
+                </ImageView>
+            </HBox>
 
         </HBox>
         <HBox fx:id="troopSelection" styleClass="disabledSection">

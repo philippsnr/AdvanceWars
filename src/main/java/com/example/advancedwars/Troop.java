@@ -8,6 +8,7 @@ public abstract class Troop {
     protected int team;
     protected int xpos;
     protected int ypos;
+    protected int price = 1000;
     protected boolean moved = false;
     protected int stepRange;
     public int identification;

@@ -11,6 +11,7 @@ public class GameModel {
     public Map map;
     public Troop[][] troops;
     private int turn = 1;
+    private int[] money = {1000, 1000};
     public static char[][] KIA = {{'d', 'd', 'e', 'd', 'e', 'x', 'x', 'e'}, {'c', 'c', 'c', 'b', 'c', 'x', 'x', 'e'}, {'b', 'b', 'd', 'b', 'c', 'x', 'x', 'e'}, {'a', 'a', 'b', 'c', 'c', 'x', 'x', 'x'}, {'a', 'a', 'd', 'c', 'd', 'c', 'c', 'a'}, {'x', 'x', 'x', 'x', 'x', 'c', 'a', 'a'}, {'a', 'a', 'a', 'a', 'a', 'x', 'x', 'x'}, {'b', 'b', 'c', 'c', 'd', 'x', 'x', 'c'}};
     private final int[] Bellcurve = {1, 1,  2, 2, 2,  2, 3, 3,3, 3, 3, 4,4, 4, 5};
     private final int[] GroudnToStars = {1, 2, 4, 0, 0, 3, 3 };
@@ -105,6 +106,9 @@ public class GameModel {
         }
     }
 
+    public int getMoney(int team) {
+        return money[team - 1];
+    }
 
     public int getTurn() {
         return turn;
@@ -119,8 +123,10 @@ public class GameModel {
             }
         }
         if (turn == 1) {
+            money[0] += 1000;
             turn = 2;
         } else {
+            money[1] += 1000;
             turn = 1;
         }
     }
@@ -138,6 +144,19 @@ public class GameModel {
                 map = new PistonDam();
                 break;
         }
+    }
+
+    public boolean buyPossible(int price) {
+        System.out.println(price);
+        return money[turn - 1] >= price;
+    }
+
+    protected void buyTroop(Troop newTroop) {
+
+        money[turn - 1] -= newTroop.price;
+
+        newTroop.moved = true;
+        placeTroop(newTroop);
     }
 
     private void initTroops() {

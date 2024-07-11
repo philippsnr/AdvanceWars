@@ -49,6 +49,10 @@ public class HelloController implements Initializable {
     private Text turnText;
     @FXML
     private HBox troopSelection;
+    @FXML
+    private HBox moneyTeam1;
+    @FXML
+    private HBox moneyTeam2;
 
     public HelloController() {
         this.model = new GameModel("Eon Springs");
@@ -175,12 +179,23 @@ public class HelloController implements Initializable {
             }
         }
 
-        newTroop.moved = true;
+        if(!model.buyPossible(newTroop.price)) { System.out.println("Zu teuer"); return; }
+
+        model.buyTroop(newTroop);
         placeTroopOnMap(newTroop, 1);
-        model.placeTroop(newTroop);
+        updateMoney();
 
         troopSelection.getStyleClass().add("disabledSection");
 
+    }
+
+    private void updateMoney() {
+        for (Node node : moneyTeam1.getChildren()) {
+            if (node instanceof Text) { ((Text) node).setText(String.valueOf(model.getMoney(1))); }
+        }
+        for (Node node : moneyTeam2.getChildren()) {
+            if (node instanceof Text) { ((Text) node).setText(String.valueOf(model.getMoney(2))); }
+        }
     }
 
     private void selectTroop(Troop troop) {
@@ -460,6 +475,7 @@ public class HelloController implements Initializable {
         }
 
         this.model.switchTurn();
+        updateMoney();
 
         for (Node node : mapGridPane.getChildren()) {
             if (node.getStyleClass().contains("troopStackPane")) {
