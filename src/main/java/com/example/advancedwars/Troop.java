@@ -8,17 +8,18 @@ public abstract class Troop {
     protected int team;
     protected int xpos;
     protected int ypos;
-    protected int price = 1000;
+    protected int price;
     protected boolean moved = false;
     protected int stepRange;
     public int identification;
 
 
-    public Troop(int _team, int _xpos, int _ypos, int _stepRange, int _identification) {
+    public Troop(int _team, int _xpos, int _ypos, int _stepRange, int _identification, int _price) {
         this.health = 10;
         this.team = _team;
         this.xpos = _xpos;
         this.ypos = _ypos;
+        this.price = _price;
         this.stepRange = _stepRange;
         this.identification = _identification;
     }
