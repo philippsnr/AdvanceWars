@@ -51,7 +51,7 @@ public class HelloController implements Initializable {
     private HBox troopSelection;
 
     public HelloController() {
-        this.model = new GameModel("Little Island");
+        this.model = new GameModel("Eon Springs");
         System.out.println("Controller created");
     }
 

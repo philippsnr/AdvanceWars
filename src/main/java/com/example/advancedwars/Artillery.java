@@ -11,7 +11,7 @@ public class Artillery extends Troop{
         int Y=-3;
         int x=0;
         //unten rechts
-        for(int i = 3; i >0 ; i--){
+        /*for(int i = 3; i >0 ; i--){
             if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos - Y});}
 
             Y+=1;
@@ -29,7 +29,7 @@ public class Artillery extends Troop{
             Y-=1;
             if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&(this.ypos-Y)>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x+=1;
-        }
+        }*/
         //oben links
         Y=3;
         x=0;
@@ -49,7 +49,7 @@ public class Artillery extends Troop{
             x-=1;
         }
         //zusatz
-        if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){range.add(new int[]{this.xpos+3, this.ypos });}
+        //if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){range.add(new int[]{this.xpos+3, this.ypos });}
         if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){ range.add(new int[]{this.xpos-3, this.ypos });}
 
 
