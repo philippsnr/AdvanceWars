@@ -30,9 +30,9 @@ public class EonSprings extends Map{
         Troop mech12 = new Mech(1, 8, 13);
         Troop mech13 = new Mech(1, 6, 15);
         Troop tank11 = new Tank(1, 4, 8);
-        Troop tank12 = new Tank(1, 2, 16);
+        Troop tank12 = new Tank(1, 3, 16);
         Troop artillery11 = new Artillery(1, 1, 10);
-        Troop artillery12 = new Artillery(1, 18, 15);
+        Troop artillery12 = new Artillery(1, 2, 15);
         Troop antiair11 = new AntiAir(1, 2, 8);
         Troop antiair12 = new AntiAir(1, 5, 13);
         Troop fighter11 = new Fighter(1, 3, 10);
@@ -49,7 +49,7 @@ public class EonSprings extends Map{
         Troop tank21 = new Tank(2, 15, 0);
         Troop tank22 = new Tank(2, 13, 8);
         Troop artillery21 = new Artillery(2, 17, 7);
-        Troop artillery22 = new Artillery(2, 18, 1);
+        Troop artillery22 = new Artillery(2, 16, 1);
         Troop antiair21 = new AntiAir(2, 14, 2);
         Troop antiair22 = new AntiAir(2, 16, 8);
         Troop fighter21 = new Fighter(2, 14, 6);

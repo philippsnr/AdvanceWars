@@ -55,7 +55,7 @@ public class HelloController implements Initializable {
     private HBox moneyTeam2;
 
     public HelloController() {
-        this.model = new GameModel("Eon Springs");
+        this.model = new GameModel("Piston Dam");
         System.out.println("Controller created");
     }
 
