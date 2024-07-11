@@ -113,7 +113,52 @@ public class GameModel {
     public int getTurn() {
         return turn;
     }
+    private int CheckForWiner(){
+        if (this.troops[11][3] != null ) {
+            if (this.troops[11][3].getTeam()==2){
+                int count =0;
+                for (Troop[] t : troops) {
+                    for (Troop x : t) {
+                        if(x != null){if (x.getTeam()==1) {
+                            count +=1;
+                        }}
 
+
+                    }
+                }
+                if (count ==0) {
+                    return 2;
+                }
+
+
+            }
+
+        }
+        if (this.troops[2][22] != null ) {
+            if (this.troops[2][22].getTeam()==1){
+                int count =0;
+                for (Troop[] t : troops) {
+                    for (Troop x : t) {
+                        if(x != null){if (x.getTeam()==2) {
+                            count +=1;
+                        }}
+
+
+                    }
+                }
+                if (count ==0) {
+                    return 1;
+                }
+
+
+            }
+
+        }
+        return 0;
+    }
+ public void Win(int winner){
+     System.out.println(winner+" hat gewonnen");
+ }
     protected void switchTurn() {
         for (int y = 0; y < troops.length; y++) {
             for (int x = 0; x < troops[y].length; x++) {
@@ -129,6 +174,11 @@ public class GameModel {
             money[1] += 1000;
             turn = 1;
         }
+        int Winner=CheckForWiner();
+        if (Winner !=0) {
+            Win(Winner);
+        }
+
     }
 
     private void initMap(String selectedMap) {

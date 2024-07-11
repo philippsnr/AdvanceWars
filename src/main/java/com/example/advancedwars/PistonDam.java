@@ -60,6 +60,6 @@ public class PistonDam extends Map{
 
 
 
-        return new Troop[] {inf11, inf12, inf13, inf14, mech11, mech12, mech13, tank11, tank12, tank13, tank14, artillery11, artillery12, antiair1, fighter1, bomber1, copter1, inf21, inf22, inf23, inf24, mech21, mech22, mech23, tank21, tank22, tank23, tank24, artillery21, artillery22, antiair2, fighter2, bomber2, copter2};
+        return new Troop[] {/*inf11, inf12, inf13, inf14, mech11, mech12, mech13, tank11, tank12, tank13, tank14, artillery11, artillery12, antiair1, fighter1, bomber1, copter1,*/ inf21, inf22, inf23, inf24, mech21, mech22, mech23, tank21, tank22, tank23, tank24, artillery21, artillery22, antiair2, fighter2, bomber2, copter2};
     }
 }
