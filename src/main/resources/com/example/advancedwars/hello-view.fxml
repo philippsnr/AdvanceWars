@@ -189,7 +189,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="infantry"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/infantry1.png"/>
+                                <Image url="@../../../images/troops/infantry2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="1.000"/>
@@ -205,7 +205,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="mech"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/mech1.png"/>
+                                <Image url="@../../../images/troops/mech2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="3.000"/>
@@ -221,7 +221,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="tank"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/tank1.png"/>
+                                <Image url="@../../../images/troops/tank2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="7.000"/>
@@ -237,7 +237,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="artillery"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/artillery1.png"/>
+                                <Image url="@../../../images/troops/artillery2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="6.000"/>
@@ -253,7 +253,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="antiair"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/antiair1.png"/>
+                                <Image url="@../../../images/troops/antiair2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="8.000"/>
@@ -269,7 +269,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="copter"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/copter1.png"/>
+                                <Image url="@../../../images/troops/copter2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="9.000"/>
@@ -285,7 +285,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="fighter"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/fighter1.png"/>
+                                <Image url="@../../../images/troops/fighter2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="20.000"/>
@@ -301,7 +301,7 @@
                         <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="bomber"
                               style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../../images/troops/bomber1.png"/>
+                                <Image url="@../../../images/troops/bomber2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
                                 <Text text="22.000"/>
