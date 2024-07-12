@@ -35,6 +35,7 @@ public class HelloController implements Initializable {
 
     private final GameModel model;
     private boolean mooving = false;
+    private boolean buying = false;
     private Factory activeFactory;
     @FXML
     private GridPane mapGridPane;
@@ -199,10 +200,20 @@ public class HelloController implements Initializable {
         else {
             troopSelection2.getStyleClass().remove("disabledSection");
         }
+        this.buying = true;
     }
 
     @FXML
     private void buyTroop(MouseEvent event) {
+
+        this.buying = false;
+
+        if(activeFactory.team == 1) {
+            troopSelection1.getStyleClass().add("disabledSection");
+        }
+        else {
+            troopSelection2.getStyleClass().add("disabledSection");
+        }
 
         Object source = event.getSource();
 
@@ -231,13 +242,6 @@ public class HelloController implements Initializable {
         model.buyTroop(newTroop);
         placeTroopOnMap(newTroop, 1);
         updateMoney();
-
-        if(activeFactory.team == 1) {
-            troopSelection1.getStyleClass().add("disabledSection");
-        }
-        else {
-            troopSelection2.getStyleClass().add("disabledSection");
-        }
     }
 
     private void updateMoney() {
@@ -521,7 +525,7 @@ public class HelloController implements Initializable {
 
     @FXML
     private void endTurn() {
-        if (this.mooving == true) {
+        if (this.mooving == true || this.buying == true) {
             return;
         }
 
