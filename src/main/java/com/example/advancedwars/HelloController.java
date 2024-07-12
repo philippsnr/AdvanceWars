@@ -190,10 +190,11 @@ public class HelloController implements Initializable {
 
     private void factoryClicked(Factory factory) {
         System.out.println("Factory clicked");
-        this.activeFactory = factory;
+
         if (this.mooving == true || this.model.getTurn() != factory.team || this.model.troops[factory.y][factory.x] != null) {
             return;
         }
+        this.activeFactory = factory;
         if(factory.team == 1) {
             troopSelection1.getStyleClass().remove("disabledSection");
         }
