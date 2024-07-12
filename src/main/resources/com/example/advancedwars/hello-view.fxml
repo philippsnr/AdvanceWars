@@ -16,45 +16,12 @@
         <URL value="@/styles.css"/>
     </stylesheets>
     <children>
-        <HBox fx:id="turnElement" styleClass="turnRed">
-            <Text fx:id="turnText">Rot ist am Zug</Text>
-        </HBox>
-        <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true"/>
-        <HBox spacing="20.0" styleClass="optionRow">
-            <HBox fx:id="moneyTeam1" styleClass="money">
-                <Text text="1.000" style="-fx-text-fill: white"/>
-                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../images/coin.png"/>
-                </ImageView>
-            </HBox>
-            <Button fx:id="surrenderButton1" mnemonicParsing="false" text="Aufgeben"/>
-            <Button fx:id="waitButton" mnemonicParsing="false" text="Warten">
-                <styleClass>
-                    <String fx:value="button"/>
-                    <String fx:value="disabled"/>
-                </styleClass>
-            </Button>
-            <Button fx:id="attackButton" mnemonicParsing="false" text="Attack">
-                <styleClass>
-                    <String fx:value="button"/>
-                    <String fx:value="disabled"/>
-                </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden"/>
-            <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben"/>
-            <HBox fx:id="moneyTeam2" styleClass="money">
-                <Text text="1.000" style="-fx-text-fill: white"/>
-                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../images/coin.png"/>
-                </ImageView>
-            </HBox>
-
-        </HBox>
-        <HBox fx:id="troopSelection" styleClass="disabledSection">
-            <VBox style="-fx-spacing: 15px; -fx-padding: 15px">
+        <HBox alignment="CENTER">
+            <VBox fx:id="troopSelection1" styleClass="disabledSection" spacing="10">
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="infantry" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="infantry"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/infantry1.png"/>
                             </ImageView>
@@ -69,7 +36,8 @@
                 </Button>
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="mech" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="mech"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/mech1.png"/>
                             </ImageView>
@@ -82,11 +50,10 @@
                         </HBox>
                     </graphic>
                 </Button>
-            </VBox>
-            <VBox style="-fx-spacing: 15px; -fx-padding: 15px">
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="tank" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="tank"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/tank1.png"/>
                             </ImageView>
@@ -101,7 +68,8 @@
                 </Button>
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="artillery" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="artillery"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/artillery1.png"/>
                             </ImageView>
@@ -116,7 +84,8 @@
                 </Button>
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="antiair" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="antiair"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/antiair1.png"/>
                             </ImageView>
@@ -129,11 +98,10 @@
                         </HBox>
                     </graphic>
                 </Button>
-            </VBox>
-            <VBox style="-fx-spacing: 15px; -fx-padding: 15px">
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="copter" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="copter"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/copter1.png"/>
                             </ImageView>
@@ -148,7 +116,8 @@
                 </Button>
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="fighter" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="fighter"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/fighter1.png"/>
                             </ImageView>
@@ -163,7 +132,174 @@
                 </Button>
                 <Button styleClass="troopSelectionButton">
                     <graphic>
-                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="bomber" style="-fx-spacing: 5px">
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="bomber"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/bomber1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="22.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+            </VBox>
+            <VBox>
+                <HBox fx:id="turnElement" styleClass="turnRed">
+                    <Text fx:id="turnText">Rot ist am Zug</Text>
+                </HBox>
+                <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true"/>
+                <HBox spacing="20.0" styleClass="optionRow">
+                    <HBox fx:id="moneyTeam1" styleClass="money">
+                        <Text text="1.000" style="-fx-text-fill: white"/>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../../../images/coin.png"/>
+                        </ImageView>
+                    </HBox>
+                    <Button fx:id="surrenderButton1" mnemonicParsing="false" text="Aufgeben"/>
+                    <Button fx:id="waitButton" mnemonicParsing="false" text="Warten">
+                        <styleClass>
+                            <String fx:value="button"/>
+                            <String fx:value="disabled"/>
+                        </styleClass>
+                    </Button>
+                    <Button fx:id="attackButton" mnemonicParsing="false" text="Attack">
+                        <styleClass>
+                            <String fx:value="button"/>
+                            <String fx:value="disabled"/>
+                        </styleClass>
+                    </Button>
+                    <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden"/>
+                    <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben"/>
+                    <HBox fx:id="moneyTeam2" styleClass="money">
+                        <Text text="1.000" style="-fx-text-fill: white"/>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../../../images/coin.png"/>
+                        </ImageView>
+                    </HBox>
+
+                </HBox>
+            </VBox>
+            <VBox fx:id="troopSelection2" styleClass="disabledSection" spacing="10">
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="infantry"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/infantry1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="1.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="mech"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/mech1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="3.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="tank"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/tank1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="7.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="artillery"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/artillery1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="6.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="antiair"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/antiair1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="8.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="copter"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/copter1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="9.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="fighter"
+                              style="-fx-spacing: 5px">
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../../images/troops/fighter1.png"/>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <Text text="20.000"/>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../../images/coin.png"/>
+                                </ImageView>
+                            </HBox>
+                        </HBox>
+                    </graphic>
+                </Button>
+                <Button styleClass="troopSelectionButton">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#buyTroop" styleClass="bomber"
+                              style="-fx-spacing: 5px">
                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../../../images/troops/bomber1.png"/>
                             </ImageView>
@@ -178,5 +314,6 @@
                 </Button>
             </VBox>
         </HBox>
+
     </children>
 </VBox>

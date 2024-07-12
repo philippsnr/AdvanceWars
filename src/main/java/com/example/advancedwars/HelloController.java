@@ -15,13 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
@@ -48,7 +47,9 @@ public class HelloController implements Initializable {
     @FXML
     private Text turnText;
     @FXML
-    private HBox troopSelection;
+    private VBox troopSelection1;
+    @FXML
+    private VBox troopSelection2;
     @FXML
     private HBox moneyTeam1;
     @FXML
@@ -167,6 +168,10 @@ public class HelloController implements Initializable {
         troopImageView.setScaleX(direction);
 
         Label healthLabel = new Label(String.valueOf(troop.getHealth()));
+        healthLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
+        healthLabel.setPadding(new Insets(3, 3, 3, 3));
+        Color transparentBlack = new Color(0, 0, 0, 0.5);
+        healthLabel.setBackground(new Background(new BackgroundFill(transparentBlack, CornerRadii.EMPTY, null)));
         healthLabel.setTextFill(Color.WHITE);
 
         StackPane stackPane = new StackPane();
@@ -188,7 +193,12 @@ public class HelloController implements Initializable {
         if (this.mooving == true || this.model.getTurn() != factory.team || this.model.troops[factory.y][factory.x] != null) {
             return;
         }
-        troopSelection.getStyleClass().remove("disabledSection");
+        if(factory.team == 1) {
+            troopSelection1.getStyleClass().remove("disabledSection");
+        }
+        else {
+            troopSelection2.getStyleClass().remove("disabledSection");
+        }
     }
 
     @FXML
@@ -222,8 +232,12 @@ public class HelloController implements Initializable {
         placeTroopOnMap(newTroop, 1);
         updateMoney();
 
-        troopSelection.getStyleClass().add("disabledSection");
-
+        if(activeFactory.team == 1) {
+            troopSelection1.getStyleClass().add("disabledSection");
+        }
+        else {
+            troopSelection2.getStyleClass().add("disabledSection");
+        }
     }
 
     private void updateMoney() {
@@ -490,6 +504,10 @@ public class HelloController implements Initializable {
                     if (label instanceof Label) {
                         ((StackPane) stackPane).getChildren().remove(label);
                         Label healthLabel = new Label(String.valueOf(troop.getHealth()));
+                        healthLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
+                        healthLabel.setPadding(new Insets(3, 3, 3, 3));
+                        Color transparentBlack = new Color(0, 0, 0, 0.5);
+                        healthLabel.setBackground(new Background(new BackgroundFill(transparentBlack, CornerRadii.EMPTY, null)));
                         healthLabel.setTextFill(Color.WHITE);
                         ((StackPane) stackPane).getChildren().add(healthLabel);
                         StackPane.setMargin(healthLabel, new Insets(-50, 0, 0, 0));
