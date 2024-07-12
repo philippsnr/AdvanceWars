@@ -10,6 +10,7 @@ public abstract class Map {
     // 1: Wald
     // 2: Berg
     // 3: Wasser
+    // 4: Straße
     // 5: Factory Red
     // 6: Factory Blue
 }

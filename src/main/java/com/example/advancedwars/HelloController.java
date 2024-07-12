@@ -85,14 +85,51 @@ public class HelloController implements Initializable {
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/sea.png")));
                         break;
                     case 4:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/matsch.jpg")));
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_straight.png")));
                         break;
                     case 5:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_straight.png")));
+                        imageView.setRotate(90);
+                        break;
+                    case 6:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_curve.png")));
+                        break;
+                    case 7:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_curve.png")));
+                        imageView.setRotate(90);
+                        break;
+                    case 8:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_curve.png")));
+                        imageView.setRotate(180);
+                        break;
+                    case 9:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/road_curve.png")));
+                        imageView.setRotate(270);
+                        break;
+                    case 10:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/3crossing.png")));
+                        break;
+                    case 11:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/3crossing.png")));
+                        imageView.setRotate(90);
+                        break;
+                    case 12:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/3crossing.png")));
+                        imageView.setRotate(180);
+                        break;
+                    case 13:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/3crossing.png")));
+                        imageView.setRotate(270);
+                        break;
+                    case 14:
+                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/4crossing.png")));
+                        break;
+                    case 15:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory1.png")));
                         Factory factory1 = new Factory(1, x, y);
                         imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory1));
                         break;
-                    case 6:
+                    case 16:
                         imageView.setImage(new Image(getClass().getResourceAsStream("/images/factory2.png")));
                         Factory factory2 = new Factory(2, x, y);
                         imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory2));
