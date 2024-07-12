@@ -54,8 +54,8 @@ public class HelloController implements Initializable {
     @FXML
     private HBox moneyTeam2;
 
-    public HelloController() {
-        this.model = new GameModel("Little Island");
+    public HelloController(String mapName) {
+        this.model = new GameModel(mapName);
         System.out.println("Controller created");
     }
 

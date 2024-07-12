@@ -23,6 +23,10 @@ public class EonSprings extends Map{
         };
     }
 
+    protected int[][] getFactoryCoordinates(){
+        return new int[][] {{15, 1}, {1, 17}};
+    };
+
     protected Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 10, 14);
         Troop inf12 = new Infantry(1, 1, 7);

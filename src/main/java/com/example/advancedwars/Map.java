@@ -6,6 +6,8 @@ public abstract class Map {
 
     protected abstract Troop[] getInitTroops();
 
+    protected abstract int[][] getFactoryCoordinates();
+
     // 0: Gras
     // 1: Wald
     // 2: Berg

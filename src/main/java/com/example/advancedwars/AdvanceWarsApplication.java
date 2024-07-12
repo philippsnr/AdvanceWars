@@ -1,8 +1,10 @@
-package Nils;
+package com.example.advancedwars;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,13 +13,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Objects;
 
-public class HelloApplication extends Application {
+public class AdvanceWarsApplication extends Application {
 
     private static final int NUM_MAPS = 6;
     private static final String[] MAP_NAMES = {
@@ -36,16 +38,15 @@ public class HelloApplication extends Application {
     private Scene mapSelectionScene;
     private Scene instructionScene;
     private Scene creditsScene;
-    private Scene selectedMapScene;
+    private Scene gameScene;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         // Erstelle die Szenen für die verschiedenen Ansichten
         startScreenScene = createStartScreenScene(primaryStage);
         mapSelectionScene = createMapSelectionScene(primaryStage);
         instructionScene = createInstructionScene(primaryStage);
         creditsScene = createCreditsScene(primaryStage);
-        selectedMapScene = createSelectedMapScene(primaryStage);
 
         // Setze die StartScreen-Szene
         primaryStage.setScene(startScreenScene);
@@ -74,7 +75,7 @@ public class HelloApplication extends Application {
 
         // Button "Press to start"
         Button startButton = new Button("Press to start");
-        startButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
+        startButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         VBox buttonBox = new VBox(startButton);
         buttonBox.setAlignment(Pos.CENTER); // Zentriere den Button
@@ -102,8 +103,8 @@ public class HelloApplication extends Application {
         Button creditsButton = new Button("Credits");
         bottomButtons.getChildren().addAll(instructionButton, creditsButton);
 
-        instructionButton.setOnAction(event -> primaryStage.setScene(instructionScene));
-        creditsButton.setOnAction(event -> primaryStage.setScene(creditsScene));
+        instructionButton.setOnAction(event -> {primaryStage.setScene(instructionScene); primaryStage.setFullScreen(true);});
+        creditsButton.setOnAction(event -> {primaryStage.setScene(creditsScene); primaryStage.setFullScreen(true);});
 
         borderPane.setBottom(bottomButtons);
 
@@ -130,7 +131,13 @@ public class HelloApplication extends Application {
             Button mapButton = new Button(MAP_NAMES[i]);
             int mapIndex = i;  // Notwendig für den Lambda-Ausdruck
             mapButton.setOnAction(event -> {
-                primaryStage.setScene(selectedMapScene);
+                try {
+                    gameScene = createGameScene(primaryStage, MAP_NAMES[mapIndex]);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                primaryStage.setScene(gameScene);
+                primaryStage.setFullScreen(true);
                 // Hier könnte zusätzliche Logik für die ausgewählte Karte hinzugefügt werden
                 System.out.println("Selected map: " + MAP_NAMES[mapIndex]);
             });
@@ -153,7 +160,7 @@ public class HelloApplication extends Application {
         instructionsBox.setAlignment(Pos.CENTER);
         Label instructionsLabel = new Label("Hier stehen die Anweisungen für das Spiel...");
         Button backButton = new Button("Zurück");
-        backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
+        backButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         instructionsBox.getChildren().addAll(instructionsLabel, backButton);
         borderPane.setBottom(instructionsBox);
@@ -176,7 +183,7 @@ public class HelloApplication extends Application {
         creditsLabel.setAlignment(Pos.CENTER); // Text zentrieren
 
         Button backButton = new Button("Zurück");
-        backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
+        backButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         creditsBox.getChildren().addAll(creditsLabel, backButton);
         borderPane.setCenter(creditsBox);
@@ -184,22 +191,20 @@ public class HelloApplication extends Application {
         return new Scene(borderPane, 1200, 800);
     }
 
+    public Scene createGameScene(Stage primaryStage, String mapName) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(AdvanceWarsApplication.class.getResource("hello-view.fxml"));
+        fxmlLoader.setController(new HelloController(mapName));
+        Parent root = fxmlLoader.load();
 
-    private Scene createSelectedMapScene(Stage primaryStage) {
-        BorderPane borderPane = new BorderPane();
+        root.setStyle("-fx-background-color: black;");
 
-        // Hier könntest du die Szene für die ausgewählte Karte erstellen
-        // Beispiel:
-        // Label selectedMapLabel = new Label("Du hast die Karte ausgewählt: " + selectedMapName);
-        // borderPane.setCenter(selectedMapLabel);
+        Scene scene = new Scene(root, 1000, 1000);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
-        // Erstelle und gebe die Szene zurück
-        Scene scene = new Scene(borderPane);
-        scene.setFill(null); // Transparenten Hintergrund setzen für Vollbildmodus
         return scene;
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

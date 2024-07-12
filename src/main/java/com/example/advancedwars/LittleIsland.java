@@ -17,6 +17,9 @@ public class LittleIsland extends Map {
         };
     }
 
+    protected int[][] getFactoryCoordinates(){
+        return new int[][] {{7, 2}, {2, 16}};
+    };
 
     protected Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 5, 4);

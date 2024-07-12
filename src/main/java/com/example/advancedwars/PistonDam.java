@@ -20,6 +20,10 @@ public class PistonDam extends Map{
         };
     }
 
+    protected int[][] getFactoryCoordinates(){
+        return new int[][] {{11, 3}, {2, 22}};
+    };
+
     public  Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 10, 0);
         Troop inf12 = new Infantry(1, 10, 7);

@@ -114,45 +114,37 @@ public class GameModel {
         return turn;
     }
     private int CheckForWiner(){
-        if (this.troops[11][3] != null ) {
-            if (this.troops[11][3].getTeam()==2){
+        int[][] factoryCoordinates = this.map.getFactoryCoordinates();
+        if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]] != null ) {
+            if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]].getTeam()==2){
                 int count =0;
                 for (Troop[] t : troops) {
                     for (Troop x : t) {
                         if(x != null){if (x.getTeam()==1) {
                             count +=1;
                         }}
-
-
                     }
                 }
                 if (count ==0) {
                     return 2;
                 }
-
-
             }
 
         }
-        if (this.troops[2][22] != null ) {
-            if (this.troops[2][22].getTeam()==1){
+        if (this.troops[factoryCoordinates[1][0]][factoryCoordinates[1][1]] != null ) {
+            if (this.troops[factoryCoordinates[1][0]][factoryCoordinates[1][1]].getTeam()==1){
                 int count =0;
                 for (Troop[] t : troops) {
                     for (Troop x : t) {
                         if(x != null){if (x.getTeam()==2) {
                             count +=1;
                         }}
-
-
                     }
                 }
                 if (count ==0) {
                     return 1;
                 }
-
-
             }
-
         }
         return 0;
     }
@@ -189,6 +181,15 @@ public class GameModel {
                 break;
             case "Eon Springs":
                 map = new EonSprings();
+                break;
+            case "Zero Wood":
+                map = new ZeroWood();
+                break;
+            case "Sabre Range":
+                map = new SabreRange();
+                break;
+            case "Cog Isle":
+                map = new CogIsle();
                 break;
             case "Piston Dam":
                 map = new PistonDam();
