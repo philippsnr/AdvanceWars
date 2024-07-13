@@ -180,6 +180,46 @@ public class AdvanceWarsApplication extends Application {
         return scene;
     }
 
+    private Scene createEndScreen(Stage primaryStage, int winner) {
+        BorderPane borderPane = new BorderPane();
+        VBox contentBox = new VBox(10);
+        contentBox.setPadding(new Insets(10));
+        contentBox.setAlignment(Pos.CENTER);
+
+        String winnerText = "";
+        String colour = "";
+
+        if (winner == 1) {
+            winnerText = "Spieler Rot hat gewonnen!";
+            colour = "red";
+        }
+        else if (winner == 2) {
+            winnerText = "Spieler Blau hat gewonnen!";
+            colour = "blue";
+        }
+
+        Image winnerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/End-pic.avif")));
+        ImageView imageView = new ImageView(winnerImage);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(300);
+        imageView.setFitHeight(300);
+
+        Label winnerLabel = new Label(winnerText);
+        winnerLabel.setAlignment(Pos.CENTER);
+
+        contentBox.getChildren().addAll(imageView, winnerLabel);
+        borderPane.setCenter(contentBox);
+
+        // Zurück-Button am unteren Rand
+        Button backButton = new Button("Zurück zur Map-Auswahl");
+        backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
+        BorderPane.setMargin(backButton, new Insets(10)); // Rand um den Button hinzufügen
+        borderPane.setBottom(backButton);
+
+        return new Scene(borderPane, 1200, 800);
+    }
+
+
     public static void main(String[] args) {
         launch();
     }
