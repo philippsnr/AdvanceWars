@@ -187,15 +187,15 @@ public class AdvanceWarsApplication extends Application {
         contentBox.setAlignment(Pos.CENTER);
 
         String winnerText = "";
-        String colour = "";
+        String color = "";
 
         if (winner == 1) {
             winnerText = "Spieler Rot hat gewonnen!";
-            colour = "red";
+            color = "red";
         }
         else if (winner == 2) {
             winnerText = "Spieler Blau hat gewonnen!";
-            colour = "blue";
+            color = "blue";
         }
 
         Image winnerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/End-pic.avif")));
@@ -205,16 +205,16 @@ public class AdvanceWarsApplication extends Application {
         imageView.setFitHeight(300);
 
         Label winnerLabel = new Label(winnerText);
-        winnerLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: red");
+        winnerLabel.setStyle(String.format("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: %s;", color));
+
         winnerLabel.setAlignment(Pos.CENTER);
 
         contentBox.getChildren().addAll(imageView, winnerLabel);
         borderPane.setCenter(contentBox);
 
-        // Zurück-Button am unteren Rand
         Button backButton = new Button("Zurück zur Map-Auswahl");
         backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
-        BorderPane.setMargin(backButton, new Insets(10)); // Rand um den Button hinzufügen
+        BorderPane.setMargin(backButton, new Insets(10));
         borderPane.setBottom(backButton);
 
         return new Scene(borderPane, 1200, 800);
