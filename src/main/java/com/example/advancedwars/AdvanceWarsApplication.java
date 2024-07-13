@@ -205,6 +205,7 @@ public class AdvanceWarsApplication extends Application {
         imageView.setFitHeight(300);
 
         Label winnerLabel = new Label(winnerText);
+        winnerLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: red");
         winnerLabel.setAlignment(Pos.CENTER);
 
         contentBox.getChildren().addAll(imageView, winnerLabel);
