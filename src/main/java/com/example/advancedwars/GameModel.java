@@ -150,10 +150,11 @@ public class GameModel {
         }
         return 0;
     }
-    public void Win(int winner){
-     System.out.println(winner+" hat gewonnen");
-    }
+    private AdvanceWarsApplication app;
 
+    public GameModel(AdvanceWarsApplication app) {
+        this.app = app;
+    }
     protected void switchTurn() {
         for (int y = 0; y < troops.length; y++) {
             for (int x = 0; x < troops[y].length; x++) {
@@ -173,8 +174,8 @@ public class GameModel {
             turn = 1;
         }
         int Winner=CheckForWinner();
-        if (Winner !=0) {
-            Win(Winner);
+        if (Winner != 0) {
+            app.switchToEndScreen(Winner);
         }
         if(turn == 1) { round++; }
     }

@@ -39,9 +39,14 @@ public class AdvanceWarsApplication extends Application {
     private Scene instructionScene;
     private Scene creditsScene;
     private Scene gameScene;
+    private Scene endScreenScene;
+    private Stage primaryStage;
+    private GameModel model;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        this.primaryStage = primaryStage;
+        this.model = new GameModel(this);
         startScreenScene = createStartScreenScene(primaryStage);
         mapSelectionScene = createMapSelectionScene(primaryStage);
         instructionScene = createInstructionScene(primaryStage);
@@ -180,7 +185,7 @@ public class AdvanceWarsApplication extends Application {
         return scene;
     }
 
-    private Scene createEndScreen(Stage primaryStage, int winner) {
+    private Scene createEndScreenScene(Stage primaryStage, int winner) {
         BorderPane borderPane = new BorderPane();
         VBox contentBox = new VBox(10);
         contentBox.setPadding(new Insets(10));
@@ -220,6 +225,10 @@ public class AdvanceWarsApplication extends Application {
         return new Scene(borderPane, 1200, 800);
     }
 
+    public void switchToEndScreen(int winner) {
+        endScreenScene = createEndScreenScene(primaryStage, winner);
+        primaryStage.setScene(endScreenScene);
+    }
 
     public static void main(String[] args) {
         launch();
