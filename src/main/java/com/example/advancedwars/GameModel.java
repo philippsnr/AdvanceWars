@@ -115,7 +115,7 @@ public class GameModel {
     public int getTurn() {
         return turn;
     }
-    private int CheckForWiner(){
+    private int CheckForWinner(){
         int[][] factoryCoordinates = this.map.getFactoryCoordinates();
         if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]] != null ) {
             if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]].getTeam()==2){
@@ -172,7 +172,7 @@ public class GameModel {
             money[1] += income;
             turn = 1;
         }
-        int Winner=CheckForWiner();
+        int Winner=CheckForWinner();
         if (Winner !=0) {
             Win(Winner);
         }
