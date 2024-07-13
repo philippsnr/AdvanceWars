@@ -70,6 +70,6 @@ public class ZeroWood extends Map{
 
         Troop copter2 = new Copter(2, 9, 2);
 
-        return new Troop[] { inf11, inf12, mech11, mech12,  tank11, tank12,  artillery11, artillery12,  antiair11, antiair12,  fighter11, fighter12, bomber11, copter1,  inf21, inf22, mech21, mech22, tank21,  tank22, artillery21, artillery22, antiair21, antiair22,  fighter21, fighter22, bomber21, copter2};
+        return new Troop[] { /*inf11, inf12, mech11, mech12,  tank11, tank12,  artillery11, artillery12,  antiair11, antiair12,  fighter11, fighter12, bomber11, copter1,*/  inf21, inf22, mech21, mech22, tank21,  tank22, artillery21, artillery22, antiair21, antiair22,  fighter21, fighter22, bomber21, copter2};
     }
 }

@@ -19,6 +19,11 @@ public class GameModel {
     private final int[][] movementCost = {{1, 1, 2, 0, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 1, 1, 0, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 2, 0, 0, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 2, 0, 0, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 2, 0, 0, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 1, 1, 1, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 1, 1, 1, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}, {1, 1, 1, 1, 1, 1,1,1, 1,1, 1,1,1, 1,1, 1,1}};
     private final int[] moneyPerRound = {1000, 1000, 2000, 2000, 2000, 3000, 3000, 3000, 4000, 4000, 5000, 5000, 6000, 6000, 7000, 7000, 8000, 8000, 9000, 10000};
 
+    public GameModel(String selectedMap) {
+        initMap(selectedMap);
+        initTroops();
+    }
+
     public static double getKIAFaktor(int unit1, int unit2) {
         if (KIA[unit1][unit2] == 'a') {
             return 0.4;
@@ -60,12 +65,6 @@ public class GameModel {
         }
 
         return 0;
-    }
-
-
-    public GameModel(String selectedMap) {
-        initMap(selectedMap);
-        initTroops();
     }
 
     public void calculateDamage(Troop attakingTroop, Troop defendingTroop) {
@@ -115,7 +114,29 @@ public class GameModel {
     public int getTurn() {
         return turn;
     }
-    private int CheckForWinner(){
+
+    protected void switchTurn() {
+        for (int y = 0; y < troops.length; y++) {
+            for (int x = 0; x < troops[y].length; x++) {
+                if (this.troops[y][x] != null) {
+                    this.troops[y][x].moved = false;
+                }
+            }
+        }
+        int income = 0;
+        if(round <= 19) { income = moneyPerRound[round]; }
+        else { income = 10000; }
+        if (turn == 1) {
+            money[0] += income;
+            turn = 2;
+        } else {
+            money[1] += income;
+            turn = 1;
+        }
+        if(turn == 1) { round++; }
+    }
+
+    protected int getWinner() {
         int[][] factoryCoordinates = this.map.getFactoryCoordinates();
         if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]] != null ) {
             if (this.troops[factoryCoordinates[0][0]][factoryCoordinates[0][1]].getTeam()==2){
@@ -149,35 +170,6 @@ public class GameModel {
             }
         }
         return 0;
-    }
-    private AdvanceWarsApplication app;
-
-    public GameModel(AdvanceWarsApplication app) {
-        this.app = app;
-    }
-    protected void switchTurn() {
-        for (int y = 0; y < troops.length; y++) {
-            for (int x = 0; x < troops[y].length; x++) {
-                if (this.troops[y][x] != null) {
-                    this.troops[y][x].moved = false;
-                }
-            }
-        }
-        int income = 0;
-        if(round <= 19) { income = moneyPerRound[round]; }
-        else { income = 10000; }
-        if (turn == 1) {
-            money[0] += income;
-            turn = 2;
-        } else {
-            money[1] += income;
-            turn = 1;
-        }
-        int Winner=CheckForWinner();
-        if (Winner != 0) {
-            app.switchToEndScreen(Winner);
-        }
-        if(turn == 1) { round++; }
     }
 
     private void initMap(String selectedMap) {

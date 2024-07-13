@@ -154,7 +154,7 @@
                 <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true"/>
                 <HBox spacing="20.0" styleClass="optionRow">
                     <HBox fx:id="moneyTeam1" styleClass="money">
-                        <Text text="1.000" style="-fx-text-fill: white"/>
+                        <Text text="3.000" style="-fx-text-fill: white"/>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../../images/coin.png"/>
                         </ImageView>
@@ -175,7 +175,7 @@
                     <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden"/>
                     <Button fx:id="surrenderButton2" mnemonicParsing="false" text="Aufgeben"/>
                     <HBox fx:id="moneyTeam2" styleClass="money">
-                        <Text text="1.000" style="-fx-text-fill: white"/>
+                        <Text text="3.000" style="-fx-text-fill: white"/>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../../../images/coin.png"/>
                         </ImageView>

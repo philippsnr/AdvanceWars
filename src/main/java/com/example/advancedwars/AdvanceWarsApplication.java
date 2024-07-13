@@ -47,11 +47,10 @@ public class AdvanceWarsApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
-        this.model = new GameModel(this);
-        startScreenScene = createStartScreenScene(primaryStage);
-        mapSelectionScene = createMapSelectionScene(primaryStage);
-        instructionScene = createInstructionScene(primaryStage);
-        creditsScene = createCreditsScene(primaryStage);
+        this.startScreenScene = createStartScreenScene(primaryStage);
+        this.mapSelectionScene = createMapSelectionScene(primaryStage);
+        this.instructionScene = createInstructionScene(primaryStage);
+        this.creditsScene = createCreditsScene(primaryStage);
 
         primaryStage.setScene(startScreenScene);
         primaryStage.setTitle("Advance Wars");
@@ -184,8 +183,8 @@ public class AdvanceWarsApplication extends Application {
     }
 
     public Scene createGameScene(Stage primaryStage, String mapName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AdvanceWarsApplication.class.getResource("hello-view.fxml"));
-        fxmlLoader.setController(new HelloController(mapName));
+        FXMLLoader fxmlLoader = new FXMLLoader(AdvanceWarsApplication.class.getResource("game scene.fxml"));
+        fxmlLoader.setController(new AdvanceWarsController(mapName, this));
         Parent root = fxmlLoader.load();
 
         root.setStyle("-fx-background-color: black;");

@@ -1,9 +1,7 @@
 package com.example.advancedwars;
 
 
-import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,8 +29,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
-public class HelloController implements Initializable {
+public class AdvanceWarsController implements Initializable {
 
+    private AdvanceWarsApplication app;
     private final GameModel model;
     private boolean mooving = false;
     private boolean buying = false;
@@ -56,7 +55,8 @@ public class HelloController implements Initializable {
     @FXML
     private HBox moneyTeam2;
 
-    public HelloController(String mapName) {
+    public AdvanceWarsController(String mapName, AdvanceWarsApplication _app) {
+        this.app = _app;
         this.model = new GameModel(mapName);
         System.out.println("Controller created");
     }
@@ -540,6 +540,10 @@ public class HelloController implements Initializable {
         }
 
         this.model.switchTurn();
+        int winner = model.getWinner();
+        if(winner != 0) {
+            this.app.switchToEndScreen(winner);
+        }
         updateMoney();
 
         for (Node node : mapGridPane.getChildren()) {
