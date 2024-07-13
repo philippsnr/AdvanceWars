@@ -277,8 +277,10 @@ public class HelloController implements Initializable {
             }
         }
 
-        if (attackPossible && (troop.identification != 3 || troop.moved == false)) {
-            attackButton.getStyleClass().remove("disabled");
+        if (attackPossible) {
+            while (attackButton.getStyleClass().contains("disabled")) {
+                attackButton.getStyleClass().remove("disabled");
+            }
             attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
@@ -406,8 +408,10 @@ public class HelloController implements Initializable {
     }
 
     private void ListActions(Troop troop) {
+        while (waitButton.getStyleClass().contains("disabled")) {
+            waitButton.getStyleClass().remove("disabled");
+        }
 
-        waitButton.getStyleClass().remove("disabled");
         waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop));
 
         boolean attackPossible = false;
@@ -456,6 +460,7 @@ public class HelloController implements Initializable {
 
                 targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
                 mapGridPane.add(targetImageView, field[0], field[1]);
+                attakingTroop.moved=true;
 
             }
 
