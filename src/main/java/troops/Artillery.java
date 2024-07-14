@@ -48,18 +48,8 @@ public class Artillery extends Troop{
             x-=1;
         }
         //zusatz
-        //if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){range.add(new int[]{this.xpos+3, this.ypos });}
         if(this.xpos+x<xlength&&this.ypos<ylength&&this.xpos+x>=0&&this.ypos>=0){ range.add(new int[]{this.xpos-3, this.ypos });}
-
-
-
-
         return range;
-
-
-
-
-
     }
 
     public String getTroopImg() {

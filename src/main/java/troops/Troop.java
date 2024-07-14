@@ -55,45 +55,6 @@ public abstract class Troop {
         if (this.xpos > 0) {
             range.add(new int[]{this.xpos - 1, this.ypos});
         }
-
-
-
-
-
         return range;
     }
-
-    /*public List<int[]> getMovingRange(int[][] map, Troop[][] troops) {
-        List<int[]> movingRange = new ArrayList<>();
-        move(xpos, ypos, stepRange, movingRange, map, troops);
-        return movingRange;
-    }
-
-    private void move(int x, int y, int steps, List<int[]> movingRange, int[][] map, Troop[][] troops) {
-        if (steps <= 0) return;
-
-        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-        for (int[] dir : directions) {
-            int nextX = x + dir[0];
-            int nextY = y + dir[1];
-
-            if(!this.canStandOnField(map, troops, nextX, nextY)) { continue; }
-
-            boolean alreadyExists = false;
-            for (int[] position : movingRange) {
-                if (position[0] == nextX && position[1] == nextY) {
-                    alreadyExists = true;
-                    break;
-                }
-            }
-
-            if (!alreadyExists) {
-                movingRange.add(new int[]{nextX, nextY});
-                move(nextX, nextY, steps - 1, movingRange, map, troops);
-            }
-
-            move(nextX, nextY, steps - 1, movingRange, map, troops);
-        }
-    }*/
 }
