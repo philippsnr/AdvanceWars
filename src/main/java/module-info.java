@@ -3,6 +3,10 @@ module com.example.advancedwars {
     requires javafx.fxml;
 
 
-    opens com.example.advancedwars to javafx.fxml;
-    exports com.example.advancedwars;
+    opens main to javafx.fxml;
+    exports main;
+    exports troops;
+    opens troops to javafx.fxml;
+    exports maps;
+    opens maps to javafx.fxml;
 }
