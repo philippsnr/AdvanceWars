@@ -1,0 +1,17 @@
+.start-button {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 70px;
+    -fx-background-color: #23342A;
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-cursor: hand;
+}
+
+.map-selection-button {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+    -fx-background-color: #23342A;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+}

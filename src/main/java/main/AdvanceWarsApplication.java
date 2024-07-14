@@ -28,12 +28,12 @@ public class AdvanceWarsApplication extends Application {
             "Little Island", "Eon Springs", "Piston Dam", "Zero Wood", "Cog Isle", "Sabre Range"
     };
     private static final String[] MAP_IMAGE_PATHS = {
-            "/images/LittleIsland.png",
-            "/images/EonSprings.png",
-            "/images/PistonDam.png",
-            "/images/ZeroWood.png",
-            "/images/CogIsle.png",
-            "/images/SabreRange.png"
+            "/images/map-preview/LittleIsland.png",
+            "/images/map-preview/EonSprings.png",
+            "/images/map-preview/PistonDam.png",
+            "/images/map-preview/ZeroWood.png",
+            "/images/map-preview/CogIsle.png",
+            "/images/map-preview/SabreRange.png"
     };
 
     private Scene startScreenScene;
@@ -60,6 +60,7 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createStartScreenScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #648571;");
         Image startImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/front-pic.jpg")));
         ImageView startImageView = new ImageView(startImage);
         double maxHeight = primaryStage.getHeight() - 100;
@@ -68,6 +69,7 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setCenter(startImageView);
 
         Button startButton = new Button("Press to start");
+        startButton.getStyleClass().add("start-button");
         startButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         VBox buttonBox = new VBox(startButton);
@@ -77,11 +79,13 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setBottom(buttonBox);
 
         Scene scene = new Scene(borderPane, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
         return scene;
     }
 
     private Scene createMapSelectionScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #648571;");
         GridPane gridPane = createMapSelectionGrid(primaryStage);
         borderPane.setCenter(gridPane);
 
@@ -99,6 +103,7 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setBottom(bottomButtons);
 
         Scene scene = new Scene(borderPane);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
         return scene;
     }
 
@@ -117,6 +122,7 @@ public class AdvanceWarsApplication extends Application {
             mapView.setFitHeight(300);
 
             Button mapButton = new Button(MAP_NAMES[i]);
+            mapButton.getStyleClass().add("map-selection-button");
             int mapIndex = i;
             mapButton.setOnAction(event -> {
                 try {
@@ -137,6 +143,7 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createInstructionScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #648571;");
         VBox instructionsBox = new VBox(10);
         instructionsBox.setPadding(new Insets(10));
         instructionsBox.setAlignment(Pos.TOP_LEFT);
@@ -164,6 +171,7 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createCreditsScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #648571;");
         VBox creditsBox = new VBox(10);
         creditsBox.setPadding(new Insets(10));
         creditsBox.setAlignment(Pos.CENTER);
@@ -186,15 +194,16 @@ public class AdvanceWarsApplication extends Application {
         fxmlLoader.setController(new AdvanceWarsController(mapName, this));
         Parent root = fxmlLoader.load();
 
-        root.setStyle("-fx-background-color: black;");
+        root.setStyle("-fx-background-color: #648571;");
 
         Scene scene = new Scene(root, 1000, 1000);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/game.css").toExternalForm());
         return scene;
     }
 
     private Scene createEndScreenScene(Stage primaryStage, int winner) {
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #648571;");
         VBox contentBox = new VBox(10);
         contentBox.setPadding(new Insets(10));
         contentBox.setAlignment(Pos.CENTER);

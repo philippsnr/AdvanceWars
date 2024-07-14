@@ -14,11 +14,12 @@
 .optionRow {
     -fx-alignment: center;
     -fx-pref-width: 100%;
+    -fx-spacing: 25px;
     -fx-padding: 20px;
 }
 
 .button {
-    -fx-pref-width: 100px;
+    -fx-min-width: 150px;
     -fx-pref-height: 40px;
     -fx-background-color: white;
     -fx-padding: 20px;
