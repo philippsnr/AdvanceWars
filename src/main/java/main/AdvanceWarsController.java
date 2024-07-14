@@ -27,12 +27,13 @@ import troops.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
 public class AdvanceWarsController implements Initializable {
 
-    private AdvanceWarsApplication app;
+    private final AdvanceWarsApplication app;
     private final GameModel model;
     private boolean mooving = false;
     private boolean buying = false;
@@ -71,71 +72,69 @@ public class AdvanceWarsController implements Initializable {
 
         for (int y = 0; y < this.model.map.mapArray.length; y++) {
             for (int x = 0; x < this.model.map.mapArray[y].length; x++) {
-                final int finalX = x;
-                final int finalY = y;
                 ImageView imageView = new ImageView();
                 switch (this.model.map.mapArray[y][x]) {
                     case 0:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/gras.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/gras.png"))));
                         break;
                     case 1:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/wood.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/wood.png"))));
                         break;
                     case 2:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/mountain.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/mountain.png"))));
                         break;
                     case 3:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/sea.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/sea.png"))));
                         break;
                     case 4:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_straight.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_straight.png"))));
                         break;
                     case 5:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_straight.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_straight.png"))));
                         imageView.setRotate(90);
                         break;
                     case 6:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_curve.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_curve.png"))));
                         break;
                     case 7:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_curve.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_curve.png"))));
                         imageView.setRotate(90);
                         break;
                     case 8:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_curve.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_curve.png"))));
                         imageView.setRotate(180);
                         break;
                     case 9:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/road_curve.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/road_curve.png"))));
                         imageView.setRotate(270);
                         break;
                     case 10:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/3crossing.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/3crossing.png"))));
                         break;
                     case 11:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/3crossing.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/3crossing.png"))));
                         imageView.setRotate(90);
                         break;
                     case 12:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/3crossing.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/3crossing.png"))));
                         imageView.setRotate(180);
                         break;
                     case 13:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/3crossing.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/3crossing.png"))));
                         imageView.setRotate(270);
                         break;
                     case 14:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/4crossing.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/4crossing.png"))));
                         break;
                     case 15:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/factory1.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/factory1.png"))));
                         Factory factory1 = new Factory(1, x, y);
-                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory1));
+                        imageView.setOnMouseClicked(_ -> factoryClicked(factory1));
                         break;
                     case 16:
-                        imageView.setImage(new Image(getClass().getResourceAsStream("/images/map/factory2.png")));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/map/factory2.png"))));
                         Factory factory2 = new Factory(2, x, y);
-                        imageView.setOnMouseClicked(mouseEvent -> factoryClicked(factory2));
+                        imageView.setOnMouseClicked(_ -> factoryClicked(factory2));
                         break;
                 }
 
@@ -158,7 +157,7 @@ public class AdvanceWarsController implements Initializable {
 
     private void placeTroopOnMap(Troop troop, int direction) {
         String troopImgPath = troop.getTroopImg();
-        Image troopImg = new Image(getClass().getResourceAsStream(troopImgPath));
+        Image troopImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream(troopImgPath)));
         ImageView troopImageView = new ImageView(troopImg);
         troopImageView.getStyleClass().add("troopImageView");
         if (troop.moved) {
@@ -182,7 +181,7 @@ public class AdvanceWarsController implements Initializable {
 
         StackPane.setMargin(healthLabel, new Insets(-50, 0, 0, 0));
 
-        stackPane.setOnMouseClicked(event -> selectTroop(troop));
+        stackPane.setOnMouseClicked(_ -> selectTroop(troop));
 
         mapGridPane.add(stackPane, troop.xpos, troop.ypos);
 
@@ -192,7 +191,7 @@ public class AdvanceWarsController implements Initializable {
     private void factoryClicked(Factory factory) {
         System.out.println("Factory clicked");
 
-        if (this.mooving == true || this.model.getTurn() != factory.team || this.model.troops[factory.y][factory.x] != null) {
+        if (this.mooving || this.model.getTurn() != factory.team || this.model.troops[factory.y][factory.x] != null) {
             return;
         }
         this.activeFactory = factory;
@@ -221,7 +220,7 @@ public class AdvanceWarsController implements Initializable {
 
         HBox clickedTroop = (HBox) source;
 
-        String type = clickedTroop.getStyleClass().get(0);
+        String type = clickedTroop.getStyleClass().getFirst();
 
         Troop newTroop;
 
@@ -257,7 +256,7 @@ public class AdvanceWarsController implements Initializable {
 
     private void selectTroop(Troop troop) {
 
-        if (this.mooving == true) {
+        if (this.mooving) {
             return;
         }
 
@@ -266,7 +265,7 @@ public class AdvanceWarsController implements Initializable {
         }
 
 
-        if (troop.moved == true) {
+        if (troop.moved) {
             return;
         }
         boolean attackPossible = false;
@@ -282,18 +281,18 @@ public class AdvanceWarsController implements Initializable {
             while (attackButton.getStyleClass().contains("disabled")) {
                 attackButton.getStyleClass().remove("disabled");
             }
-            attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
+            attackButton.setOnMouseClicked(_ -> troopAttack(troop, attackRange));
         }
         System.out.println("Truppe ausgewählt: bei Koordinaten (" + troop.xpos + ", " + troop.ypos + ")");
         this.mooving = true;
         ArrayList<TargetField> movingRange = this.model.getTroopRange(troop);
         for (TargetField field : movingRange) {
-            Image blue = new Image(getClass().getResourceAsStream("/images/possible.png"));
+            Image blue = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/possible.png")));
             ImageView blueImageView = new ImageView(blue);
             blueImageView.getStyleClass().add("blueImageView");
             blueImageView.setFitWidth(50);
             blueImageView.setFitHeight(50);
-            blueImageView.setOnMouseClicked(event -> selectTargetField(troop, field));
+            blueImageView.setOnMouseClicked(_ -> selectTargetField(troop, field));
             mapGridPane.add(blueImageView, field.x, field.y);
         }
     }
@@ -373,7 +372,7 @@ public class AdvanceWarsController implements Initializable {
         pathTransition.setNode(troopNode);
         pathTransition.setCycleCount(1);
 
-        pathTransition.setOnFinished(event -> {
+        pathTransition.setOnFinished(_ -> {
             future.complete(null);
             troopNode.setTranslateX(0);
             troopNode.setTranslateY(0);
@@ -413,7 +412,7 @@ public class AdvanceWarsController implements Initializable {
             waitButton.getStyleClass().remove("disabled");
         }
 
-        waitButton.setOnMouseClicked(mouseEvent -> troopWait(troop));
+        waitButton.setOnMouseClicked(_ -> troopWait(troop));
 
         boolean attackPossible = false;
         ArrayList<int[]> attackRange = troop.getAttackRange(this.model.map.mapArray[0].length, this.model.map.mapArray.length);
@@ -424,11 +423,11 @@ public class AdvanceWarsController implements Initializable {
             }
         }
 
-        if (attackPossible && (troop.identification != 3 || troop.moved == false)) {
+        if (attackPossible && (troop.identification != 3 || !troop.moved)) {
             while (attackButton.getStyleClass().contains("disabled")) {
                 attackButton.getStyleClass().remove("disabled");
             }
-            attackButton.setOnMouseClicked(mouseEvent -> troopAttack(troop, attackRange));
+            attackButton.setOnMouseClicked(_ -> troopAttack(troop, attackRange));
         }
 
 
@@ -451,7 +450,7 @@ public class AdvanceWarsController implements Initializable {
         clearHighlights();
         for (int[] field : attackRange) {
             if (this.model.troops[field[1]][field[0]] != null && this.model.troops[field[1]][field[0]].team != attakingTroop.team && (model.KIA[attakingTroop.getIdentification()][this.model.troops[field[1]][field[0]].identification] != 'x')) {
-                Image target = new Image(getClass().getResourceAsStream("/images/target.png"));
+                Image target = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/target.png")));
                 ImageView targetImageView = new ImageView(target);
                 targetImageView.getStyleClass().add("TargetImageView");
                 targetImageView.setFitWidth(50);
@@ -459,11 +458,11 @@ public class AdvanceWarsController implements Initializable {
                 targetImageView.setPickOnBounds(true);
 
 
-                targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
+                targetImageView.setOnMouseClicked(_ -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
                 mapGridPane.add(targetImageView, field[0], field[1]);
                 attakingTroop.moved=true;
                 System.out.println(getNodeFromGridPane(mapGridPane, attakingTroop.xpos, attakingTroop.ypos));
-                disableTroop((StackPane) getNodeFromGridPane(mapGridPane, attakingTroop.xpos, attakingTroop.ypos));
+                disableTroop((StackPane) Objects.requireNonNull(getNodeFromGridPane(mapGridPane, attakingTroop.xpos, attakingTroop.ypos)));
             }
 
 
@@ -533,7 +532,7 @@ public class AdvanceWarsController implements Initializable {
 
     @FXML
     private void endTurn() {
-        if (this.mooving == true || this.buying == true) {
+        if (this.mooving || this.buying) {
             return;
         }
 
