@@ -42,7 +42,6 @@ public class AdvanceWarsApplication extends Application {
     private Scene gameScene;
     private Scene endScreenScene;
     private Stage primaryStage;
-    private GameModel model;
 
     @Override
     public void start(Stage primaryStage) throws IOException {

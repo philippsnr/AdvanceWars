@@ -173,7 +173,6 @@ public class GameModel {
     }
 
     private void initMap(String selectedMap) {
-        //Plain: 0, Wood: 1, Mountain: 2, Sea: 3
         switch (selectedMap) {
             case "Little Island":
                 map = new LittleIsland();
@@ -307,7 +306,7 @@ public class GameModel {
     public static ArrayList<TargetField> deepClone(ArrayList<TargetField> list) {
         ArrayList<TargetField> newList = new ArrayList<>();
         for (TargetField element : list) {
-            newList.add(new TargetField(element)); // Verwende Kopierkonstruktor
+            newList.add(new TargetField(element));
         }
         return newList;
     }
