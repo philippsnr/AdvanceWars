@@ -213,7 +213,7 @@ public class AdvanceWarsApplication extends Application {
             color = "blue";
         }
 
-        Image winnerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/End-pic.avif")));
+        Image winnerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/end-pic.jpg")));
         ImageView imageView = new ImageView(winnerImage);
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(300);
