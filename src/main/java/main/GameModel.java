@@ -73,7 +73,6 @@ public class GameModel {
         double kiaFaktor = getKIAFaktor(attakingTroop.getIdentification(), defendingTroop.getIdentification());
         double GroundFaktor = getGroundFaktor(attakingTroop, defendingTroop);
         System.out.println("Ground Faktor: " + GroundFaktor);
-        System.out.println(kiaFaktor);
         Random rand = new Random();
         int beforFaktor = 0;
         for (int i = 1; i <= attakingTroop.getHealth(); i++) {
@@ -90,7 +89,7 @@ public class GameModel {
 
 
         kiaFaktor = getKIAFaktor(defendingTroop.getIdentification(), attakingTroop.getIdentification());
-        System.out.println(kiaFaktor);
+        
 
         beforFaktor = 0;
         if ((defendingTroop.identification!=3&& attakingTroop.identification!=3)&&kiaFaktor!=0) {
