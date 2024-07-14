@@ -57,16 +57,16 @@ public class CogIsle extends Map{
         Troop inf22 = new Infantry(2, 8, 5);
         Troop inf23 = new Infantry(2, 9, 9);
 
-        Troop mech21 = new Mech(2, 14, 2);
+        Troop mech21 = new Mech(2, 13, 3);
         Troop mech22 = new Mech(2, 8, 3);
 
         Troop tank21 = new Tank(2, 10, 5);
-        Troop tank22 = new Tank(2, 13, 8);
+        Troop tank22 = new Tank(2, 11, 8);
 
         Troop artillery21 = new Artillery(2, 12, 4);
         Troop artillery22 = new Artillery(2, 13, 6);
 
-        Troop antiair21 = new AntiAir(2, 14, 2);
+        Troop antiair21 = new AntiAir(2, 13, 2);
         Troop antiair22 = new AntiAir(2, 10, 3);
 
         Troop fighter21 = new Fighter(2, 14, 6);
