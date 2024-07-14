@@ -216,8 +216,8 @@ public class AdvanceWarsApplication extends Application {
         Image winnerImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/end-pic.png")));
         ImageView imageView = new ImageView(winnerImage);
         imageView.setPreserveRatio(true);
-        imageView.setFitWidth(300);
-        imageView.setFitHeight(300);
+        imageView.setFitWidth(900);
+        imageView.setFitHeight(900);
 
         Label winnerLabel = new Label(winnerText);
         winnerLabel.setStyle(String.format("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: %s;", color));
