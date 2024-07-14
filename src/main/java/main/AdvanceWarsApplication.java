@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.control.ScrollPane;
@@ -98,7 +99,6 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setBottom(bottomButtons);
 
         Scene scene = new Scene(borderPane);
-        scene.setFill(null);
         return scene;
     }
 
@@ -190,8 +190,6 @@ public class AdvanceWarsApplication extends Application {
 
         Scene scene = new Scene(root, 1000, 1000);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-
-
         return scene;
     }
 
