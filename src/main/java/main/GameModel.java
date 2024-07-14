@@ -13,7 +13,7 @@ public class GameModel {
     public Troop[][] troops;
     private int turn = 1;
     private int round = 0;
-    private int[] money = {3000, 3000};
+    private final int[] money = {3000, 3000};
     public static char[][] KIA = {{'d', 'd', 'e', 'd', 'e', 'x', 'x', 'e'}, {'c', 'c', 'c', 'b', 'c', 'x', 'x', 'e'}, {'b', 'b', 'd', 'b', 'c', 'x', 'x', 'e'}, {'a', 'a', 'b', 'c', 'c', 'x', 'x', 'x'}, {'a', 'a', 'd', 'c', 'd', 'c', 'c', 'a'}, {'x', 'x', 'x', 'x', 'x', 'c', 'a', 'a'}, {'a', 'a', 'a', 'a', 'a', 'x', 'x', 'x'}, {'b', 'b', 'c', 'c', 'd', 'x', 'x', 'c'}};
     private final int[] Bellcurve = {1, 1, 1,1,1,  2, 2, 2,  2, 3, 3, 3, 4,4, 5};
     private final int[] GroudnToStars = {1, 2, 4, 0, 0,0,0,0,0,0,0,0,0,0,0, 3, 3 };
@@ -116,14 +116,14 @@ public class GameModel {
     }
 
     protected void switchTurn() {
-        for (int y = 0; y < troops.length; y++) {
-            for (int x = 0; x < troops[y].length; x++) {
-                if (this.troops[y][x] != null) {
-                    this.troops[y][x].moved = false;
+        for (Troop[] troop : troops) {
+            for (Troop value : troop) {
+                if (value != null) {
+                    value.moved = false;
                 }
             }
         }
-        int income = 0;
+        int income;
         if(round <= 19) { income = moneyPerRound[round]; }
         else { income = 10000; }
         if (turn == 1) {
