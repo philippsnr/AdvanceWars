@@ -32,6 +32,7 @@ public class LittleIsland extends Map {
         Troop antiair1 = new AntiAir(1, 1, 7);
         Troop bomber1 = new Bomber(1, 0, 3);
         Troop copter1 = new Copter(1, 4, 8);
+        Troop fighter1 = new Fighter(1, 1, 8);
 
         Troop inf21 = new Infantry(2, 11, 2);
         Troop inf22 = new Infantry(2, 12, 4);
@@ -41,7 +42,8 @@ public class LittleIsland extends Map {
         Troop antiair2 = new AntiAir(2, 17, 2);
         Troop bomber2 = new Bomber(2, 18, 7);
         Troop copter2 = new Copter(2, 16, 1);
+        Troop fighter2 = new Fighter(2, 16, 7);
 
-        return new Troop[] {inf11, inf12, inf13, inf21, inf22, inf23, mech1, mech2, tank1, tank2, antiair1, antiair2, bomber1, bomber2, copter1, copter2};
+        return new Troop[] {inf11, inf12, inf13, inf21, inf22, inf23, fighter1, mech1, mech2, tank1, tank2, antiair1, antiair2, bomber1, bomber2, copter1, copter2, fighter2};
     }
 }

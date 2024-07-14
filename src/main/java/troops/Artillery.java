@@ -19,6 +19,7 @@ public class Artillery extends Troop{
             if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
             x+=1;
         }
+        if(this.xpos+x<xlength&&this.ypos-Y<ylength&&this.xpos+x>=0&&this.ypos-Y>=0){range.add(new int[]{this.xpos+x, this.ypos-Y });}
         //oben rechts
          Y=3;
          x=0;
