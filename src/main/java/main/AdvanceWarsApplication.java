@@ -94,7 +94,9 @@ public class AdvanceWarsApplication extends Application {
         bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button instructionButton = new Button("Anleitung");
+        instructionButton.getStyleClass().add("menu-button");
         Button creditsButton = new Button("Credits");
+        creditsButton.getStyleClass().add("menu-button");
         bottomButtons.getChildren().addAll(instructionButton, creditsButton);
 
         instructionButton.setOnAction(event -> {primaryStage.setScene(instructionScene); primaryStage.setFullScreen(true);});
@@ -122,7 +124,7 @@ public class AdvanceWarsApplication extends Application {
             mapView.setFitHeight(300);
 
             Button mapButton = new Button(MAP_NAMES[i]);
-            mapButton.getStyleClass().add("map-selection-button");
+            mapButton.getStyleClass().add("menu-button");
             int mapIndex = i;
             mapButton.setOnAction(event -> {
                 try {
@@ -147,7 +149,7 @@ public class AdvanceWarsApplication extends Application {
         VBox instructionsBox = new VBox(10);
         instructionsBox.setPadding(new Insets(10));
         instructionsBox.setAlignment(Pos.TOP_LEFT);
-        Text instructionsText = new Text("Anweisungen für das Spiel:\n\n1. Die Steuerung erfolgt ausschließlich mit der Maus\n\n2. Jeder Spieler startet mit den gleichen Truppen, einer Fabrik und 3000 'Geld'\n\n3. Man gewinnt, wenn man alle Truppen des Gegners auslöscht und auch mit einer eigenen Truppe die Gegnerische Fabrik besetzt\n\n4. Bewegen: Drückt man auf eine Truppe so werden diejenigen Felder markiert, auf die man sich auch bewegen kann. Drückt man dann auf eines dieser Felder bewegt sich die Truppe auf das Feld. Ist die Truppe auf dem Feld angekommen, so kann man auf den Knopf 'Warten' drücken. Damit ist der Zug für diese Truppe beendet und die anderen Truppen können bewegt werden. Sind alle Truppen bewegt worden bzw. man will keine Truppen mehr bewegen, dann kann man mit dem Knopf 'Zug beenden' seinen Zug beenden und damit beginnt der Zug des anderen Spielers.\n\n5. Kämpfen: Ist nach dem Bewegen eine gegnerische Truppe in Angriffsreichweite, so kann man auf den Knopf 'Angriff' drücken. Dann werden alle möglichen Ziele mit einem roten Fadenkreuz markiert. Drückt man nun auf eines dieser markierten Truppen so wird diese angegriffen und die Lebensanzeigen werden entsprechend angepasst.\n\n6. Kaufen: Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.");
+        Text instructionsText = new Text("Anweisungen für das Spiel:\n\n1. Die Steuerung erfolgt ausschließlich mit der Maus\n\n2. Jeder Spieler startet mit den gleichen Truppen, einer Fabrik und 3000 'Geld'\n\n3. Man gewinnt, wenn man alle Truppen des Gegners auslöscht und auch mit einer eigenen Truppe die Gegnerische Fabrik besetzt\n\n4. Bewegen: Drückt man auf eine Truppe so werden diejenigen Felder markiert, auf die man sich auch bewegen kann. Drückt man dann auf eines dieser Felder bewegt sich die Truppe auf das Feld. Ist die Truppe auf dem Feld angekommen, so kann man auf den Knopf 'Warten' drücken. Damit ist der Zug für diese Truppe beendet und die anderen Truppen können bewegt werden. Sind alle Truppen bewegt worden bzw. man will keine Truppen mehr bewegen, dann kann man mit dem Knopf 'Zug beenden' seinen Zug beenden und damit beginnt der Zug des anderen Spielers.\n\n5. Kämpfen: Ist nach dem Bewegen eine gegnerische Truppe in Angriffsreichweite, so kann man auf den Knopf 'Angriff' drücken. Dann werden alle möglichen Ziele mit einem roten Fadenkreuz markiert. Drückt man nun auf eines dieser markierten Truppen so wird diese angegriffen und die Lebensanzeigen werden entsprechend angepasst.\n(Wichtig bei Artillierie: Darf nur in 2-3 Felder Entfernung angreifen, wenn man sie vorher nicht bewegt hat)\n\n6. Kaufen: Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.");
         instructionsText.setStyle("-fx-font-size: 18px;");
         instructionsText.setWrappingWidth(1500);
 
@@ -156,6 +158,7 @@ public class AdvanceWarsApplication extends Application {
         scrollPane.setFitToHeight(true);
 
         Button backButton = new Button("Zurück");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> {
             primaryStage.setScene(mapSelectionScene);
             primaryStage.setFullScreen(true);
@@ -165,6 +168,7 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setCenter(instructionsBox);
 
         Scene scene = new Scene(borderPane, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
         return scene;
     }
 
@@ -181,12 +185,15 @@ public class AdvanceWarsApplication extends Application {
         creditsLabel.setAlignment(Pos.CENTER);
 
         Button backButton = new Button("Zurück");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         creditsBox.getChildren().addAll(creditsLabel, backButton);
         borderPane.setCenter(creditsBox);
 
-        return new Scene(borderPane, 1200, 800);
+        Scene scene = new Scene(borderPane, 1200, 800);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
+        return scene;
     }
 
     public Scene createGameScene(Stage primaryStage, String mapName) throws IOException {
@@ -235,16 +242,20 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setCenter(contentBox);
 
         Button backButton = new Button("Zurück zur Map-Auswahl");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
         BorderPane.setMargin(backButton, new Insets(10));
         borderPane.setBottom(backButton);
 
-        return new Scene(borderPane, 1200, 800);
+        Scene scene = new Scene(borderPane, 1200, 800);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
+        return scene;
     }
 
     public void switchToEndScreen(int winner) {
         endScreenScene = createEndScreenScene(primaryStage, winner);
         primaryStage.setScene(endScreenScene);
+        primaryStage.setFullScreen(true);
     }
 
     public static void main(String[] args) {
