@@ -21,7 +21,7 @@ public class CogIsle extends Map{
 
     public int[][] getFactoryCoordinates(){
         return new int[][] {{8, 6}, {2, 9}};
-    };
+    }
 
     public  Troop[] getInitTroops() {
 

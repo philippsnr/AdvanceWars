@@ -21,7 +21,7 @@ public class SabreRange extends Map{
 
     public int[][] getFactoryCoordinates(){
         return new int[][] {{9, 0}, {2, 14}};
-    };
+    }
 
     public  Troop[] getInitTroops() {
 
