@@ -1,12 +1,12 @@
-package main;
+package troops;
 
 import java.util.ArrayList;
 
 public class TargetField {
 
-    int x;
-    int y;
-    ArrayList<TargetField> path;
+    public int x;
+    public int y;
+    public  ArrayList<TargetField> path;
 
     public TargetField(int _x, int _y, ArrayList<TargetField> _path) {
         this.x = _x;

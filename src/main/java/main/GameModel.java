@@ -1,6 +1,7 @@
 package main;
 
 import maps.*;
+import troops.TargetField;
 import troops.Troop;
 
 import java.util.ArrayList;
