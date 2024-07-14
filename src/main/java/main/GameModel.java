@@ -196,7 +196,6 @@ public class GameModel {
     }
 
     public boolean buyPossible(int price) {
-        System.out.println(price);
         return money[turn - 1] >= price;
     }
 

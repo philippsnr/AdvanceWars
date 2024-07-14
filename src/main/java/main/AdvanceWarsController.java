@@ -364,7 +364,6 @@ public class AdvanceWarsController implements Initializable {
         }
 
         int pathLength = field.path.toArray().length - 1;
-        System.out.println(field.path.toArray().length);
 
         PathTransition pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.seconds((double) pathLength / 2));
