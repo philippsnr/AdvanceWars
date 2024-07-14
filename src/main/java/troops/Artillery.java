@@ -7,7 +7,7 @@ public class Artillery extends Troop{
         super(_team, _xpos, _ypos, 5, 3, 6000);
     }
     public ArrayList<int[]> getAttackRange(int xlength, int ylength){
-        ArrayList<int[]> range = new ArrayList<int[]>();
+        ArrayList<int[]> range = new ArrayList<>();
         //unten rechts
         int Y=-3;
         int x=0;
