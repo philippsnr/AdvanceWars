@@ -7,7 +7,7 @@
     -fx-cursor: hand;
 }
 
-.map-selection-button {
+.menu-button {
     -fx-pref-width: 150px;
     -fx-pref-height: 30px;
     -fx-background-color: #23342A;

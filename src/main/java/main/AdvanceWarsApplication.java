@@ -94,7 +94,9 @@ public class AdvanceWarsApplication extends Application {
         bottomButtons.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button instructionButton = new Button("Anleitung");
+        instructionButton.getStyleClass().add("menu-button");
         Button creditsButton = new Button("Credits");
+        creditsButton.getStyleClass().add("menu-button");
         bottomButtons.getChildren().addAll(instructionButton, creditsButton);
 
         instructionButton.setOnAction(event -> {primaryStage.setScene(instructionScene); primaryStage.setFullScreen(true);});
@@ -122,7 +124,7 @@ public class AdvanceWarsApplication extends Application {
             mapView.setFitHeight(300);
 
             Button mapButton = new Button(MAP_NAMES[i]);
-            mapButton.getStyleClass().add("map-selection-button");
+            mapButton.getStyleClass().add("menu-button");
             int mapIndex = i;
             mapButton.setOnAction(event -> {
                 try {
@@ -156,6 +158,7 @@ public class AdvanceWarsApplication extends Application {
         scrollPane.setFitToHeight(true);
 
         Button backButton = new Button("Zurück");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> {
             primaryStage.setScene(mapSelectionScene);
             primaryStage.setFullScreen(true);
@@ -165,6 +168,7 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setCenter(instructionsBox);
 
         Scene scene = new Scene(borderPane, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
         return scene;
     }
 
@@ -181,12 +185,15 @@ public class AdvanceWarsApplication extends Application {
         creditsLabel.setAlignment(Pos.CENTER);
 
         Button backButton = new Button("Zurück");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
         creditsBox.getChildren().addAll(creditsLabel, backButton);
         borderPane.setCenter(creditsBox);
 
-        return new Scene(borderPane, 1200, 800);
+        Scene scene = new Scene(borderPane, 1200, 800);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
+        return scene;
     }
 
     public Scene createGameScene(Stage primaryStage, String mapName) throws IOException {
@@ -235,16 +242,20 @@ public class AdvanceWarsApplication extends Application {
         borderPane.setCenter(contentBox);
 
         Button backButton = new Button("Zurück zur Map-Auswahl");
+        backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(event -> primaryStage.setScene(mapSelectionScene));
         BorderPane.setMargin(backButton, new Insets(10));
         borderPane.setBottom(backButton);
 
-        return new Scene(borderPane, 1200, 800);
+        Scene scene = new Scene(borderPane, 1200, 800);
+        scene.getStylesheets().add(getClass().getResource("/menu.css").toExternalForm());
+        return scene;
     }
 
     public void switchToEndScreen(int winner) {
         endScreenScene = createEndScreenScene(primaryStage, winner);
         primaryStage.setScene(endScreenScene);
+        primaryStage.setFullScreen(true);
     }
 
     public static void main(String[] args) {

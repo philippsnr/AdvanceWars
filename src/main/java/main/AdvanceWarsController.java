@@ -462,7 +462,8 @@ public class AdvanceWarsController implements Initializable {
                 targetImageView.setOnMouseClicked(event -> troopFight(attakingTroop, this.model.troops[field[1]][field[0]]));
                 mapGridPane.add(targetImageView, field[0], field[1]);
                 attakingTroop.moved=true;
-
+                System.out.println(getNodeFromGridPane(mapGridPane, attakingTroop.xpos, attakingTroop.ypos));
+                disableTroop((StackPane) getNodeFromGridPane(mapGridPane, attakingTroop.xpos, attakingTroop.ypos));
             }
 
 
@@ -566,6 +567,18 @@ public class AdvanceWarsController implements Initializable {
             turnElement.getStyleClass().remove("turnRed");
             turnElement.getStyleClass().add("turnBlue");
         }
+    }
+
+    private Object getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (javafx.scene.Node node : gridPane.getChildren()) {
+            if(!(node instanceof StackPane)) { continue; }
+            if (GridPane.getColumnIndex(node) != null && GridPane.getRowIndex(node) != null) {
+                if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                    return node;
+                }
+            }
+        }
+        return null;
     }
 
     public void surrenderTeam1() {
