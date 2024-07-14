@@ -27,7 +27,7 @@ public class EonSprings extends Map{
 
     public int[][] getFactoryCoordinates(){
         return new int[][] {{15, 1}, {1, 17}};
-    };
+    }
 
     public Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 10, 14);

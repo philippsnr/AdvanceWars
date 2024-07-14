@@ -24,7 +24,7 @@ public class PistonDam extends Map{
 
     public int[][] getFactoryCoordinates(){
         return new int[][] {{11, 3}, {2, 22}};
-    };
+    }
 
     public  Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 10, 0);

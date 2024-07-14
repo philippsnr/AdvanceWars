@@ -22,7 +22,7 @@ public class ZeroWood extends Map{
 
     public int[][] getFactoryCoordinates(){
         return new int[][] {{8, 4}, {2, 10}};
-    };
+    }
 
     public  Troop[] getInitTroops() {
         Troop inf11 = new Infantry(1, 3, 9);
