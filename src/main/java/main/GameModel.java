@@ -280,18 +280,22 @@ public class GameModel {
                 continue;
             }
 
-            boolean alreadyExists = false;
-            for (TargetField position : movingRange) {
-                if (position.x == nextX && position.y == nextY) {
-                    alreadyExists = true;
-                    break;
-                }
-            }
-
             ArrayList<TargetField> newPath = deepClone(path);
 
             TargetField newField = new TargetField(nextX, nextY, null);
             newPath.add(newField);
+
+            boolean alreadyExists = false;
+            for (TargetField position : movingRange) {
+                if (position.x == nextX && position.y == nextY) {
+                    alreadyExists = true;
+                    if(position.getPathLength() > newPath.size()) {
+                        movingRange.remove(position);
+                        alreadyExists = false;
+                    }
+                    break;
+                }
+            }
 
             if(!alreadyExists && (troops[nextY][nextX] == null || troops[nextY][nextX] == troop ||(troops[nextY][nextX].team == troop.team && troops[nextY][nextX].identification == troop.identification && troop.health < 10 && troops[nextY][nextX].health < 10))) {
                 movingRange.add(new TargetField(nextX, nextY, newPath));

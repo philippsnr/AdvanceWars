@@ -14,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.control.ScrollPane;
@@ -144,17 +146,49 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createInstructionScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #648571;");
-        VBox instructionsBox = new VBox(10);
-        instructionsBox.setPadding(new Insets(10));
-        instructionsBox.setAlignment(Pos.TOP_LEFT);
-        Text instructionsText = new Text("Anweisungen für das Spiel:\n\n1. Die Steuerung erfolgt ausschließlich mit der Maus\n\n2. Jeder Spieler startet mit den gleichen Truppen, einer Fabrik und 3000 'Geld'\n\n3. Man gewinnt, wenn man alle Truppen des Gegners auslöscht und auch mit einer eigenen Truppe die Gegnerische Fabrik besetzt\n\n4. Bewegen: Drückt man auf eine Truppe so werden diejenigen Felder markiert, auf die man sich auch bewegen kann. Drückt man dann auf eines dieser Felder bewegt sich die Truppe auf das Feld. Ist die Truppe auf dem Feld angekommen, so kann man auf den Knopf 'Warten' drücken. Damit ist der Zug für diese Truppe beendet und die anderen Truppen können bewegt werden. Sind alle Truppen bewegt worden bzw. man will keine Truppen mehr bewegen, dann kann man mit dem Knopf 'Zug beenden' seinen Zug beenden und damit beginnt der Zug des anderen Spielers.\n\n5. Kämpfen: Ist nach dem Bewegen eine gegnerische Truppe in Angriffsreichweite, so kann man auf den Knopf 'Angriff' drücken. Dann werden alle möglichen Ziele mit einem roten Fadenkreuz markiert. Drückt man nun auf eines dieser markierten Truppen so wird diese angegriffen und die Lebensanzeigen werden entsprechend angepasst.\n(Wichtig bei Artillierie: Darf nur in 2-3 Felder Entfernung angreifen, wenn man sie vorher nicht bewegt hat)\n\n6. Kaufen: Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.");
-        instructionsText.setStyle("-fx-font-size: 18px;");
-        instructionsText.setWrappingWidth(1500);
+        borderPane.setStyle("-fx-background-color: #648571;"); // Fallback background color
+        borderPane.getStyleClass().add("instructions-background");
 
-        ScrollPane scrollPane = new ScrollPane(instructionsText);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
+        VBox instructionsBox = new VBox(20);
+        instructionsBox.setPadding(new Insets(20));
+        instructionsBox.setAlignment(Pos.TOP_CENTER);
+
+        Label titleLabel = new Label("Anweisungen für das Spiel");
+        titleLabel.setStyle("-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(one-pass-box, black, 8, 0, 0, 0);");
+        titleLabel.setAlignment(Pos.CENTER);
+
+        Text instruction1 = new Text("1. Die Steuerung erfolgt ausschließlich mit der Maus\n\n");
+        Text instruction2 = new Text("2. Jeder Spieler startet mit den gleichen Truppen, einer Fabrik und 3000 'Geld'\n\n");
+        Text instruction3 = new Text("3. Man gewinnt, wenn man alle Truppen des Gegners auslöscht und auch mit einer eigenen Truppe die gegnerische Fabrik besetzt\n\n");
+        Text instruction4 = new Text("4. Bewegen:\n");
+        Text instruction4Detail = new Text("Drückt man auf eine Truppe, so werden diejenigen Felder markiert, auf die man sich auch bewegen kann. Drückt man dann auf eines dieser Felder, bewegt sich die Truppe auf das Feld. Ist die Truppe auf dem Feld angekommen, so kann man auf den Knopf 'Warten' drücken. Damit ist der Zug für diese Truppe beendet und die anderen Truppen können bewegt werden. Sind alle Truppen bewegt worden bzw. man will keine Truppen mehr bewegen, dann kann man mit dem Knopf 'Zug beenden' seinen Zug beenden und damit beginnt der Zug des anderen Spielers.\n\n");
+        Text instruction5 = new Text("5. Kämpfen:\n");
+        Text instruction5Detail = new Text("Ist nach dem Bewegen eine gegnerische Truppe in Angriffsreichweite, so kann man auf den Knopf 'Angriff' drücken. Dann werden alle möglichen Ziele mit einem roten Fadenkreuz markiert. Drückt man nun auf eine dieser markierten Truppen, so wird diese angegriffen und die Lebensanzeigen werden entsprechend angepasst.\n(Wichtig bei Artillerie: Darf nur in 2-3 Felder Entfernung angreifen, wenn man sie vorher nicht bewegt hat)\n\n");
+        Text instruction6 = new Text("6. Kaufen:\n");
+        Text instruction6Detail = new Text("Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe, wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.\n");
+
+        // Set white text color for all instructions
+        instruction1.setFill(Color.WHITE);
+        instruction2.setFill(Color.WHITE);
+        instruction3.setFill(Color.WHITE);
+        instruction4.setFill(Color.WHITE);
+        instruction4Detail.setFill(Color.WHITE);
+        instruction5.setFill(Color.WHITE);
+        instruction5Detail.setFill(Color.WHITE);
+        instruction6.setFill(Color.WHITE);
+        instruction6Detail.setFill(Color.WHITE);
+
+        instruction1.setStyle("-fx-font-size: 18px;");
+        instruction2.setStyle("-fx-font-size: 18px;");
+        instruction3.setStyle("-fx-font-size: 18px;");
+        instruction4.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        instruction4Detail.setStyle("-fx-font-size: 18px;");
+        instruction5.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        instruction5Detail.setStyle("-fx-font-size: 18px;");
+        instruction6.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        instruction6Detail.setStyle("-fx-font-size: 18px;");
+
+        VBox textBox = new VBox(10, instruction1, instruction2, instruction3, instruction4, instruction4Detail, instruction5, instruction5Detail, instruction6, instruction6Detail);
 
         Button backButton = new Button("Zurück");
         backButton.getStyleClass().add("menu-button");
@@ -163,7 +197,7 @@ public class AdvanceWarsApplication extends Application {
             primaryStage.setFullScreen(true);
         });
 
-        instructionsBox.getChildren().addAll(scrollPane, backButton);
+        instructionsBox.getChildren().addAll(titleLabel, textBox, backButton);
         borderPane.setCenter(instructionsBox);
 
         Scene scene = new Scene(borderPane, 800, 600);
@@ -174,26 +208,48 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createCreditsScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #648571;");
-        VBox creditsBox = new VBox(10);
-        creditsBox.setPadding(new Insets(10));
+        borderPane.setStyle("-fx-background-color: #648571;"); // Fallback background color
+        borderPane.getStyleClass().add("credits-background");
+
+        VBox creditsBox = new VBox(20);
+        creditsBox.setPadding(new Insets(20));
         creditsBox.setAlignment(Pos.CENTER);
 
-        Label creditsLabel = new Label("JAVA Projekt: Advance Wars\n\nErstellt von:\n\n\tPhilipp Staudinger, TIK23\n\n\tLinus Gerlach,        TIT23\n\n\tJanne Nußbaum,     TIT23\n\n\tNils Fleschhut,        TIT23\n");
-        creditsLabel.setStyle("-fx-font-size: 22px; -fx-text-fill: white");
-        creditsLabel.setAlignment(Pos.CENTER);
+        Label titleLabel = new Label("JAVA Projekt: Advance Wars");
+        titleLabel.setStyle("-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(one-pass-box, black, 8, 0, 0, 0);");
+        titleLabel.setAlignment(Pos.CENTER);
+
+        GridPane creditsGrid = new GridPane();
+        creditsGrid.setAlignment(Pos.CENTER);
+        creditsGrid.setHgap(20);
+        creditsGrid.setVgap(10);
+
+        addCredit(creditsGrid, "Philipp Staudinger", "TIK23", 1);
+        addCredit(creditsGrid, "Linus Gerlach", "TIT23", 2);
+        addCredit(creditsGrid, "Janne Nußbaum", "TIT23", 3);
+        addCredit(creditsGrid, "Nils Fleschhut", "TIT23", 4);
 
         Button backButton = new Button("Zurück");
         backButton.getStyleClass().add("menu-button");
         backButton.setOnAction(_ -> {primaryStage.setScene(mapSelectionScene); primaryStage.setFullScreen(true);});
 
-        creditsBox.getChildren().addAll(creditsLabel, backButton);
+        creditsBox.getChildren().addAll(titleLabel, creditsGrid, backButton);
         borderPane.setCenter(creditsBox);
 
         Scene scene = new Scene(borderPane, 1200, 800);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/menu.css")).toExternalForm());
         return scene;
     }
+
+    private void addCredit(GridPane grid, String name, String title, int row) {
+        Label nameLabel = new Label(name);
+        nameLabel.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
+        grid.add(nameLabel, 0, row);
+        grid.add(titleLabel, 1, row);
+    }
+
 
     public Scene createGameScene(String mapName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AdvanceWarsApplication.class.getResource("game scene.fxml"));

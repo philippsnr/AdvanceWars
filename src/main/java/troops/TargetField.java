@@ -20,4 +20,8 @@ public class TargetField {
         this.path = element.path != null ? new ArrayList<>(element.path) : null;
     }
 
+    public int getPathLength() {
+        return this.path != null ? this.path.size() : 0;
+    }
+
 }

@@ -22,7 +22,7 @@
                                 <Image url="@../images/troops/infantry1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="1.000"/>
+                                <Text styleClass="cost" text="1.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -38,7 +38,7 @@
                                 <Image url="@../images/troops/mech1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="3.000"/>
+                                <Text styleClass="cost" text="3.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -54,7 +54,7 @@
                                 <Image url="@../images/troops/tank1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="7.000"/>
+                                <Text styleClass="cost" text="7.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -70,7 +70,7 @@
                                 <Image url="@../images/troops/artillery1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="6.000"/>
+                                <Text styleClass="cost" text="6.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -86,7 +86,7 @@
                                 <Image url="@../images/troops/antiair1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="8.000"/>
+                                <Text styleClass="cost" text="8.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -102,7 +102,7 @@
                                 <Image url="@../images/troops/copter1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="9.000"/>
+                                <Text styleClass="cost" text="9.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -118,7 +118,7 @@
                                 <Image url="@../images/troops/fighter1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="20.000"/>
+                                <Text styleClass="cost" text="20.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -134,7 +134,7 @@
                                 <Image url="@../images/troops/bomber1.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="22.000"/>
+                                <Text styleClass="cost" text="22.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -145,7 +145,7 @@
             </VBox>
             <VBox>
                 <HBox fx:id="turnElement" styleClass="turnRed">
-                    <Text fx:id="turnText">Rot ist am Zug</Text>
+                    <Text fx:id="turnText" style="-fx-fill: white">Rot ist am Zug</Text>
                 </HBox>
                 <GridPane fx:id="mapGridPane" alignment="CENTER" gridLinesVisible="true"/>
             </VBox>
@@ -158,7 +158,7 @@
                                 <Image url="@../images/troops/infantry2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="1.000"/>
+                                <Text styleClass="cost" text="1.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -174,7 +174,7 @@
                                 <Image url="@../images/troops/mech2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="3.000"/>
+                                <Text styleClass="cost" text="3.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -190,7 +190,7 @@
                                 <Image url="@../images/troops/tank2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="7.000"/>
+                                <Text styleClass="cost" text="7.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -206,7 +206,7 @@
                                 <Image url="@../images/troops/artillery2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="6.000"/>
+                                <Text styleClass="cost" text="6.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -222,7 +222,7 @@
                                 <Image url="@../images/troops/antiair2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="8.000"/>
+                                <Text styleClass="cost" text="8.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -238,7 +238,7 @@
                                 <Image url="@../images/troops/copter2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="9.000"/>
+                                <Text styleClass="cost" text="9.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -254,7 +254,7 @@
                                 <Image url="@../images/troops/fighter2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="20.000"/>
+                                <Text styleClass="cost" text="20.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -270,7 +270,7 @@
                                 <Image url="@../images/troops/bomber2.png"/>
                             </ImageView>
                             <HBox alignment="CENTER">
-                                <Text text="22.000"/>
+                                <Text styleClass="cost" text="22.000"/>
                                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../images/coin.png"/>
                                 </ImageView>
@@ -283,7 +283,7 @@
         <HBox spacing="20.0" styleClass="optionRow">
             <Button fx:id="surrenderButton1" mnemonicParsing="false" text="Aufgeben" onMouseClicked="#surrenderTeam1"/>
             <HBox fx:id="moneyTeam1" styleClass="money">
-                <Text text="3.000" style="-fx-text-fill: white"/>
+                <Text text="3.000" style="-fx-fill: white"/>
                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/coin.png"/>
                 </ImageView>
@@ -302,7 +302,7 @@
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#endTurn" text="Zug beenden"/>
             <HBox fx:id="moneyTeam2" styleClass="money">
-                <Text text="3.000" style="-fx-text-fill: white"/>
+                <Text text="3.000" style="-fx-fill: white"/>
                 <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/coin.png"/>
                 </ImageView>

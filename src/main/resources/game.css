@@ -34,6 +34,7 @@
 
 #moneyTeam1 {
     -fx-background-color: #F77F6A;
+    -fx-fill: white;
 }
 
 #moneyTeam2 {
@@ -86,6 +87,12 @@
     -fx-pref-height: 50px;
     -fx-min-height: 50px;
     -fx-padding: 5px;
+    -fx-background-color: #23342A;
+    -fx-fill: white;
+}
+
+.cost {
+    -fx-fill: white;
 }
 
 .troopSelectionButton .image-view {
