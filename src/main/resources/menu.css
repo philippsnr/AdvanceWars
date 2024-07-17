@@ -1,17 +1,31 @@
 .start-button {
     -fx-pref-width: 300px;
     -fx-pref-height: 70px;
+    -fx-background-radius: 10;
     -fx-background-color: #23342A;
     -fx-text-fill: white;
     -fx-font-size: 25px;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
 }
 
 .menu-button {
-    -fx-pref-width: 150px;
-    -fx-pref-height: 30px;
     -fx-background-color: #23342A;
     -fx-text-fill: white;
-    -fx-font-size: 15px;
     -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
+}
+
+.menu-button:hover,
+.start-button:hover {
+    -fx-background-color: #5588aa;
+}
+
+.menu-button:pressed,
+.start-button:pressed {
+    -fx-background-color: #224466;
 }

@@ -15,10 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-import javafx.scene.control.ScrollPane;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -167,7 +165,6 @@ public class AdvanceWarsApplication extends Application {
         Text instruction6 = new Text("6. Kaufen:\n");
         Text instruction6Detail = new Text("Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe, wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.\n");
 
-        // Set white text color for all instructions
         instruction1.setFill(Color.WHITE);
         instruction2.setFill(Color.WHITE);
         instruction3.setFill(Color.WHITE);
@@ -189,6 +186,7 @@ public class AdvanceWarsApplication extends Application {
         instruction6Detail.setStyle("-fx-font-size: 18px;");
 
         VBox textBox = new VBox(10, instruction1, instruction2, instruction3, instruction4, instruction4Detail, instruction5, instruction5Detail, instruction6, instruction6Detail);
+        textBox.setAlignment(Pos.TOP_LEFT);
 
         Button backButton = new Button("Zurück");
         backButton.getStyleClass().add("menu-button");
@@ -197,7 +195,11 @@ public class AdvanceWarsApplication extends Application {
             primaryStage.setFullScreen(true);
         });
 
-        instructionsBox.getChildren().addAll(titleLabel, textBox, backButton);
+        HBox buttonBox = new HBox(backButton);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+
+        instructionsBox.getChildren().addAll(titleLabel, textBox, buttonBox);
         borderPane.setCenter(instructionsBox);
 
         Scene scene = new Scene(borderPane, 800, 600);
@@ -205,11 +207,9 @@ public class AdvanceWarsApplication extends Application {
         return scene;
     }
 
-
     private Scene createCreditsScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #648571;"); // Fallback background color
-        borderPane.getStyleClass().add("credits-background");
+        borderPane.setStyle("-fx-background-color: #648571;");
 
         VBox creditsBox = new VBox(20);
         creditsBox.setPadding(new Insets(20));

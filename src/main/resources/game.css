@@ -22,9 +22,20 @@
     -fx-min-width: 150px;
     -fx-pref-height: 40px;
     -fx-background-color: white;
-    -fx-padding: 20px;
     -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
 }
+
+.button:hover {
+    -fx-background-color: #5588aa;
+}
+
+.button:pressed {
+    -fx-background-color: #224466;
+}
+
 .money {
     -fx-pref-width: 100px;
     -fx-pref-height: 30px;
@@ -34,11 +45,14 @@
 
 #moneyTeam1 {
     -fx-background-color: #F77F6A;
-    -fx-fill: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
 }
 
 #moneyTeam2 {
     -fx-background-color: #6E7DBA;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
 }
 
 .button.disabled {
@@ -50,12 +64,31 @@
 #surrenderButton1 {
     -fx-background-color: #F77F6A;
     -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
+}
+#surrenderButton1:hover {
+    -fx-background-color: #A9A9A9;
+}
+#surrenderButton1:pressed {
+    -fx-background-color: #A9A9A9;
 }
 
 #surrenderButton2 {
     -fx-background-color: #6E7DBA;
     -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0, 0, 0);
 }
+#surrenderButton2:hover {
+    -fx-background-color: #A9A9A9;
+}
+#surrenderButton2:pressed {
+    -fx-background-color: #A9A9A9;
+}
+
 #testButton {
     -fx-background-color: #e0b446;
     -fx-text-fill: white;
