@@ -6,14 +6,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -144,14 +142,13 @@ public class AdvanceWarsApplication extends Application {
 
     private Scene createInstructionScene(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #648571;"); // Fallback background color
-        borderPane.getStyleClass().add("instructions-background");
+        borderPane.setStyle("-fx-background-color: #648571;");
 
         VBox instructionsBox = new VBox(20);
         instructionsBox.setPadding(new Insets(20));
         instructionsBox.setAlignment(Pos.TOP_CENTER);
 
-        Label titleLabel = new Label("Anweisungen für das Spiel");
+        Label titleLabel = new Label("Anleitung");
         titleLabel.setStyle("-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(one-pass-box, black, 8, 0, 0, 0);");
         titleLabel.setAlignment(Pos.CENTER);
 
@@ -164,6 +161,9 @@ public class AdvanceWarsApplication extends Application {
         Text instruction5Detail = new Text("Ist nach dem Bewegen eine gegnerische Truppe in Angriffsreichweite, so kann man auf den Knopf 'Angriff' drücken. Dann werden alle möglichen Ziele mit einem roten Fadenkreuz markiert. Drückt man nun auf eine dieser markierten Truppen, so wird diese angegriffen und die Lebensanzeigen werden entsprechend angepasst.\n(Wichtig bei Artillerie: Darf nur in 2-3 Felder Entfernung angreifen, wenn man sie vorher nicht bewegt hat)\n\n");
         Text instruction6 = new Text("6. Kaufen:\n");
         Text instruction6Detail = new Text("Nach jedem Zug erhält man eine gewisse Menge an Geld. Dies wird mit der Zeit immer mehr und ist daher nur rundenabhängig. Drückt man auf seine eigene Fabrik, so erscheinen die Knöpfe, um die Truppen zu kaufen. Drückt man auf einen dieser Knöpfe, wird die Truppe gekauft und diese erscheint auf der Fabrik. Diese Truppe kann sich erst im nächsten Zug wieder bewegen.\n");
+        Text instruction7 = new Text("7. Zusammenfügen:\n");
+        Text instruction7Detail = new Text("Zwei Truppen gleicher Art und mit jeweils unter 10 Lebenspunkten, lassen sich zusammenfügen, und erhalten die Summe der beiden Lebenspunkte.\n");
+
 
         instruction1.setFill(Color.WHITE);
         instruction2.setFill(Color.WHITE);
@@ -174,18 +174,22 @@ public class AdvanceWarsApplication extends Application {
         instruction5Detail.setFill(Color.WHITE);
         instruction6.setFill(Color.WHITE);
         instruction6Detail.setFill(Color.WHITE);
+        instruction7.setFill(Color.WHITE);
+        instruction7Detail.setFill(Color.WHITE);
 
-        instruction1.setStyle("-fx-font-size: 18px;");
-        instruction2.setStyle("-fx-font-size: 18px;");
-        instruction3.setStyle("-fx-font-size: 18px;");
-        instruction4.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        instruction4Detail.setStyle("-fx-font-size: 18px;");
-        instruction5.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        instruction5Detail.setStyle("-fx-font-size: 18px;");
-        instruction6.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        instruction6Detail.setStyle("-fx-font-size: 18px;");
+        instruction1.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction2.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction3.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction4.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: transparent;");
+        instruction4Detail.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction5.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: transparent;");
+        instruction5Detail.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction6.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: transparent;");
+        instruction6Detail.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
+        instruction7.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: transparent;");
+        instruction7Detail.setStyle("-fx-font-size: 18px; -fx-background-color: transparent;");
 
-        VBox textBox = new VBox(10, instruction1, instruction2, instruction3, instruction4, instruction4Detail, instruction5, instruction5Detail, instruction6, instruction6Detail);
+        VBox textBox = new VBox(10, instruction1, instruction2, instruction3, instruction4, instruction4Detail, instruction5, instruction5Detail, instruction6, instruction6Detail, instruction7, instruction7Detail);
         textBox.setAlignment(Pos.TOP_LEFT);
 
         Button backButton = new Button("Zurück");
@@ -195,12 +199,16 @@ public class AdvanceWarsApplication extends Application {
             primaryStage.setFullScreen(true);
         });
 
-        HBox buttonBox = new HBox(backButton);
-        buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+        BorderPane.setAlignment(titleLabel, Pos.TOP_CENTER);
+        borderPane.setTop(titleLabel);
 
-        instructionsBox.getChildren().addAll(titleLabel, textBox, buttonBox);
-        borderPane.setCenter(instructionsBox);
+        ScrollPane scrollPane = new ScrollPane(textBox);
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        borderPane.setCenter(scrollPane);
+
+        BorderPane.setAlignment(backButton, Pos.BOTTOM_CENTER);
+        BorderPane.setMargin(backButton, new Insets(10));
+        borderPane.setBottom(backButton);
 
         Scene scene = new Scene(borderPane, 800, 600);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/menu.css")).toExternalForm());
