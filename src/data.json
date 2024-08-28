@@ -1,0 +1,80 @@
+{
+    "accounts": {
+        "li.gerlach@freenet.de": {
+            "mail": "li.gerlach@freenet.de",
+            "master-password": "4b37b2a1a92738cc6ddbf00f27a5d60c4e04ee3fe74ffcc40f381e94c6b48f6a",
+            "passwords-list": [
+                "Steam",
+                "Avira",
+                "Paypal",
+                "EA",
+                "Avira2"
+            ],
+            "passwords": {
+                "Steam": {
+                    "name": "Steam",
+                    "password": "suniL_04",
+                    "url": "",
+                    "text": "",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                },
+                "Avira": {
+                    "name": "Avira",
+                    "password": "suniL_04",
+                    "url": "",
+                    "text": "",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                },
+                "Paypal": {
+                    "name": "Paypal",
+                    "password": "suniL_04",
+                    "url": "",
+                    "text": "",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                },
+                "EA": {
+                    "name": "EA",
+                    "password": "suniL_04",
+                    "url": "",
+                    "text": "",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                },
+                "Avira2": {
+                    "name": "Avira2",
+                    "password": "suniL_04",
+                    "url": "",
+                    "text": "",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                }
+            }
+        },
+        "s04unil@gmail.com": {
+            "mail": "s04unil@gmail.com",
+            "master-password": "4b37b2a1a92738cc6ddbf00f27a5d60c4e04ee3fe74ffcc40f381e94c6b48f6a",
+            "passwords-list": [
+                "Paypal"
+            ],
+            "passwords": {
+                "Paypal": {
+                    "name": "Paypal",
+                    "password": "suniL_04",
+                    "url": "www.paypal.com",
+                    "text": "bums",
+                    "oldpasswordlist": [
+                        "suniL_04"
+                    ]
+                }
+            }
+        }
+    }
+}
